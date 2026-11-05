@@ -1,0 +1,21 @@
+/* Shared header and footer. Self-contained so it renders the same on every page,
+   including the recorded-run pages that keep their older stylesheet. */
+.hdr,.foot{
+  --bg:#0B0E12;--line:#1E2731;--line2:#151C24;--text:#E8EDF2;--muted:#A9B4C0;--dim:#74808C;--teal:#5FE0C8;
+  font-family:var(--font-sans),Inter,system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.55;box-sizing:border-box;-webkit-font-smoothing:antialiased
+}
+.hdr *,.foot *{box-sizing:border-box}
+.hdr a,.foot a{text-decoration:none}.hdr a:hover,.foot a:hover{text-decoration:underline}
+/* header. The logo is 64px, twice the 32px it was before v2. */
+.hdr{position:sticky;top:0;z-index:50;height:80px;display:flex;align-items:center;gap:20px;padding:0 32px;background:rgba(11,14,18,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line2)}
+.hdr .brand{display:flex;align-items:center;gap:12px;color:var(--text);font-weight:600;font-size:17px;white-space:nowrap}
+.hdr .brand img{width:64px;height:64px;display:block;flex:none;max-width:none}
+.hdr .pill{font-size:12px;border:1px solid #2A3440;border-radius:999px;padding:1px 8px;color:var(--muted);font-weight:500;white-space:nowrap}
+.hdr nav{margin-left:auto;display:flex;gap:18px;font-size:15px}
+.hdr nav a{color:var(--muted);white-space:nowrap}.hdr nav a.on{color:var(--text)}
+.hdr .menu{display:none;margin-left:auto;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;height:36px;padding:0 12px;font:inherit;font-size:14px;flex:none;cursor:pointer}
+@media (max-width:1240px){.hdr nav{display:none}.hdr .menu{display:block}.hdr.open nav{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px;gap:12px}}
+@media (max-width:760px){.hdr{height:72px;padding:0 16px;gap:12px}.hdr .brand{gap:10px;white-space:normal;line-height:1.15;min-width:0}}
+.foot{border-top:1px solid var(--line2);padding:28px 32px;font-size:14px;color:var(--dim);margin-top:40px}
+.foot a{color:var(--muted)}
+@media (max-width:760px){.foot{padding:24px 16px}}

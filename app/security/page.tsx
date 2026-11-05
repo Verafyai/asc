@@ -1,102 +1,40 @@
-import Chrome from "@/components/Chrome";
+import "@/styles/site.css";
+import type { Metadata } from "next";
 import { pageMeta } from "@/lib/page-meta";
-import { performanceModel } from "@/lib/performance";
 
-export const metadata = pageMeta("Security", "/security");
-
-const fp = performanceModel.inputs.flashprove;
-const src = fp.sources;
-
-const THREATS: [string, string, string, string][] = [
-  ["A juror secretly runs a different model", "Proof of inference: each vote carries a proof that the committed model produced it", "ill", "design only, FlashProve prototype"],
-  ["Jurors share a blind spot or collude", "Jurors from different labs, quorum, and a second jury of other model families on dispute", "real", "built"],
-  ["Instructions hidden in the evidence", "Evidence fenced as data; jurors flag suspected injection; tested in recorded runs", "real", "built"],
-  ["Forged or poisoned evidence", "Signed sources and a dispute window", "ill", "design only; today it fooled every model"],
-  ["A juror key is stolen", "Quorum plus hard caps in code; a stolen key can't pay out alone", "real", "built"],
-  ["The compiler gets the rules wrong", "A second model hunts loopholes; a person signs the steps before funds move", "real", "built"],
-  ["The inscribed rules are swapped", "Read the inscription back and match the stored hash before judging", "real", "built (local validator)"],
-  ["A vote is replayed on another action", "Each attestation signs a hash over the inscribed steps, the call and the input; the chain id is added in the proposal", "ill", "built, chain id design only"],
-  ["A private ASC leaks", "Encrypted to jurors only; any juror could still leak it", "ill", "design only"],
-  ["The jury doesn't answer", "Timeout means hold, then refund; never allow by default", "ill", "design only"],
-];
+export const metadata: Metadata = { ...pageMeta("Security", "/security"), description: "Threat model, assurance levels and honest limits for inference programs under the three draft SIMDs, including proofs of inference, injection, forged evidence, relitigation and fast System 1 models." };
 
 export default function Page() {
   return (
-    <Chrome current="/security">
-      <div className="d-wrap" style={{ paddingTop: 56, paddingBottom: 32 }}>
-        <div className="d-eb">Security</div>
-        <h1 className="d-h1 d-md">Proving the jury is who it says it is</h1>
-        <p className="d-lede">An AI jury is only as trustworthy as the claim that each juror is the model it says it is. The cornerstone of Actually Smart Contracts is being able to prove that a given model, with a given set of weights, produced each vote.</p>
-      </div>
-      <div className="d-wrap d-sec">
-        <h2 className="d-h2">The gap signatures can&apos;t close</h2>
-        <p className="d-mut" style={{ maxWidth: 780 }}>Today every juror signs its vote with its own wallet. That proves which wallet voted. It doesn&apos;t prove which model ran. A juror could quietly swap in a cheaper model, a fine-tuned one, or a person, and the signatures would look the same.</p>
-      </div>
-      <div className="d-wrap d-sec">
-        <h2 className="d-h2">Provable inference</h2>
-        <p className="d-mut" style={{ maxWidth: 820 }}>Anthropic&apos;s research post <a href={src.anthropic_research}>Progress on provable inference for large language models</a> (Nov 2, 2026) describes FlashProve: a model provider publishes a short fingerprint that pins down one exact set of weights, then produces a proof for each response that the committed model generated it. The proof is zero-knowledge: it reveals nothing about the weights, the intermediate values or which experts ran. A verifier needs no GPU.</p>
-        <div className="d-grid4" style={{ marginTop: 18 }}>
-          <div className="d-card" style={{ padding: 16 }}><div style={{ fontSize: 24, fontWeight: 700 }}>~70 to 95x</div><div className="d-dim" style={{ fontSize: 13.5 }}>GPU time vs serving the model on vLLM</div></div>
-          <div className="d-card" style={{ padding: 16 }}><div style={{ fontSize: 24, fontWeight: 700 }}>{fp.proving_tokens_per_sec_per_h100} tok/s</div><div className="d-dim" style={{ fontSize: 13.5 }}>proving on one H100 ({fp.batch_example.requests} requests in ~{fp.batch_example.seconds} s)</div></div>
-          <div className="d-card" style={{ padding: 16 }}><div style={{ fontSize: 24, fontWeight: 700 }}>{fp.proof_mb} MB</div><div className="d-dim" style={{ fontSize: 13.5 }}>per proof, {fp.max_context_tokens.toLocaleString("en-US")}-token context</div></div>
-          <div className="d-card" style={{ padding: 16 }}><div style={{ fontSize: 24, fontWeight: 700 }}>{fp.verify_seconds_24_threads} s</div><div className="d-dim" style={{ fontSize: 13.5 }}>to verify on 24 CPU threads</div></div>
-        </div>
-        <p className="d-dim" style={{ fontSize: 14, marginTop: 10 }}>Demonstrated on Llama 4 Maverick (400B Mixture-of-Experts, 4-bit). {fp.hardware}. Offline setup about {fp.offline_phase_minutes_once_per_model} minutes per model. Figures from Anthropic&apos;s post. <span className="d-tag">design only</span> Not used on this site.</p>
-      </div>
-      <div className="d-wrap d-sec">
-        <h2 className="d-h2">Why it matters for ASCs</h2>
-        <div className="d-grid3">
-          {[
-            ["Model substitution becomes detectable", "Each juror's model commitment sits in the juror registry. A vote counts only with a proof that checks against that commitment, the prompt and the answer."],
-            ["Jurors can run anywhere", "If the proof checks, it doesn't matter who hosts the juror. Anyone with the hardware can run one and be paid per ruling, without being trusted."],
-            ["Closed models could join", "The proof hides the weights, so a lab could publish a commitment without publishing its model. None has yet."],
-            ["Greedy decoding fits juries", "Proofs cover greedy (deterministic) outputs, which is how jurors should answer anyway: the same question gets the same vote."],
-            ["Disputes get cheaper", "A challenger downloads a 19 MB proof and checks it in under a minute, instead of re-running the model."],
-            ["Audits outlive the run", "The proof hash is inscribed with the attestation, so a ruling can be re-checked years later."],
-          ].map(([t, d]) => (
-            <div className="d-card" key={t} style={{ padding: 18 }}><b>{t}</b><div className="d-mut" style={{ fontSize: 15, marginTop: 4 }}>{d}</div></div>
-          ))}
-        </div>
-      </div>
-      <div className="d-wrap d-sec">
-        <h2 className="d-h2">How it would plug in</h2>
-        <ol className="d-b d-mut" style={{ paddingLeft: 22 }}>
-          <li>Each juror registers its model commitment (fingerprint) in the IQ Labs juror table.</li>
-          <li>Jurors answer with greedy decoding, inside the {fp.max_context_tokens.toLocaleString("en-US")}-token context.</li>
-          <li>After the vote, each juror produces a proof and stores it off chain; its hash goes in the attestation&apos;s proof field.</li>
-          <li>Payout waits for a challenge window. Anyone can verify; a proof that fails voids the vote and the juror&apos;s bond.</li>
-        </ol>
-        <p className="d-dim" style={{ fontSize: 14 }}>Design only. No proof has been generated on this site. A Solana transaction can&apos;t hold a {fp.proof_mb} MB proof, so proofs are checked off chain and challenged, not verified in the transaction.</p>
-      </div>
-      <div className="d-wrap d-sec">
-        <h2 className="d-h2">What it costs, and what it doesn&apos;t cover</h2>
-        <ul className="d-b d-mut">
-          <li>Time and effort: proofs are made after the answer, in batches, so a proven ruling waits minutes. See <a href="/performance">Performance</a> for the cost model.</li>
-          <li>Context: {fp.max_context_tokens.toLocaleString("en-US")} tokens today, so evidence must be short or split.</li>
-          <li>One model so far: Llama 4 Maverick. A proven jury today is copies of one open model, which weakens lab diversity.</li>
-          <li>Not covered: side channels, the model&apos;s architecture (not hidden), whether the hardware does other work, and sampled outputs.</li>
-          <li>Trust gaps Anthropic names: the fast prover and C++ verifier aren&apos;t formally verified; the Lean statements need manual audit.</li>
-          <li>Status: {fp.status}.</li>
-        </ul>
-        <p style={{ marginTop: 10 }}>
-          <a href={src.anthropic_research}>Anthropic research post</a> · <a href={src.technical_report}>Technical report</a> · <a href={src.protocol_spec}>Protocol spec (PDF)</a> · <a href={src.code}>FlashProve code</a> · <a href={src.lean_proofs}>Lean proofs</a>
-        </p>
-      </div>
-      <div className="d-wrap d-sec">
-        <h2 className="d-h2">Threat model</h2>
-        <table className="d-table">
-          <thead><tr><th>Threat</th><th>Defense</th><th>Status</th></tr></thead>
-          <tbody>
-            {THREATS.map(([threat, defense, kind, status]) => (
-              <tr key={threat}>
-                <td><b>{threat}</b></td>
-                <td className="d-mut" style={{ fontSize: 15 }}>{defense}</td>
-                <td><span className={`d-tag ${kind}`}>{status}</span></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </Chrome>
+    <>
+<main className="w">
+<section className="hero">
+<p className="eb">Security</p>
+<h1>What a ruling proves, and what it doesn’t</h1>
+<p className="lede">A ruling is only as trustworthy as three claims: the rules it applied are the ones you trust, the evaluators are who and what they say, and the evidence was honest. The SIMDs make the first checkable on chain, the second provable in stages, and the third challengeable. None makes models infallible.</p>
+</section>
+<section className="sec">
+<h2>Assurance levels</h2>
+<div className="g3">
+<div className="card"><p className="n">L0</p><h3>Signatures</h3><p className="mut">A quorum of registered evaluators signed. Proves which wallets voted, not which models ran.</p></div>
+<div className="card"><p className="n">L1</p><h3>Diverse and blind</h3><p className="mut">L0, plus commit-then-reveal and at least quorum distinct model families. No one can copy the majority; a single lab’s blind spot can’t decide alone.</p></div>
+<div className="card"><p className="n">L1+</p><h3>Bonded and checkable</h3><p className="mut">L1, plus every evaluator is bonded and every vote can be challenged: re-run an open model on a pinned runtime, demand the proof, or check a hardware report. A proven fault loses the bond.{" "}<span className="tag draft">draft</span></p></div>
+<div className="card hl"><p className="n">L2</p><h3>Proven</h3><p className="mut">L1+, plus a published proof of inference, or an accepted hardware report, per counted vote, confirmed by independent verifiers off chain. Proofs exist today for one open model.{" "}<span className="tag draft">design only</span></p></div>
+<div className="card"><p className="n">L3</p><h3>Verified on chain</h3><p className="mut">Reserved. Needs proofs wrapped into a few hundred bytes that Solana’s BN254 syscalls verify inside a transaction. Not shown for model inference yet.</p></div>
+</div>
+<div className="warn" style={{ "marginTop": "20px" }}><b>The proof problem.</b>{" "}One proof is about 18.78 MB; a transaction holds 1,232 bytes. Storing it would cost about 131 SOL of rent, uploading it about 19,000 transactions, and verifying it about 17 seconds on 24 CPU threads against a budget of 1.4 million compute units. A proof hash the chain can’t check proves nothing on its own, so the drafts pair every hash with availability, bonds and challenges. Precedent: oracles, optimistic rollups,{" "}<a href="https://arxiv.org/pdf/2401.17555">opML</a>, proof wrapping (<a href="https://lib.rs/crates/groth16-solana">Groth16 on Solana</a>) and{" "}<a href="https://docs.nvidia.com/confidential-computing/">confidential GPUs</a>.</div>
+<figure className="figure"><img src="/slides/offchain.jpg" alt="Slide: proofs are too big for the chain, make lying expensive instead." loading="lazy" /></figure>
+</section>
+<section className="sec">
+<h2>Threat model</h2>
+<div className="tbl"><table><thead><tr><th>Threat</th><th>Defense in the SIMDs</th><th>Status</th></tr></thead><tbody><tr><td>The rules change under a caller</td><td>Every request pins prompt, context, external context and input hashes. Timelocked or frozen programs; callers check hashes they trust.</td><td><span className="tag">draft</span></td></tr><tr><td>Instructions hidden in the external context</td><td>External context goes below the internal context, labeled as supplied by the caller, judged as material, never followed. Programs restrict which kinds callers may add.</td><td><span className="tag real">tested in recorded runs</span></td></tr><tr><td>A linked page is edited before it’s read</td><td>Links are snapshotted at a defined moment and ruled on by hash.</td><td><span className="tag">draft</span></td></tr><tr><td>An evaluator secretly runs a different model</td><td>Model commitments; at L1+ bonds and challenges by re-execution or proof on demand; at L2 a proof or hardware report per vote.</td><td><span className="tag draft">design only</span></td></tr><tr><td>Evaluators share a blind spot or collude</td><td>Distinct families, commit-reveal, evaluator sets; disputes and challenges go to other families.</td><td><span className="tag real">built in the prototype</span></td></tr><tr><td>A ruling cites a document it wasn’t given</td><td>Sources must hash to the pinned prompt, context or evidence, checked on chain.</td><td><span className="tag">draft</span></td></tr><tr><td>A rapporteur summarizes unfairly</td><td>Quorum sign-off over the opinion; dissents recorded; full reasoning by hash.</td><td><span className="tag">draft</span></td></tr><tr><td>Forged or poisoned evidence</td><td>Challenges at any time on false evidence; the original is marked overturned, never erased. Hard limits stay in code.</td><td><span className="tag draft">open risk</span>{" "}fooled every model in our test</td></tr><tr><td>A losing side relitigates until it wins</td><td>A bond returned only on success, new evidence required each time, fresh families, growing bonds.</td><td><span className="tag">draft</span></td></tr><tr><td>Someone with a position steers a prediction market</td><td>Resolvers name their deciding sources in internal context, snapshot them at a set time, and never see the forecast. Resolutions can be challenged.</td><td><span className="tag ill">informative</span></td></tr><tr><td>An evaluator posts the hash of a proof that doesn’t exist</td><td>Proofs must stay fetchable; anyone can demand or check one; a missing or invalid proof loses the bond.</td><td><span className="tag">draft</span></td></tr><tr><td>A vote is replayed on another action</td><td>Attestations sign the request address, every pinned hash and the input hash.</td><td><span className="tag">draft</span></td></tr><tr><td>Fee padding or a drained escrow</td><td>Pinned prices, token caps, max fee per evaluator; callbacks notify and never move funds.</td><td><span className="tag">draft</span></td></tr><tr><td>The jury doesn’t answer</td><td>Expiry yields the program’s default, which must be the safe one: hold, not allow.</td><td><span className="tag">draft</span></td></tr><tr><td>A fast System 1 screen is confidently wrong</td><td>Screens settle only the safe default or low-value cases within limits in code; everything else escalates. Screens write no opinion.</td><td><span className="tag ill">informative</span></td></tr><tr><td>A juror key is stolen</td><td>Quorum with distinct operators, plus hard caps in code.</td><td><span className="tag real">built in the prototype</span></td></tr></tbody></table></div>
+</section>
+<section className="sec">
+<h2>Trust and limits in this prototype</h2>
+<div className="tbl"><table><thead><tr><th>Property</th><th>Status</th><th>Limits</th></tr></thead><tbody><tr><td>Evidence snapshots and hashes</td><td><span className="tag real">real</span></td><td>Proves which bytes were shown, not whether the source was honest.</td></tr><tr><td>Commit and reveal</td><td><span className="tag real">real</span></td><td>In the demo the harness runs the jurors, so it is a protocol check.</td></tr><tr><td>Signed answers and record</td><td><span className="tag real">real</span></td><td>Demo keys come from public seeds. They prove the mechanism, not identity.</td></tr><tr><td>Solana signature check and inscription</td><td><span className="tag real">real, local validator</span></td><td>Not devnet or mainnet.</td></tr><tr><td>The SIMD account layouts and instructions</td><td><span className="tag draft">draft</span></td><td>No reference program is deployed yet.</td></tr><tr><td>Proof of which model answered</td><td><span className="tag draft">design only</span></td><td>No proof has been generated on this site. FlashProve is Anthropic research.</td></tr><tr><td>Closed models</td><td><span className="tag draft">design only</span></td><td>A provider can serve a different model than it names; only L2 would detect it.</td></tr></tbody></table></div>
+<p className="mut" style={{ "marginTop": "16px" }}>Sources:{" "}<a href="https://www.anthropic.com/research/provable-inference">Anthropic, Progress on provable inference</a>. Full security considerations are in each of the{" "}<a href="/simds">three SIMDs</a>.</p>
+</section>
+</main>
+    </>
   );
 }

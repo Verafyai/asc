@@ -19,16 +19,15 @@ export default async function Page({ params }: { params: Promise<{ code: string 
   if (!s) notFound();
   const demo = s.code === "EDO";
   return (
-    <Chrome current="/standards">
+    <Chrome>
       <div className="d-wrap d-split" style={{ paddingTop: 48 }}>
         <div>
           <div className="d-eb">Standard · {s.code} v{s.version} <span className="d-tag ill" style={{ marginLeft: 6 }}>{s.status}</span></div>
           <h1 className="d-h1" style={{ fontSize: 48 }}>{s.title}</h1>
           <p className="d-lede">{s.abstract}</p>
           <div style={{ display: "flex", gap: 10, marginTop: 20, flexWrap: "wrap" }}>
-            {s.code !== "ASC-0" && <a className="d-btn p" href={`/certify?standard=${s.code}`}>Certify a repo against {s.code}</a>}
+            {s.code !== "ASC-0" && <a className="d-btn p" href={`/certifications?std=${s.code}`}>Certify a repo against {s.code}</a>}
             <a className="d-btn g" href={`/standards/${s.code.toLowerCase()}/source`}>Read {s.code}.md</a>
-            {s.code !== "ASC-0" && <a className="d-btn g" href={`/sandbox?t=emo-01`}>Try in sandbox</a>}
           </div>
           <p className="d-dim" style={{ fontSize: 13, marginTop: 8 }}>GitHub publication is waiting on Rex. This link serves the Markdown file in the repo.</p>
         </div>

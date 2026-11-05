@@ -1,0 +1,40 @@
+{
+  "_comment": "Arguments to CreateInferenceProgram. Illustrative.",
+  "name": "Purchasing agent spending rules",
+  "prompt": {
+    "storage": {
+      "inline": "program.asc.md"
+    },
+    "encoding": {
+      "compress": true
+    }
+  },
+  "context": [
+    {
+      "kind": "rules",
+      "label": "Agent spending rules",
+      "storage": {
+        "inline": "context/rules.md"
+      },
+      "encoding": {
+        "compress": true
+      }
+    }
+  ],
+  "mutability": "mutable",
+  "contextBudget": 8000,
+  "externalContext": {
+    "mode": "optional",
+    "kinds": [
+      "web_page",
+      "other"
+    ],
+    "budget": 3000
+  },
+  "minimums": {
+    "evaluators": 3,
+    "quorum": 2,
+    "assurance": "L1",
+    "distinctFamilies": true
+  }
+}

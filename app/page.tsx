@@ -1,131 +1,78 @@
-import Chrome from "@/components/Chrome";
-import { HOME } from "@/content/copy";
-import { PRODUCT_NAME } from "@/lib/brand";
+import "@/styles/site.css";
+import type { Metadata } from "next";
 import { pageMeta } from "@/lib/page-meta";
-import examples from "@/examples/examples.json";
+import DeckScript from "@/components/scripts/DeckScript";
 
-export const metadata = pageMeta(PRODUCT_NAME, "/", true);
+export const metadata: Metadata = { ...pageMeta("Bringing Inference Programs To Solana \u00b7 Actually Smart Contracts", "/", true), description: "Three draft SIMDs to bring inference programs to Solana: prompts and context stored on chain, run by AI models off chain, with signed, provable rulings that programs act on." };
 
-const RUN_HREF: Record<string, string> = {
-  "Flight insurance: delayed 3h17m": "/docs/recorded-runs/flight-delay",
-  "Forecast: real FOMC statement": "/docs/recorded-runs/fed-forecast",
-  "Governance: real SIMD-0296 text": "/docs/recorded-runs/simd-review",
-  "Treasury: SOL at 82%": "/docs/recorded-runs/treasury-rebalance",
-  "Vesting: audit with one High finding": "/docs/recorded-runs/audit-vesting",
-  "Prompt injection, guarded": "/docs/recorded-runs/prompt-injection",
-  "Forged correction (poisoned evidence)": "/docs/recorded-runs/prompt-injection",
-};
+const CSS = `.pre p{font-size:19px;line-height:1.6;color:#C9D2DB;max-width:760px;margin:0 0 16px}
+.pre p.k{color:var(--text)}
+/* deck */
+.deck{margin-top:40px}
+.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;border:1px solid var(--line);border-radius:14px;background:var(--bg);scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:start;aspect-ratio:16/9;position:relative;margin:0}
+.slide img{width:100%;height:100%;object-fit:contain}
+.live{position:absolute;inset:0;container-type:inline-size;background:#0B0E12}
+.live .e{position:absolute;left:6.67%;top:8.9%;font-family:var(--mono);font-size:1.25cqw;letter-spacing:.16em;color:#5FE0C8}
+.live .t{position:absolute;left:6.67%;top:13%;width:86%;font-size:2.92cqw;font-weight:700;line-height:1.1;letter-spacing:-.02em;color:#E6EDF3;margin:0}
+.live img{position:absolute;left:15.4%;top:23.1%;width:69.3%;height:71.9%;object-fit:contain}
+.ctl{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.ctl button{height:40px;min-width:44px;border-radius:10px;border:1px solid #2A3440;background:none;color:var(--text);font:inherit;font-size:15px;cursor:pointer;padding:0 14px}
+.ctl button:hover{border-color:var(--fill)}
+.ctl .count{font-family:var(--mono);font-size:14px;color:var(--muted);min-width:64px}
+.ctl .ttl{color:var(--muted);font-size:15px;flex:1;min-width:200px}
+.dots{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.dots button{width:26px;height:6px;border-radius:3px;border:0;background:#26303B;cursor:pointer;padding:0}
+.dots button.on{background:var(--teal)}
+.notes{margin-top:14px;font-size:15.5px;color:var(--muted);max-width:860px;display:none}
+.deck.shownotes .notes{display:block}
+/* simds */
+.simds{margin-top:44px}
+.simds .card{display:flex;flex-direction:column;gap:8px}
+.simds .card h3{font-size:21px}
+.simds .card p{color:var(--muted);font-size:15.5px;margin:0}
+.simds .card .go{margin-top:auto;padding-top:10px;font-weight:600}
+.links{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:15px}`;
 
 export default function Page() {
   return (
-    <Chrome current="/">
-      <div className="d-wrap d-hero">
-        <div>
-          <div className="d-eb">{HOME.eyebrow}</div>
-          <h1 className="d-h1">{HOME.headline}</h1>
-          <p className="d-lede">{HOME.subhead}</p>
-          <div style={{ display: "flex", gap: 12, marginTop: 26, flexWrap: "wrap" }}>
-            <a className="d-btn p" href="/inscribed">{HOME.primary}</a>
-            <a className="d-btn g" href="/proposal">{HOME.secondary}</a>
-          </div>
-        </div>
-        <div className="d-card">
-          <div className="d-dim" style={{ fontSize: 13, letterSpacing: "0.1em", textTransform: "uppercase" }}>{HOME.ruleLabel}</div>
-          <div style={{ fontSize: 19, marginTop: 6 }}>{HOME.rule}</div>
-          <div className="d-ok" style={{ marginTop: 18 }}>
-            <div className="d-mut" style={{ fontSize: 15 }}>{HOME.okTitle}</div>
-            <div className="d-okt">{HOME.okResult}</div>
-          </div>
-          <div className="d-no" style={{ marginTop: 10 }}>
-            <div className="d-mut" style={{ fontSize: 15 }}>{HOME.noTitle}</div>
-            <div className="d-not">{HOME.noResult}</div>
-          </div>
-          <div className="d-dim" style={{ fontSize: 13, marginTop: 12 }}>{HOME.exampleNote}</div>
-        </div>
-      </div>
-
-      <div className="d-wrap d-sec">
-        <h2 className="d-h2">{HOME.problemTitle}</h2>
-        <p className="d-mut" style={{ maxWidth: 720 }}>{HOME.problem}</p>
-      </div>
-
-      <div className="d-wrap d-sec">
-        <h2 className="d-h2">{HOME.ideaTitle}</h2>
-        <div className="d-grid3" style={{ marginTop: 18 }}>
-          {HOME.steps.map(([title, body], i) => (
-            <div className="d-card" key={title} style={{ padding: 20 }}>
-              <div style={{ color: "#5fe0c8", fontWeight: 700 }}>{i + 1}</div>
-              <div style={{ fontWeight: 600, marginTop: 4 }}>{title}</div>
-              <div className="d-mut" style={{ fontSize: 16, marginTop: 4 }}>{body}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="d-wrap d-sec">
-        <h2 className="d-h2">{HOME.waysTitle}</h2>
-        <div className="d-grid2" style={{ marginTop: 14 }}>
-          <div className="d-card">
-            <div style={{ fontWeight: 600 }}>{HOME.wayATitle} <span className="d-tag real">{HOME.wayATag.replace(/\.$/, "")}</span></div>
-            <div className="d-mut" style={{ fontSize: 16, marginTop: 6 }}>{HOME.wayA}</div>
-          </div>
-          <div className="d-card">
-            <div style={{ fontWeight: 600 }}>{HOME.wayBTitle} <span className="d-tag">design only</span></div>
-            <div className="d-mut" style={{ fontSize: 16, marginTop: 6 }}>{HOME.wayB}</div>
-          </div>
-        </div>
-      </div>
-
-      <div className="d-wrap d-sec">
-        <h2 className="d-h2">{HOME.proofTitle}</h2>
-        <p className="d-mut" style={{ fontSize: 16 }}>{HOME.proofLine}</p>
-        <table className="d-table" style={{ marginTop: 12 }}>
-          <thead><tr><th>Scenario</th><th>Ruling</th><th>Paid</th><th>Label</th></tr></thead>
-          <tbody>
-            {examples.recorded_runs.map((row) => (
-              <tr key={row.scenario}>
-                <td><a href={RUN_HREF[row.scenario] ?? "/docs/recorded-runs"}>{row.scenario}</a></td>
-                <td>{row.ruling}</td>
-                <td>{row.paid}</td>
-                <td><span className="d-tag real">{row.label}</span></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="d-wrap d-sec">
-        <h2 className="d-h2">{HOME.trustTitle}</h2>
-        <div className="d-grid4" style={{ marginTop: 14 }}>
-          {HOME.trust.map(([title, body]) => (
-            <div key={title}>
-              <div style={{ fontWeight: 600 }}>{title}{title === "Next" && <> <span className="d-tag">design only</span></>}</div>
-              <div className="d-mut" style={{ fontSize: 16, marginTop: 4 }}>{body}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="d-wrap d-sec">
-        <h2 className="d-h2">{HOME.nextTitle}</h2>
-        <div className="d-grid3" style={{ marginTop: 14 }}>
-          {HOME.next.map(([title, body]) => (
-            <div className="d-card" key={title} style={{ padding: 20 }}>
-              <div style={{ fontWeight: 600 }}>{title}</div>
-              <div className="d-mut" style={{ fontSize: 16, marginTop: 4 }}>{body}</div>
-            </div>
-          ))}
-        </div>
-        <p className="d-dim" style={{ fontSize: 14, marginTop: 10 }}>{HOME.nextNote} <span className="d-tag">design only</span></p>
-      </div>
-
-      <div className="d-wrap d-sec">
-        <h2 className="d-h2">{HOME.limitsTitle}</h2>
-        <ul className="d-b d-mut">
-          {examples.limits.map((item) => <li key={item}>{item}</li>)}
-        </ul>
-        <p style={{ marginTop: 10 }}><a href="/docs/trust">{HOME.limitsLink}</a></p>
-      </div>
-    </Chrome>
+    <>
+      <style dangerouslySetInnerHTML={{ __html: CSS }} />
+<main className="w">
+<section className="hero pre" aria-labelledby="t">
+<p className="eb">Proposal · three draft SIMDs</p>
+<h1 id="t">Bringing Inference Programs To Solana</h1>
+<p className="lede" style={{ "marginBottom": "28px" }}>aka Actually Smart Contracts: programs written in natural language, stored on chain, run by AI models off chain, and answered with a signed, provable ruling that any program can act on: a judgment, a policy check, or a prediction.</p>
+<p>Blockchains have made real progress toward trustless, decentralized systems that run without anyone in charge. But they still lean on people for judgment: discussion, opinion, motives and alignment, all happening off chain. That reliance has been a steady source of inefficiency, and of risk.</p>
+<p>A DAO can pass a constitution, but it has no full-time lawyers to enforce it. An insurer can write a policy that a smart contract is meant to pay out on, but deciding whether a claim qualifies still happens off chain, by people. An exchange may want to wrap its hot wallets in procedures that protect user funds, and find it can only enforce what code can express. Code is law, and code can’t say everything.</p>
+<p>That’s why we think it’s time to talk seriously about how AI and blockchains can converge to add the missing piece: judgment, and policy checks built into the contract itself. A program should be able to get a second opinion, ask an expert panel, or go to a judiciary for a ruling before it moves funds.</p>
+<p className="k">So we’ve written three draft Solana Improvement Documents that would make it a shared standard, so every program, wallet and explorer can use it the same way.</p>
+<div className="deck" id="deck" aria-roledescription="carousel" aria-label="Slides: Bringing Inference Programs To Solana">
+<div className="track" id="track" tabIndex={0}></div>
+<div className="ctl">
+<button id="prev" aria-label="Previous slide">←</button>
+<button id="next" aria-label="Next slide">→</button>
+<span className="count" id="count" aria-live="polite">1 / 19</span>
+<span className="ttl" id="ttl"></span>
+<button id="nb" aria-pressed="false">Show script</button>
+</div>
+<div className="dots" id="dots" role="tablist" aria-label="Choose a slide"></div>
+<p className="notes" id="notes"></p>
+</div>
+<div className="simds g3" aria-label="The three SIMDs">
+<a className="card hl" href="/simds#programs">{" "}<span className="row"><span className="n">SIMD 1</span><span className="tag draft">draft</span></span>{" "}<h3>Inference Programs</h3>{" "}<p>Natural-language programs on chain and their internal context, inline, from a web page or a git repo at a commit. How other programs call them: a request prompt, external context, jury shaping, and an escrowed payment.</p>{" "}<span className="go">Read SIMD 1</span>{" "}</a>
+<a className="card hl" href="/simds#attestations">{" "}<span className="row"><span className="n">SIMD 2</span><span className="tag draft">draft</span></span>{" "}<h3>Inference Evaluators and Attestations</h3>{" "}<p>Who runs the models and what they commit to. The signed, commit-then-reveal vote each one casts, assurance levels from signatures to proofs of inference, and fast System 1 evaluators.</p>{" "}<span className="go">Read SIMD 2</span>{" "}</a>
+<a className="card hl" href="/simds#rulings">{" "}<span className="row"><span className="n">SIMD 3</span><span className="tag draft">draft</span></span>{" "}<h3>Inference Rulings, Disputes and Challenges</h3>{" "}<p>The signed ruling programs act on: outcome, summary, reasoning, checked sources, certainty, signatures and sign-off. Forecasts and prediction-market resolutions. How rulings are disputed, challenged with new evidence, and overturned without being erased.</p>{" "}<span className="go">Read SIMD 3</span>{" "}</a>
+</div>
+<div className="links">
+<a href="https://blog.verafy.ai/articles/20261105-simd-verifiable-inference">Read the full post on the Verafy blog</a>
+<a href="https://github.com/solana-foundation/solana-improvement-documents/discussions/categories/ideas">Discuss in SIMD Ideas</a>
+<a href="/sandbox">Try the sandbox</a>
+</div>
+</section>
+</main>
+      <DeckScript />
+    </>
   );
 }

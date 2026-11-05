@@ -1,0 +1,41 @@
+{
+  "_comment": "Arguments to CreateInferenceProgram. Illustrative.",
+  "name": "Grant milestone payouts",
+  "prompt": {
+    "storage": {
+      "inline": "program.asc.md"
+    },
+    "encoding": {
+      "compress": true
+    }
+  },
+  "context": [
+    {
+      "kind": "contract_terms",
+      "label": "Grant program rules",
+      "storage": {
+        "link": "https://example-dao.org/grants/rules"
+      },
+      "encoding": {
+        "compress": true
+      }
+    }
+  ],
+  "mutability": "timelocked",
+  "updateTimelockSlots": 216000,
+  "contextBudget": 16000,
+  "externalContext": {
+    "mode": "required",
+    "kinds": [
+      "web_page",
+      "other"
+    ],
+    "budget": 16000
+  },
+  "minimums": {
+    "evaluators": 5,
+    "quorum": 4,
+    "assurance": "L1",
+    "distinctFamilies": true
+  }
+}

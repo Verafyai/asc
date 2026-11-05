@@ -1,6 +1,6 @@
 {
  "kind": "asc.performance-model/1",
- "asOf": "2026-11-04",
+ "asOf": "2026-11-05",
  "note": "Every input is editable. Prices change; refresh model prices from the OpenRouter catalog and GPU prices before publishing.",
  "inputs": {
   "jurors": 5,
@@ -67,6 +67,29 @@
     "side channels",
     "whether the hardware is also doing other work",
     "sampled (non-greedy) outputs"
+   ]
+  },
+  "jev": {
+   "model": "typesafe/jev-latest",
+   "usd_per_input_token": 4.2e-08,
+   "usd_per_output_token": 0,
+   "usd_per_decision": 0.0004,
+   "latency_ms": [
+    70,
+    500
+   ],
+   "benchmark": {
+    "jev": 0.678,
+    "gpt-5.6-terra": 0.679,
+    "gpt-5.6-sol": 0.741,
+    "claude-opus-5": 0.731,
+    "source": "TypeSafe 4-workflow benchmark, as reported by DataCamp"
+   },
+   "status": "vendor-reported, early access since 2026-09-15, not independently reproduced",
+   "sources": [
+    "https://thenewstack.io/typesafe-jev-system-one/",
+    "https://www.datacamp.com/blog/system-one-models-jev",
+    "https://www.digitalocean.com/resources/articles/what-is-jev"
    ]
   }
  },
@@ -138,5 +161,13 @@
    7
   ],
   "source": "asc.verafy.ai recorded runs"
+ },
+ "accounts": {
+  "ruling_request_bytes": 2816,
+  "ruling_bytes_fixed": 6293,
+  "ruling_bytes_typical": 1952,
+  "attestation_bytes": 268,
+  "rent_lamports_per_byte": 6960,
+  "rent_header_bytes": 128
  }
 }

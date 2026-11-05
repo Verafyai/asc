@@ -1,0 +1,14 @@
+{
+  "_comment": "The certify inference program. Standards are internal context from the asc-standards repository, pinned at a commit. Illustrative.",
+  "name": "ASC repository certification",
+  "prompt": { "storage": { "inline": "certify.asc.md" }, "encoding": { "compress": true } },
+  "context": [
+    { "kind": "standard", "label": "EAO v1.0", "storage": { "git": { "repo": "github.com/verafy/asc-standards", "commit": "<40-hex commit>", "path": "EAO.md" } } },
+    { "kind": "standard", "label": "ETC v1.0", "storage": { "git": { "repo": "github.com/verafy/asc-standards", "commit": "<40-hex commit>", "path": "ETC.md" } } }
+  ],
+  "mutability": "frozen",
+  "contextBudget": 120000,
+  "externalContext": { "mode": "required", "kinds": ["other"], "budget": 100000 },
+  "minimums": { "evaluators": 5, "quorum": 4, "assurance": "L1", "distinctFamilies": true },
+  "reviewPolicy": { "challengeMode": "anyone", "_note": "a certificate can be challenged with new evidence and revoked" }
+}

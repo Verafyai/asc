@@ -1,0 +1,41 @@
+{
+  "illustrative": true,
+  "ruling": "Rul1ng8fK2c9...",
+  "request": "Req7Hk2...",
+  "inferenceProgram": "IPhotwallet...",
+  "status": "final",
+  "outcome": "hold",
+  "assurance": "L1",
+  "certainty": { "agreeing": 5, "answered": 5, "confidenceMean": 91, "confidenceMin": 84 },
+  "pinned": {
+    "revision": 3,
+    "promptHash": "9c41e0...",
+    "contextHash": "4b1e07...",
+    "extContextHash": "d27a5f...",
+    "inputHash": "0e88b3..."
+  },
+  "summary": "Hold. The account's email and 2FA changed 3 hours before this request, and the destination has never been used by this account. That matches rule 5 of the withdrawal policy (account takeover).",
+  "reasoning": { "sha256": "71f0c2...", "ref": "ar://reasoning/rul_8fK2c9" },
+  "sources": [
+    { "kind": "context",  "contentHash": "4b1e07...", "locator": "Withdrawal policy, rule 5" },
+    { "kind": "evidence", "contentHash": "a90d11...", "locator": "account.security_changes" },
+    { "kind": "external", "contentHash": "c3e2f4...", "locator": "Support ticket #88142" }
+  ],
+  "signatures": [
+    { "evaluator": "EvGpt...",      "family": "gpt",      "signature": "3fa9c1..." },
+    { "evaluator": "EvClaude...",   "family": "claude",   "signature": "b07e42..." },
+    { "evaluator": "EvGemini...",   "family": "gemini",   "signature": "9d21aa..." },
+    { "evaluator": "EvQwen...",     "family": "qwen",     "signature": "51c8e0..." },
+    { "evaluator": "EvDeepseek...", "family": "deepseek", "signature": "e6f30b..." }
+  ],
+  "rapporteur": "EvClaude...",
+  "signoffs": [
+    { "evaluator": "EvClaude...", "signature": "11ab..." },
+    { "evaluator": "EvGpt...",    "signature": "72cd..." },
+    { "evaluator": "EvGemini...", "signature": "0f3e..." },
+    { "evaluator": "EvQwen...",   "signature": "aa90..." }
+  ],
+  "dissents": [],
+  "payment": { "unit": "lamports", "quoted": 92000, "spent": 69400, "refunded": 22600, "note": "spent is the modeled cost of a budget jury of 5 at 1,500 tokens in and 300 out each, SOL at $85; rent is refunded separately" },
+  "readRulingReturnData": "ruling(32) | outcome=1 | assurance=1 | agreeing=5 | answered=5 | confidence_mean=91 | summary_hash(32)"
+}

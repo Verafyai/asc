@@ -1,42 +1,24 @@
 "use client";
+import "@/styles/chrome.css";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { PRODUCT_NAME } from "@/lib/brand";
+import { NAV, isCurrent } from "@/lib/nav";
 
-const LINKS = [
-  { href: "/how-it-works", label: "How it works" },
-  { href: "/sandbox", label: "Sandbox" },
-  { href: "/docs", label: "Docs" },
-  { href: "/code", label: "Sample code" },
-  { href: "/standards", label: "Standards" },
-  { href: "/certify", label: "Certify" },
-  { href: "/performance", label: "Performance" },
-  { href: "/security", label: "Security" },
-];
 
-function currentOf(href: string, current?: string): boolean {
-  if (!current) return false;
-  if (href === "/docs") return current === "/docs" || current.startsWith("/docs/") || current === "/inscribed" || current === "/proposal";
-  if (href === "/standards") return current.startsWith("/standards");
-  if (href === "/certify") return current.startsWith("/certify");
-  if (href === "/code") return current.startsWith("/code");
-  return current === href;
-}
-
-export default function Header({ current }: { current?: string }) {
+export default function Header() {
+  const pathname = usePathname() ?? "";
   const [open, setOpen] = useState(false);
   return (
-    <header className={`asc-header${open ? " menu-open" : ""}`}>
-      <button type="button" className="asc-menu" aria-expanded={open} aria-label={open ? "Close menu" : "Menu"} onClick={() => setOpen((v) => !v)}>
-        {open ? "×" : "☰"}
-      </button>
-      <a className="brand" href="/" aria-label={`${PRODUCT_NAME} home`}><img src="/asc-logo.png" alt="" width={32} height={32} className="brand-logo" />{PRODUCT_NAME}</a>
-      <span className="d-tag">alpha</span>
+    <header className={`hdr${open ? " open" : ""}`}>
+      <a className="brand" href="/"><img src="/asc-logo.png" alt="" width={64} height={64} />{PRODUCT_NAME}</a>
+      <span className="pill">alpha</span>
+      <button type="button" className="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)}>Menu</button>
       <nav aria-label="Primary">
-        {LINKS.map((l) => (
-          <a key={l.href} href={l.href} aria-current={currentOf(l.href, current) ? "page" : undefined} onClick={() => setOpen(false)}>
-            {l.label}
-          </a>
-        ))}
+        {NAV.map((n) => {
+          const on = isCurrent(n.href, pathname);
+          return <a key={n.href} href={n.href} className={on ? "on" : undefined} aria-current={on ? "page" : undefined}>{n.label}</a>;
+        })}
       </nav>
     </header>
   );

@@ -1,0 +1,52 @@
+{
+  "_comment": "Arguments to CreateInferenceProgram. Illustrative.",
+  "name": "Example DAO constitution, treasury articles",
+  "prompt": {
+    "storage": {
+      "inline": "program.asc.md"
+    },
+    "encoding": {
+      "compress": true
+    }
+  },
+  "context": [
+    {
+      "kind": "constitution",
+      "label": "DAO constitution v1",
+      "storage": {
+        "git": {
+          "repo": "github.com/example-dao/governance",
+          "commit": "<40-hex commit>",
+          "path": "constitution.md"
+        }
+      },
+      "encoding": {
+        "compress": true
+      }
+    }
+  ],
+  "mutability": "frozen",
+  "contextBudget": 16000,
+  "externalContext": {
+    "mode": "required",
+    "kinds": [
+      "discussion",
+      "web_page",
+      "other"
+    ],
+    "budget": 12000
+  },
+  "minimums": {
+    "evaluators": 7,
+    "quorum": 5,
+    "assurance": "L1",
+    "distinctFamilies": true
+  },
+  "reviewPolicy": {
+    "disputeParties": "named",
+    "challengeMode": "anyone",
+    "challengeBondLamports": 500000000,
+    "challengeMinEvaluators": 7,
+    "_note": "SetReviewPolicy, from the Rulings SIMD"
+  }
+}

@@ -1,16 +1,24 @@
 import type { Metadata } from "next";
 import Chrome from "@/components/Chrome";
 import { pageMeta } from "@/lib/page-meta";
+import { CATEGORY_LABEL, DEMO_DATA, demoBySlug } from "@/lib/oracle/demos-data";
+import RecordedRun from "@/components/RecordedRun";
+
+/** Recorded runs (moved from /docs/recorded-runs/:slug) are prerendered; any other id is a run record from /api/runs. */
+export function generateStaticParams() { return DEMO_DATA.map((d) => ({ id: d.slug })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
-  return pageMeta("Run", `/runs/${id}`);
+  const d = demoBySlug(id);
+  return pageMeta(d ? `${CATEGORY_LABEL[d.category]}: ${d.title}` : "Run", `/runs/${id}`);
 }
 
 type RunRec = { id: string; status: string; charged: number; message: string; mode: string; createdAt: string };
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  const d = demoBySlug(id);
+  if (d) return <RecordedRun demo={d} />;
   const g = globalThis as unknown as { __ascRuns?: Map<string, RunRec> };
   const rec = g.__ascRuns?.get(id);
   return (

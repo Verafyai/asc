@@ -1,0 +1,20 @@
+{
+  "_comment": "Arguments to CreateInferenceProgram. Illustrative.",
+  "name": "Exchange hot wallet withdrawals",
+  "prompt": { "storage": { "inline": "program.asc.md" }, "encoding": { "compact": true, "compress": true } },
+  "context": [
+    {
+      "kind": "internal_policy",
+      "label": "Withdrawal policy v1",
+      "storage": { "git": { "repo": "github.com/example-exchange/policies", "commit": "<40-hex commit>", "path": "withdrawals.md" } },
+      "encoding": { "compress": true, "encrypt": true },
+      "tokenEstimate": 420
+    }
+  ],
+  "mutability": "timelocked",
+  "updateTimelockSlots": 216000,
+  "contextBudget": 6000,
+  "externalContext": { "mode": "optional", "kinds": ["discussion", "other"], "budget": 2000 },
+  "minimums": { "evaluators": 5, "quorum": 4, "assurance": "L1", "distinctFamilies": true },
+  "evaluatorSet": ["<required because the policy is encrypted>"]
+}

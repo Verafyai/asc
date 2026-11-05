@@ -37,6 +37,6 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules", "devnet", "examples", "samples"
+    "node_modules", "devnet", "examples", "simds/samples"
   ]
 }

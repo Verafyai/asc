@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 import config from "../next.config";
-import { HOME, INSCRIBED, PROPOSAL, proseWords } from "@/content/copy";
+import { INSCRIBED, proseWords } from "@/content/copy";
 import examples from "@/examples/examples.json";
 import { createCreditsClient } from "@/lib/credits";
 import { headlines, usd } from "@/lib/performance";
@@ -11,13 +11,15 @@ import { simulate, TEMPLATES } from "@/lib/sandbox/simulate";
 import { loadStandards } from "@/lib/standards";
 import { PRODUCT_NAME, SITE_URL } from "@/lib/brand";
 import { redirectLegacyHost } from "../middleware";
+import { NAV, isCurrent } from "@/lib/nav";
+import { loadSimds } from "@/lib/simds";
 
-function walk(dir: string, out: string[] = []): string[] {
+function walk(dir: string, out: string[] = [], pattern = /\.(tsx|ts|md|css)$/): string[] {
   for (const name of readdirSync(dir)) {
     if (name === "node_modules" || name === ".next" || name === "data" || name === "uploads") continue;
     const p = path.join(dir, name);
-    if (statSync(p).isDirectory()) walk(p, out);
-    else if (/\.(tsx|ts|md|css)$/.test(name) && !p.includes(`${path.sep}tests${path.sep}`)) out.push(p);
+    if (statSync(p).isDirectory()) walk(p, out, pattern);
+    else if (pattern.test(name) && !p.includes(`${path.sep}tests${path.sep}`)) out.push(p);
   }
   return out;
 }
@@ -50,17 +52,7 @@ describe("copy rules", () => {
     expect(bad).toEqual([]);
   });
 
-  it("keeps Home, ASC run and Proposal under the word caps", () => {
-    const home = proseWords([
-      HOME.eyebrow, HOME.headline, HOME.subhead, HOME.primary, HOME.secondary,
-      HOME.ruleLabel, HOME.rule, HOME.okTitle, HOME.okResult, HOME.noTitle, HOME.noResult, HOME.exampleNote,
-      HOME.problemTitle, HOME.problem, HOME.ideaTitle, ...HOME.steps.flat(),
-      HOME.waysTitle, HOME.wayATitle, HOME.wayATag, HOME.wayA, HOME.wayBTitle, "design only", HOME.wayB,
-      HOME.proofTitle, HOME.proofLine,
-      HOME.trustTitle, ...HOME.trust.flat(), "design only",
-      HOME.nextTitle, ...HOME.next.flat(), HOME.nextNote, "design only",
-      HOME.limitsTitle, ...examples.limits, HOME.limitsLink,
-    ]);
+  it("keeps the ASC run under its word cap", () => {
     const inscribed = proseWords([
       INSCRIBED.eyebrow, INSCRIBED.tag, INSCRIBED.headline, INSCRIBED.subhead,
       INSCRIBED.rulesTitle, ...examples.hot_wallet.rules, INSCRIBED.rulesNote,
@@ -71,21 +63,7 @@ describe("copy rules", () => {
       INSCRIBED.happenedNote, INSCRIBED.howTitle, ...INSCRIBED.how, INSCRIBED.dataTitle,
       "Inscribed step list", "Run steps and signatures", "Run rules (quorum, wallets, caps)",
     ]);
-    const proposal = proseWords([
-      PROPOSAL.eyebrow, PROPOSAL.tag, PROPOSAL.outline, PROPOSAL.headline, PROPOSAL.subhead, PROPOSAL.diagram,
-      PROPOSAL.whyTitle, PROPOSAL.why, PROPOSAL.ifaceTitle, PROPOSAL.solana, PROPOSAL.evm,
-      PROPOSAL.storeTitle,
-      "Compiled to a loop-free step list.",
-      "Inscribed with IQ Labs writer.codeIn: on Solana with @iqlabs-official/solana-sdk, on EVM chains with @iqlabs-official/ethereum-sdk.",
-      "The contract stores the inscription's transaction id and the SHA-256 of its bytes, so the rules can't change under it.",
-      "Private policies: encrypted with crypto.multiEncrypt to each juror's wallet-derived key.",
-      PROPOSAL.storeStatus,
-      PROPOSAL.signTitle, PROPOSAL.signLine, PROPOSAL.failTitle, ...PROPOSAL.fail, PROPOSAL.limitsTitle, ...PROPOSAL.limits,
-    ]);
-    console.log(`WORD COUNTS home=${home} inscribed=${inscribed} proposal=${proposal}`);
-    expect(home).toBeLessThan(450);
     expect(inscribed).toBeLessThan(400);
-    expect(proposal).toBeLessThan(600);
   });
 });
 
@@ -173,15 +151,43 @@ describe("standards and performance", () => {
 });
 
 describe("redirects", () => {
-  it("301s the old site map", async () => {
+  it("301s the removed pages to their v2 homes (SITE_SPEC_v2)", async () => {
     const rules = await config.redirects!();
     const map = Object.fromEntries(rules.map((r) => [r.source, `${r.destination}:${"statusCode" in r ? r.statusCode : ""}`]));
-    expect(map["/trust"]).toBe("/docs/trust:301");
-    expect(map["/demos"]).toBe("/docs/recorded-runs:301");
-    expect(map["/demos/:slug"]).toBe("/docs/recorded-runs/:slug:301");
-    expect(map["/contracts"]).toBe("/docs/recorded-runs:301");
-    expect(map["/settlement"]).toBe("/docs/recorded-runs/settlement:301");
-    expect(map["/evidence"]).toBe("/how-it-works:301");
+    expect(map["/docs"]).toBe("/simds:301");
+    expect(map["/docs/:path*"]).toBe("/simds:301");
+    expect(map["/docs/trust"]).toBe("/security:301");
+    expect(map["/docs/recorded-runs/:slug"]).toBe("/runs/:slug:301");
+    expect(map["/code"]).toBe("/simds:301");
+    expect(map["/proposal"]).toBe("/simds:301");
+    expect(map["/certify"]).toBe("/certifications:301");
+    expect(map["/demos"]).toBe("/:301");
+    expect(map["/trust"]).toBe("/security:301");
     expect(map["/asc"]).toBe("/inscribed:301");
+    // the specific /docs rules must come before the catch-all
+    const order = rules.map((r) => r.source);
+    expect(order.indexOf("/docs/trust")).toBeLessThan(order.indexOf("/docs/:path*"));
+    expect(order.indexOf("/docs/recorded-runs/:slug")).toBeLessThan(order.indexOf("/docs/:path*"));
+  });
+});
+
+describe("v2 nav and SIMDs", () => {
+  it("has the one nav, in the spec order", () => {
+    expect(NAV.map((n) => n.label)).toEqual(["Home", "How it works", "Sandbox", "Read the SIMDs", "Standards", "Certifications", "Performance", "Security"]);
+    expect(isCurrent("/", "/")).toBe(true);
+    expect(isCurrent("/", "/simds")).toBe(false);
+    expect(isCurrent("/standards", "/standards/edo")).toBe(true);
+  });
+
+  it("renders the three SIMDs with every anchor the site links to", () => {
+    const simds = loadSimds();
+    expect(simds.map((s) => s.title)).toEqual(["Inference Programs", "Inference Evaluators and Attestations", "Inference Rulings, Disputes and Challenges"]);
+    const ids = new Set<string>(["programs", "attestations", "rulings"]);
+    for (const s of simds) for (const m of s.html.matchAll(/ id="([^"]+)"/g)) ids.add(m[1]);
+    const roots = ["app", "components", "public/sandbox"].map((p) => path.join(process.cwd(), p));
+    const files = roots.flatMap((p) => walk(p, [], /\.(tsx|ts|js)$/));
+    const missing: string[] = [];
+    for (const file of files) for (const m of readFileSync(file, "utf8").matchAll(/\/simds#([a-z0-9-]+)/g)) if (!ids.has(m[1])) missing.push(`${file}: ${m[1]}`);
+    expect(missing).toEqual([]);
   });
 });
