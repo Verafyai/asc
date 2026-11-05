@@ -1,0 +1,54 @@
+{
+  "kind": "asc.steps/1",
+  "english": [
+    "Never send more than $1,000,000 to a wallet not registered to the exchange.",
+    "Never send more than $50,000,000 in total per day.",
+    "Only pay out to wallets on the declared withdrawal list.",
+    "A newly registered address cannot receive funds until 24 hours after registration.",
+    "Never send more than 10% of the hot wallet balance in one withdrawal.",
+    "If any rule is broken, refuse the withdrawal and hold it for human review."
+  ],
+  "steps": [
+    {
+      "n": 1,
+      "op": "read_input",
+      "what": "withdrawal request: to, amountUsd, registered, sentTodayUsd, registeredHoursAgo"
+    },
+    {
+      "n": 2,
+      "op": "judge",
+      "rule": "unregistered_cap",
+      "test": "registered || amountUsd <= 1000000"
+    },
+    {
+      "n": 3,
+      "op": "judge",
+      "rule": "daily_cap",
+      "test": "sentTodayUsd + amountUsd <= 50000000"
+    },
+    {
+      "n": 4,
+      "op": "judge",
+      "rule": "declared_list",
+      "test": "to in declaredList"
+    },
+    {
+      "n": 5,
+      "op": "judge",
+      "rule": "new_address_delay",
+      "test": "registeredHoursAgo >= 24"
+    },
+    {
+      "n": 6,
+      "op": "judge",
+      "rule": "balance_share",
+      "test": "amountUsd <= 0.10 * hotWalletBalanceUsd"
+    },
+    {
+      "n": 7,
+      "op": "exit",
+      "requires": "quorum of allow attestations",
+      "else": "refuse + hold"
+    }
+  ]
+}

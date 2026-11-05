@@ -1,0 +1,352 @@
+{
+ "cluster": "localnet (solana-test-validator 4.4.0, IQ program cloned from devnet)",
+ "ranAt": "2026-11-04T22:33:00.993Z",
+ "modelCallsUsd": 0,
+ "note": "Verdicts are scripted from the inscribed rules (no model calls were made for this run). Signatures, inscriptions and transfers are real on a local validator.",
+ "stepsDoc": {
+  "kind": "swarmchain.steps/1",
+  "title": "Exchange hot wallet: withdrawal rules (illustrative)",
+  "english": [
+   "Never send more than $1,000,000 to a wallet not registered to Binance.",
+   "Never send more than $50,000,000 in total per day.",
+   "Only pay out to wallets on the declared withdrawal list.",
+   "A newly registered address cannot receive funds until 24 hours after registration.",
+   "Never send more than 10% of the hot wallet balance in one withdrawal.",
+   "If any rule is broken, refuse the withdrawal and hold it for human review."
+  ],
+  "steps": [
+   {
+    "n": 1,
+    "op": "read_input",
+    "what": "withdrawal request: to, amountUsd, registered, sentTodayUsd, registeredHoursAgo"
+   },
+   {
+    "n": 2,
+    "op": "judge",
+    "rule": "unregistered_cap",
+    "test": "registered || amountUsd <= 1000000"
+   },
+   {
+    "n": 3,
+    "op": "judge",
+    "rule": "daily_cap",
+    "test": "sentTodayUsd + amountUsd <= 50000000"
+   },
+   {
+    "n": 4,
+    "op": "judge",
+    "rule": "declared_list",
+    "test": "to in declaredList"
+   },
+   {
+    "n": 5,
+    "op": "judge",
+    "rule": "new_address_delay",
+    "test": "registeredHoursAgo >= 24"
+   },
+   {
+    "n": 6,
+    "op": "judge",
+    "rule": "balance_share",
+    "test": "amountUsd <= 0.10 * hotWalletBalanceUsd"
+   },
+   {
+    "n": 7,
+    "op": "exit",
+    "requires": "quorum of allow attestations",
+    "else": "refuse + hold"
+   }
+  ],
+  "runRules": {
+   "quorum": 4,
+   "of": 5,
+   "operators": [
+    {
+     "id": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "wallet": "5SJ7ZemJANUHQjHG6X34SpFFCAX5cmbv8oAgdeNriDtU"
+    },
+    {
+     "id": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "wallet": "Ekarw8NU7EdfopzqGJGYLmrshnDzRXeKVzvN56QTzxJf"
+    },
+    {
+     "id": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "wallet": "pcnWPu1P454ggHYSuFD1FiS6JYu41ASoTPXJWdqs8D9"
+    },
+    {
+     "id": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "wallet": "J3YWuPLmz582oympM5UGJ4HPZ74hkaKsu3VYJHh63FZg"
+    },
+    {
+     "id": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "wallet": "2Dd8uX1ikU4opmXPhfa3Bzj9yoQQcGMeX5FXnrZFAXGP"
+    }
+   ],
+   "declaredList": [
+    "6pmUjXFsHjQnyxmwYK1A4cPbMjmE22uqS79ihQB9Qb7R"
+   ],
+   "hotWalletBalanceUsd": 2000000000,
+   "loops": "none"
+  }
+ },
+ "calls": [
+  {
+   "id": "normal",
+   "label": "Normal payout: $250,000 to a registered wallet",
+   "request": {
+    "to": "6pmUjXFsHjQnyxmwYK1A4cPbMjmE22uqS79ihQB9Qb7R",
+    "amountUsd": 250000,
+    "sentTodayUsd": 4000000,
+    "registeredHoursAgo": 720
+   },
+   "callTx": "3Bryt9Fma5NHL6Ex8jnrwtbnwkYXtzNqrKQQgXaD1AJJbrfHQPnGPrPhVLDZyHQ1XBk6e6eWjENmAk4weHDDESpV",
+   "ruling": "allow",
+   "broken": [],
+   "allowCount": 5,
+   "quorum": 4,
+   "exitTx": "3YcigZipak6AzB5Rc22kbbGozrVqvtwrznYfANkuPxNUqhfBckTfZ6TZhUh9pSV4nhnvNL9CMfGBmtyJpYrgox8v",
+   "exitBytes": 1169,
+   "paidLamports": 5000000,
+   "attestations": [
+    {
+     "kind": "jury.attestation/0",
+     "rulesRef": "4c2nG6DwHumsxaz4ZbD92Nt3B9EVVi2Hefv3vmdPUpxPQGkPWyq5PUtkdCCXf5pLx6bh3fKMB6qDim9LnYwPWhx7",
+     "call": "3Bryt9Fma5NHL6Ex8jnrwtbnwkYXtzNqrKQQgXaD1AJJbrfHQPnGPrPhVLDZyHQ1XBk6e6eWjENmAk4weHDDESpV",
+     "inputHash": "6aaf823397e5b2988b428f0922d95f28c4935ab1173f24c68499eaf58bbfc3ab",
+     "actionHash": "64a3b1f98ea757f84d46b50754dc41931228781f3c5b964a992ee0fc9695de32",
+     "modelId": "openai/gpt-5-mini",
+     "ruling": "allow",
+     "broken": [],
+     "proof": "none (ZK planned)",
+     "wallet": "5SJ7ZemJANUHQjHG6X34SpFFCAX5cmbv8oAgdeNriDtU",
+     "attHash": "4da499e305fef8ea2ebcfdf4ae843781aa997a3322995e6c5949facbcb0f5938",
+     "sig": "d8f591fc1233128c8fe828ae8ccb7df19ee1f928b5d2d4037fccac2b7636eadadeddb22669e916d9b6f0221bc04c62b110841bb071beee9c60b731c61649bd09",
+     "voteTx": "4xfKCbK8JUbTYwNPCGpS8LB6BsSAsmfvpTCAKDByybGqJMkoiLCLmEtHUxVJ4jTzJG6WhAKp4jRMNjkEU2otComo"
+    },
+    {
+     "kind": "jury.attestation/0",
+     "rulesRef": "4c2nG6DwHumsxaz4ZbD92Nt3B9EVVi2Hefv3vmdPUpxPQGkPWyq5PUtkdCCXf5pLx6bh3fKMB6qDim9LnYwPWhx7",
+     "call": "3Bryt9Fma5NHL6Ex8jnrwtbnwkYXtzNqrKQQgXaD1AJJbrfHQPnGPrPhVLDZyHQ1XBk6e6eWjENmAk4weHDDESpV",
+     "inputHash": "6aaf823397e5b2988b428f0922d95f28c4935ab1173f24c68499eaf58bbfc3ab",
+     "actionHash": "64a3b1f98ea757f84d46b50754dc41931228781f3c5b964a992ee0fc9695de32",
+     "modelId": "anthropic/claude-haiku-4.5",
+     "ruling": "allow",
+     "broken": [],
+     "proof": "none (ZK planned)",
+     "wallet": "Ekarw8NU7EdfopzqGJGYLmrshnDzRXeKVzvN56QTzxJf",
+     "attHash": "b7ffc2404d81a61bc2cd54800cfa36af882f5c0e8e85dc5b55d524e80eae031a",
+     "sig": "4127ce0d6bceec504adae0dd1e9f563b91af09ec3141b5218b2fa8370a85662a8ec326fca48e775c8f9751f49d91629fcfcea61e29e90ba26a2f6edb97f76608",
+     "voteTx": "58nGhH5thMY7Zf5sCznUm9AgEmSxAEcn9XMrC2ekgkxTSwe3TMQdfd85pnYsicK17K8jFmL3F3DowG1Em1ht83x6"
+    },
+    {
+     "kind": "jury.attestation/0",
+     "rulesRef": "4c2nG6DwHumsxaz4ZbD92Nt3B9EVVi2Hefv3vmdPUpxPQGkPWyq5PUtkdCCXf5pLx6bh3fKMB6qDim9LnYwPWhx7",
+     "call": "3Bryt9Fma5NHL6Ex8jnrwtbnwkYXtzNqrKQQgXaD1AJJbrfHQPnGPrPhVLDZyHQ1XBk6e6eWjENmAk4weHDDESpV",
+     "inputHash": "6aaf823397e5b2988b428f0922d95f28c4935ab1173f24c68499eaf58bbfc3ab",
+     "actionHash": "64a3b1f98ea757f84d46b50754dc41931228781f3c5b964a992ee0fc9695de32",
+     "modelId": "google/gemini-2.5-flash",
+     "ruling": "allow",
+     "broken": [],
+     "proof": "none (ZK planned)",
+     "wallet": "pcnWPu1P454ggHYSuFD1FiS6JYu41ASoTPXJWdqs8D9",
+     "attHash": "ee637fff8f0df6517a2347be85ea834d14657b7250deaa03860fe962faa2b346",
+     "sig": "6ce492aebbac47064da3e8a722d24d0d9bd1f2ee88ce907e44de591d72f04ca7f1044e4cef1156a9469fe54ecd379f1ac429663b91eb886daed9763ebd596e0a",
+     "voteTx": "3ApGbCSkhFVwreGcZa5id5HM9eB2BvG3GiGEdaRaSNjubRyT4TpJBiEw34YJLma2zikszLyXDu97EA4Lzek8tmHv"
+    },
+    {
+     "kind": "jury.attestation/0",
+     "rulesRef": "4c2nG6DwHumsxaz4ZbD92Nt3B9EVVi2Hefv3vmdPUpxPQGkPWyq5PUtkdCCXf5pLx6bh3fKMB6qDim9LnYwPWhx7",
+     "call": "3Bryt9Fma5NHL6Ex8jnrwtbnwkYXtzNqrKQQgXaD1AJJbrfHQPnGPrPhVLDZyHQ1XBk6e6eWjENmAk4weHDDESpV",
+     "inputHash": "6aaf823397e5b2988b428f0922d95f28c4935ab1173f24c68499eaf58bbfc3ab",
+     "actionHash": "64a3b1f98ea757f84d46b50754dc41931228781f3c5b964a992ee0fc9695de32",
+     "modelId": "qwen/qwen3-235b-a22b-2507",
+     "ruling": "allow",
+     "broken": [],
+     "proof": "none (ZK planned)",
+     "wallet": "J3YWuPLmz582oympM5UGJ4HPZ74hkaKsu3VYJHh63FZg",
+     "attHash": "b7c9a432e1ec272d949e9c7127d2d5e583e049a28baff7f067377110b49a48ea",
+     "sig": "d12f2bb75217b6c16569584a3d73ae20a4760669fb2932e7b4d38f449577bbe859f0bf66a89ca4ee982386f9ffa6a42aae817aadc3b4c68cec2fbcfec4685f06",
+     "voteTx": "2zx9gMDNFVLhBVuUhi2zc4rp7JezEzmabj9cL4gs8B3dH77B1pDq3XpKaRMsg3DG36TjP5JHe6ixXgJZsYvx3TN2"
+    },
+    {
+     "kind": "jury.attestation/0",
+     "rulesRef": "4c2nG6DwHumsxaz4ZbD92Nt3B9EVVi2Hefv3vmdPUpxPQGkPWyq5PUtkdCCXf5pLx6bh3fKMB6qDim9LnYwPWhx7",
+     "call": "3Bryt9Fma5NHL6Ex8jnrwtbnwkYXtzNqrKQQgXaD1AJJbrfHQPnGPrPhVLDZyHQ1XBk6e6eWjENmAk4weHDDESpV",
+     "inputHash": "6aaf823397e5b2988b428f0922d95f28c4935ab1173f24c68499eaf58bbfc3ab",
+     "actionHash": "64a3b1f98ea757f84d46b50754dc41931228781f3c5b964a992ee0fc9695de32",
+     "modelId": "deepseek/deepseek-v4-flash",
+     "ruling": "allow",
+     "broken": [],
+     "proof": "none (ZK planned)",
+     "wallet": "2Dd8uX1ikU4opmXPhfa3Bzj9yoQQcGMeX5FXnrZFAXGP",
+     "attHash": "f8c902884dbfc182fbf5a2b736c2bb0a264ac5b9fb3b82327f75d6858a0e5c82",
+     "sig": "9c3d35ca47b785607f12fda741ce93586544fe18eacccc319a2cb9f2e788dfc4317cb4732dcdf67c23f1b7f6770c4020017f730460346125639bf8bb2ee1d507",
+     "voteTx": "2wE8XpxkAyCBmNThPZGWpJvk98KGxzoLkdAHckkRnb31NbD7VqYPSa3Ng1QbZ4M6e7pCp7YPiWNFZVPiaGSKcvK7"
+    }
+   ]
+  },
+  {
+   "id": "drain",
+   "label": "Hypothetical drain: $6,000,000,000 to an unregistered wallet",
+   "request": {
+    "to": "AeBsq4hYbwQbBEMjP9CUfNdM3mSpCcc3Sf7duBLHqQ74",
+    "amountUsd": 6000000000,
+    "sentTodayUsd": 4000000,
+    "registeredHoursAgo": 0
+   },
+   "callTx": "4tJsFEm6krPf7x7yvpaEQWFeHzfbAoDXmKsHthKQBUQd7npxkKwjCWTfWoDCUXtjW6zUK2rMj4v8tPKQdf9dHwrM",
+   "ruling": "deny",
+   "broken": [
+    "unregistered_cap",
+    "daily_cap",
+    "declared_list",
+    "new_address_delay",
+    "balance_share"
+   ],
+   "allowCount": 0,
+   "quorum": 4,
+   "attestations": [
+    {
+     "kind": "jury.attestation/0",
+     "rulesRef": "4c2nG6DwHumsxaz4ZbD92Nt3B9EVVi2Hefv3vmdPUpxPQGkPWyq5PUtkdCCXf5pLx6bh3fKMB6qDim9LnYwPWhx7",
+     "call": "4tJsFEm6krPf7x7yvpaEQWFeHzfbAoDXmKsHthKQBUQd7npxkKwjCWTfWoDCUXtjW6zUK2rMj4v8tPKQdf9dHwrM",
+     "inputHash": "15242486f389da74a75e991c47da3fb264b04143846c2e2dcbe2683f0501c1f6",
+     "actionHash": "2298714835a7c96c8b1369c47842603a7d55cf2612c2557e7377b7f42bb0ac31",
+     "modelId": "openai/gpt-5-mini",
+     "ruling": "deny",
+     "broken": [
+      "unregistered_cap",
+      "daily_cap",
+      "declared_list",
+      "new_address_delay",
+      "balance_share"
+     ],
+     "proof": "none (ZK planned)",
+     "wallet": "5SJ7ZemJANUHQjHG6X34SpFFCAX5cmbv8oAgdeNriDtU",
+     "attHash": "044131e550e667c2e6b5e7dd4362608af6ee2de5e827ed4e2d907388cdcb662c",
+     "sig": "8947073f3c572cc4658a2ba72c086084e795289ce4ac5dad4e6c8398130b4321185f2ac5091efb5f1e74ba9f8ec5067b3cd55b62c1709494490adf3216ebf50c",
+     "voteTx": "41P4M9735tLxeVvWLxmNrMvmPC8d1TMiyQoDNscQm9RQnd1vFbeJ9xQK4v7MKuHLbsSvKK1x87QMAPJjNEFAgvsQ"
+    },
+    {
+     "kind": "jury.attestation/0",
+     "rulesRef": "4c2nG6DwHumsxaz4ZbD92Nt3B9EVVi2Hefv3vmdPUpxPQGkPWyq5PUtkdCCXf5pLx6bh3fKMB6qDim9LnYwPWhx7",
+     "call": "4tJsFEm6krPf7x7yvpaEQWFeHzfbAoDXmKsHthKQBUQd7npxkKwjCWTfWoDCUXtjW6zUK2rMj4v8tPKQdf9dHwrM",
+     "inputHash": "15242486f389da74a75e991c47da3fb264b04143846c2e2dcbe2683f0501c1f6",
+     "actionHash": "2298714835a7c96c8b1369c47842603a7d55cf2612c2557e7377b7f42bb0ac31",
+     "modelId": "anthropic/claude-haiku-4.5",
+     "ruling": "deny",
+     "broken": [
+      "unregistered_cap",
+      "daily_cap",
+      "declared_list",
+      "new_address_delay",
+      "balance_share"
+     ],
+     "proof": "none (ZK planned)",
+     "wallet": "Ekarw8NU7EdfopzqGJGYLmrshnDzRXeKVzvN56QTzxJf",
+     "attHash": "dd6b4a98babe401ac58d77088629db42209bb7655ba3b9e2d1c644561ef61849",
+     "sig": "057f71267d9b1203ca25dcf4feed55c4278051a436f4cec1eadc6de0550de33ae77e9bbed87d7dfa5ecf3a26cdb432553604080ed2be4aa36054985bb28d8c02",
+     "voteTx": "5ytoWz3k3jybTzFybTakzagMDEfWsFkovftEod61M3MTt8RJsT2oUR88hY1d5yhm7tB4rGsHTZYbNijqwTZDHM2z"
+    },
+    {
+     "kind": "jury.attestation/0",
+     "rulesRef": "4c2nG6DwHumsxaz4ZbD92Nt3B9EVVi2Hefv3vmdPUpxPQGkPWyq5PUtkdCCXf5pLx6bh3fKMB6qDim9LnYwPWhx7",
+     "call": "4tJsFEm6krPf7x7yvpaEQWFeHzfbAoDXmKsHthKQBUQd7npxkKwjCWTfWoDCUXtjW6zUK2rMj4v8tPKQdf9dHwrM",
+     "inputHash": "15242486f389da74a75e991c47da3fb264b04143846c2e2dcbe2683f0501c1f6",
+     "actionHash": "2298714835a7c96c8b1369c47842603a7d55cf2612c2557e7377b7f42bb0ac31",
+     "modelId": "google/gemini-2.5-flash",
+     "ruling": "deny",
+     "broken": [
+      "unregistered_cap",
+      "daily_cap",
+      "declared_list",
+      "new_address_delay",
+      "balance_share"
+     ],
+     "proof": "none (ZK planned)",
+     "wallet": "pcnWPu1P454ggHYSuFD1FiS6JYu41ASoTPXJWdqs8D9",
+     "attHash": "045e1959b348113ba0616e9794cc33963b8c6a99b82420dbb323c35472b32c6c",
+     "sig": "c050315332512d17bb4960ea01af07a219785701cf4bcaab923568d5f9fd89de6a6ec0209c78bbe2d207169f57dd4f516e4dbfd3168ddd5885066a794f06ea0a",
+     "voteTx": "3zk3dvGipwi1PTBeBLFXs925XMqJCAze3BfCQuXy8qrNLAz7ZCjZDJmCvvAk8FjmbKcsnDLj6V94Svm25CRmg3ct"
+    },
+    {
+     "kind": "jury.attestation/0",
+     "rulesRef": "4c2nG6DwHumsxaz4ZbD92Nt3B9EVVi2Hefv3vmdPUpxPQGkPWyq5PUtkdCCXf5pLx6bh3fKMB6qDim9LnYwPWhx7",
+     "call": "4tJsFEm6krPf7x7yvpaEQWFeHzfbAoDXmKsHthKQBUQd7npxkKwjCWTfWoDCUXtjW6zUK2rMj4v8tPKQdf9dHwrM",
+     "inputHash": "15242486f389da74a75e991c47da3fb264b04143846c2e2dcbe2683f0501c1f6",
+     "actionHash": "2298714835a7c96c8b1369c47842603a7d55cf2612c2557e7377b7f42bb0ac31",
+     "modelId": "qwen/qwen3-235b-a22b-2507",
+     "ruling": "deny",
+     "broken": [
+      "unregistered_cap",
+      "daily_cap",
+      "declared_list",
+      "new_address_delay",
+      "balance_share"
+     ],
+     "proof": "none (ZK planned)",
+     "wallet": "J3YWuPLmz582oympM5UGJ4HPZ74hkaKsu3VYJHh63FZg",
+     "attHash": "b0cbd3401842fe7e7ccc0038a5e3d33a085501092d80059326ba3d8b213230b5",
+     "sig": "0f5bb1670aebdc48e16bd546d1f06060105c01f94d8f0442d2db3e300d02c0aa3c7c24f28687752b1eb0cd9e107cec1ce74bceddaa683d309919a200cc2f2001",
+     "voteTx": "3v4VKEes8aXQidqCGQz2D9jWDA2uAb7meazHkhCrR2mbxvE4pmUAMHDc6s4q4YeXQbESchp5SJ6iajWGjjHHGrhz"
+    },
+    {
+     "kind": "jury.attestation/0",
+     "rulesRef": "4c2nG6DwHumsxaz4ZbD92Nt3B9EVVi2Hefv3vmdPUpxPQGkPWyq5PUtkdCCXf5pLx6bh3fKMB6qDim9LnYwPWhx7",
+     "call": "4tJsFEm6krPf7x7yvpaEQWFeHzfbAoDXmKsHthKQBUQd7npxkKwjCWTfWoDCUXtjW6zUK2rMj4v8tPKQdf9dHwrM",
+     "inputHash": "15242486f389da74a75e991c47da3fb264b04143846c2e2dcbe2683f0501c1f6",
+     "actionHash": "2298714835a7c96c8b1369c47842603a7d55cf2612c2557e7377b7f42bb0ac31",
+     "modelId": "deepseek/deepseek-v4-flash",
+     "ruling": "deny",
+     "broken": [
+      "unregistered_cap",
+      "daily_cap",
+      "declared_list",
+      "new_address_delay",
+      "balance_share"
+     ],
+     "proof": "none (ZK planned)",
+     "wallet": "2Dd8uX1ikU4opmXPhfa3Bzj9yoQQcGMeX5FXnrZFAXGP",
+     "attHash": "bcfecb6e3afb95802a6ac8bb087539e05807a9ff2c5ab4c46bfd66cc1ac77b9c",
+     "sig": "9e5c5bf9e05cb39eb5b0d26397fac19e2898e6215239a764459bfe1e5b5e71eab5ceb9ffb33947f6847f09d359c5ddd80c84cd3255e8fe901a43ae501fca7e04",
+     "voteTx": "3E812KZpyEtHH9xZGsrGPnUz58miU58jhLKZswRynsE7PptdTUeJHmBGwZomDiKwxt2RHcRoYAW4YyH739mj71ur"
+    }
+   ]
+  }
+ ],
+ "steps": [
+  {
+   "name": "Inscribe hot-wallet rules as loop-free steps + run rules via IQ Labs codeIn",
+   "ok": true,
+   "sig": "4c2nG6DwHumsxaz4ZbD92Nt3B9EVVi2Hefv3vmdPUpxPQGkPWyq5PUtkdCCXf5pLx6bh3fKMB6qDim9LnYwPWhx7",
+   "bytes": 1909
+  },
+  {
+   "name": "IQ readCodeIn round trip (byte-identical)",
+   "ok": true
+  },
+  {
+   "name": "Normal payout: $250,000 to a registered wallet: 5 of 5 jurists allow, exit tx verifies each wallet's signed attestation and pays",
+   "ok": true,
+   "sig": "3YcigZipak6AzB5Rc22kbbGozrVqvtwrznYfANkuPxNUqhfBckTfZ6TZhUh9pSV4nhnvNL9CMfGBmtyJpYrgox8v",
+   "bytes": 1169
+  },
+  {
+   "name": "Same exit with one attestation signature altered: whole tx fails, nothing paid",
+   "ok": true,
+   "rejected": true
+  },
+  {
+   "name": "Hypothetical drain: $6,000,000,000 to an unregistered wallet: 0 of 5 jurists allow (rules broken: unregistered_cap, daily_cap, declared_list, new_address_delay, balance_share), no exit tx can be built, held for review",
+   "ok": true,
+   "rejected": true
+  }
+ ],
+ "treasury": "2Psu6KZykLsdivJWMfHJQoddjV2ACEmx8SybMojrC2pq",
+ "registeredWallet": "6pmUjXFsHjQnyxmwYK1A4cPbMjmE22uqS79ihQB9Qb7R"
+}

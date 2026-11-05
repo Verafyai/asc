@@ -1,0 +1,6 @@
++------------------------------------------+
+|  ASC {CODE} v{ver}   NOT CERTIFIED       |
+|  {passed}/{total} rules passed           |
+|  {repo}@{sha7}                           |
+|  sha256:{sum12}   {date}                 |
++------------------------------------------+

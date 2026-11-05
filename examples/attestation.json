@@ -1,0 +1,12 @@
+{
+  "kind": "jury.attestation/0",
+  "policyTx": "<IQ code-in tx signature (Solana) or tx hash (EVM) of the inscribed ASC>",
+  "policyRef": "<sha256 of the inscribed bytes, as returned by reader.readCodeIn>",
+  "actionHash": "<sha256 of the exact action>",
+  "inputHash": "<sha256 of evidence read>",
+  "modelId": "<model id>",
+  "ruling": "allow | deny | abstain",
+  "proof": "<planned: proof of which model answered; today: none>",
+  "wallet": "<juror pubkey listed in the rules>",
+  "sig": "<Ed25519 over all fields above>"
+}

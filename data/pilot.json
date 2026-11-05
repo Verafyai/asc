@@ -1,0 +1,4623 @@
+{
+ "fetchedAt": "2026-11-03T15:18:55.056Z",
+ "source": "https://gamma-api.polymarket.com/markets?closed=true&order=volumeNum&ascending=false&end_date_min=2024-01-01T00:00:00Z&end_date_max=2025-03-31T23:59:59Z&limit=100",
+ "scanned": 1000,
+ "eligibleEvents": 408,
+ "rule": "closed Yes/No, UMA resolved 1/0, ended 2024-01-01..2025-03-31, one market per event (highest volume), top 30 by volume",
+ "ranAt": "2026-11-03T15:32:03.434Z",
+ "n": 30,
+ "models": [
+  "openai/gpt-5-mini",
+  "anthropic/claude-haiku-4.5",
+  "google/gemini-2.5-flash",
+  "qwen/qwen3-235b-a22b-2507",
+  "deepseek/deepseek-v4-flash",
+  "meta-llama/llama-4-maverick",
+  "mistralai/mistral-small-3.2-24b-instruct",
+  "moonshotai/kimi-k2",
+  "z-ai/glm-4.6",
+  "amazon/nova-lite-v1"
+ ],
+ "costUsd": 0.09670481349999996,
+ "calls": 300,
+ "baseRate": {
+  "yes": 8,
+  "no": 22
+ },
+ "baselines": {
+  "alwaysNo": 0.7333333333333333
+ },
+ "perModel": [
+  {
+   "model": "openai/gpt-5-mini",
+   "family": "OpenAI",
+   "answered": 10,
+   "na": 20,
+   "invalid": 0,
+   "correct": 6,
+   "accuracyAnswered": 0.6,
+   "accuracyAll": 0.2
+  },
+  {
+   "model": "anthropic/claude-haiku-4.5",
+   "family": "Anthropic",
+   "answered": 30,
+   "na": 0,
+   "invalid": 0,
+   "correct": 25,
+   "accuracyAnswered": 0.8333333333333334,
+   "accuracyAll": 0.8333333333333334
+  },
+  {
+   "model": "google/gemini-2.5-flash",
+   "family": "Google",
+   "answered": 24,
+   "na": 6,
+   "invalid": 0,
+   "correct": 14,
+   "accuracyAnswered": 0.5833333333333334,
+   "accuracyAll": 0.4666666666666667
+  },
+  {
+   "model": "qwen/qwen3-235b-a22b-2507",
+   "family": "Alibaba Qwen",
+   "answered": 16,
+   "na": 14,
+   "invalid": 0,
+   "correct": 10,
+   "accuracyAnswered": 0.625,
+   "accuracyAll": 0.3333333333333333
+  },
+  {
+   "model": "deepseek/deepseek-v4-flash",
+   "family": "DeepSeek",
+   "answered": 27,
+   "na": 0,
+   "invalid": 3,
+   "correct": 25,
+   "accuracyAnswered": 0.9259259259259259,
+   "accuracyAll": 0.8333333333333334
+  },
+  {
+   "model": "meta-llama/llama-4-maverick",
+   "family": "Meta Llama",
+   "answered": 26,
+   "na": 3,
+   "invalid": 1,
+   "correct": 11,
+   "accuracyAnswered": 0.4230769230769231,
+   "accuracyAll": 0.36666666666666664
+  },
+  {
+   "model": "mistralai/mistral-small-3.2-24b-instruct",
+   "family": "Mistral",
+   "answered": 30,
+   "na": 0,
+   "invalid": 0,
+   "correct": 21,
+   "accuracyAnswered": 0.7,
+   "accuracyAll": 0.7
+  },
+  {
+   "model": "moonshotai/kimi-k2",
+   "family": "Moonshot",
+   "answered": 30,
+   "na": 0,
+   "invalid": 0,
+   "correct": 25,
+   "accuracyAnswered": 0.8333333333333334,
+   "accuracyAll": 0.8333333333333334
+  },
+  {
+   "model": "z-ai/glm-4.6",
+   "family": "Zhipu GLM",
+   "answered": 11,
+   "na": 6,
+   "invalid": 13,
+   "correct": 11,
+   "accuracyAnswered": 1,
+   "accuracyAll": 0.36666666666666664
+  },
+  {
+   "model": "amazon/nova-lite-v1",
+   "family": "Amazon",
+   "answered": 30,
+   "na": 0,
+   "invalid": 0,
+   "correct": 16,
+   "accuracyAnswered": 0.5333333333333333,
+   "accuracyAll": 0.5333333333333333
+  }
+ ],
+ "swarmA": {
+  "decided": 20,
+  "noQuorum": 10,
+  "correct": 17,
+  "accuracyDecided": 0.85,
+  "accuracyAll": 0.5666666666666667,
+  "disagreements": [
+   "Will there be a US Government shutdown? ",
+   "Will the Democratic candidate win Nevada by 3.0%-4.0%? ",
+   "Israel x Hezbollah Ceasefire in 2024?"
+  ]
+ },
+ "swarm10": {
+  "decided": 22,
+  "noQuorum": 8,
+  "correct": 19,
+  "accuracyDecided": 0.8636363636363636,
+  "accuracyAll": 0.6333333333333333,
+  "disagreements": [
+   "Will there be a US Government shutdown? ",
+   "Israel x Hezbollah Ceasefire in 2024?",
+   "Israel military action against Iraq before November?"
+  ]
+ },
+ "rows": [
+  {
+   "id": "253591",
+   "slug": "will-donald-trump-win-the-2024-us-presidential-election",
+   "question": "Will Donald Trump win the 2024 US Presidential Election?",
+   "endDate": "2024-11-05T12:00:00Z",
+   "closedTime": "2024-11-06 15:17:41+00",
+   "description": "This market will resolve to “Yes” if Donald J. Trump wins the 2024 US Presidential Election. Otherwise, this market will resolve to “No.”\n\nThe resolution source for this market is the Associated Press, Fox News, and NBC. This market will resolve once all three sources call the race for the same candidate. If all three sources haven’t called the race for the same candidate by the inauguration date (January 20, 2025) this market will resolve based on who is inaugurated.",
+   "volumeUsd": 1531479285,
+   "resolved": "YES",
+   "event": "Presidential Election Winner 2024",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "AP, Fox News, and NBC called the 2024 election for Joe Biden and he was inaugurated Jan 20, 2025, so Donald Trump did not win.",
+     "error": null,
+     "ms": 3599,
+     "costUsd": 0.000547
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.99,
+     "reasoning": "Donald Trump won the 2024 US Presidential Election. AP, Fox News, and NBC all called the race for Trump on November 6, 2024.",
+     "error": null,
+     "ms": 1197,
+     "costUsd": 0.000587
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The 2024 US Presidential Election has not yet occurred. The market end date is in the future.",
+     "error": null,
+     "ms": 917,
+     "costUsd": 0.0002085
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The election has not yet occurred, and no official results are available to determine the winner.",
+     "error": null,
+     "ms": 2402,
+     "costUsd": 0.0000655
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Donald Trump won the 2024 US Presidential Election and was inaugurated on January 20, 2025, satisfying the resolution rules.",
+     "error": null,
+     "ms": 1299,
+     "costUsd": 0.00007574
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "As of the market end date, 2024-11-05T12:00:00Z, the actual election results were known, and Donald Trump lost the 2024 US Presidential Election.",
+     "error": null,
+     "ms": 6315,
+     "costUsd": 0.00008433
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Joe Biden won the 2024 US Presidential Election, confirmed by all resolution sources.",
+     "error": null,
+     "ms": 2313,
+     "costUsd": 0.00003359375
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Trump won 312 electoral votes; AP, Fox, NBC all called race by Nov 6.",
+     "error": null,
+     "ms": 2137,
+     "costUsd": 0.00023804
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 42068,
+     "costUsd": 0.00114847
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Joe Biden is inaugurated on January 20, 2025.",
+     "error": null,
+     "ms": 1329,
+     "costUsd": 0.00002538
+    }
+   ],
+   "swarmA": {
+    "winner": null,
+    "byOutcome": {
+     "NO": 2,
+     "YES": 2
+    },
+    "counted": 4
+   },
+   "swarm10": {
+    "winner": null,
+    "byOutcome": {
+     "NO": 4,
+     "YES": 3
+    },
+    "counted": 7
+   }
+  },
+  {
+   "id": "511754",
+   "slug": "will-donald-trump-be-inaugurated",
+   "question": "Will Donald Trump be inaugurated?",
+   "endDate": "2025-01-20T12:00:00Z",
+   "closedTime": "2025-01-20 22:51:36+00",
+   "description": "This market will resolve to \"Yes\" if Donald J. Trump is inaugurated as President of the United States. Otherwise, this market will resolve to \"No\".\n\nInauguration day is currently scheduled for January 20, 2025. If inauguration day is delayed, this market will remain open until someone has been inaugurated. If no one has been inaugurated by January 31, 2025, 11:59 PM ET, this market will resolve to \"No\". \n\nThe primary resolution source for this market will be information from the US government, however a consensus of credible reporting will also be used.",
+   "volumeUsd": 400409527,
+   "resolved": "YES",
+   "event": "Who will be inaugurated as President? ",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I don't have verifiable post-2024-06 information about the January 20, 2025 inauguration outcome.",
+     "error": null,
+     "ms": 2060,
+     "costUsd": 0.00033875
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.99,
+     "reasoning": "Donald Trump was inaugurated as President of the United States on January 20, 2025, as scheduled.",
+     "error": null,
+     "ms": 1568,
+     "costUsd": 0.000551
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Donald Trump was not inaugurated on January 20, 2025, nor by January 31, 2025.",
+     "error": null,
+     "ms": 835,
+     "costUsd": 0.0002258
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0.5,
+     "reasoning": "The inauguration date is in the future; outcome depends on the 2024 election results and subsequent events not yet known.",
+     "error": null,
+     "ms": 3273,
+     "costUsd": 0.00007456
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Donald J. Trump was inaugurated as President of the United States on January 20, 2025.",
+     "error": null,
+     "ms": 3544,
+     "costUsd": 0.000041678
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Donald J. Trump was inaugurated as President of the United States on January 20, 2025.",
+     "error": null,
+     "ms": 17513,
+     "costUsd": 0.00019518
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Joe Biden was inaugurated on January 20, 2025, for a second term.",
+     "error": null,
+     "ms": 2686,
+     "costUsd": 0.0000356875
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Donald Trump was inaugurated as the 47th President of the United States on January 20, 2025.",
+     "error": null,
+     "ms": 2369,
+     "costUsd": 0.00024372
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 26232,
+     "costUsd": 0.00115621
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Donald Trump was not re-elected in the 2024 election.",
+     "error": null,
+     "ms": 702,
+     "costUsd": 0.00002628
+    }
+   ],
+   "swarmA": {
+    "winner": "YES",
+    "byOutcome": {
+     "YES": 3,
+     "NO": 1
+    },
+    "counted": 4
+   },
+   "swarm10": {
+    "winner": null,
+    "byOutcome": {
+     "YES": 4,
+     "NO": 3
+    },
+    "counted": 7
+   }
+  },
+  {
+   "id": "512340",
+   "slug": "will-nicolae-ciuca-win-the-2024-romanian-presidential-election",
+   "question": "Will Nicolae Ciucă win the 2024 Romanian Presidential election?",
+   "endDate": "2024-12-08T12:00:00Z",
+   "closedTime": "2025-05-01 09:18:53+00",
+   "description": "Presidential elections will be held in Romania on 24 November 2024. A second round will be held on 8 December 2024 if no candidate receives an absolute majority of the vote.\n\nThis market will resolve to \"Yes\" if Nicolae Ciucă wins this election. Otherwise, this market will resolve to \"No\".\n\nThis market includes any potential second round. If the result of this election isn't known by April 30, 2025, 11:59 PM ET, the market will resolve to \"No\".\n\nThis market will resolve solely based off the first official announcement of the election results from the Romanian Government, specifically the Permanent Electoral Authority (https://www.roaep.ro/prezentare/).\n",
+   "volumeUsd": 326507671,
+   "resolved": "NO",
+   "event": "(Old) Romania Election",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 1,
+     "reasoning": "I don't have access to the official Romanian election results from the Permanent Electoral Authority, so I cannot determine whether Ciucă won.",
+     "error": null,
+     "ms": 2323,
+     "costUsd": 0.000421
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Nicolae Ciucă did not win the 2024 Romanian Presidential election. Elena Lasconi advanced to the second round but lost to Klaus Iohannis in the runoff.",
+     "error": null,
+     "ms": 1492,
+     "costUsd": 0.000676
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Nicolae Ciucă did not advance to the second round of the 2024 Romanian Presidential election.",
+     "error": null,
+     "ms": 727,
+     "costUsd": 0.0002256
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Klaus Iohannis endorsed Marcel Ciolacu, and Ciucă lost the November 2024 election; official results confirm he did not win.",
+     "error": null,
+     "ms": 3477,
+     "costUsd": 0.00008508
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Nicolae Ciucă did not win Romania’s 2024 presidential election; he placed fifth in the first round and did not advance to the runoff.",
+     "error": null,
+     "ms": 2075,
+     "costUsd": 0.00010962
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Nicolae Ciucă won as per the official announcement from the Permanent Electoral Authority.",
+     "error": null,
+     "ms": 15821,
+     "costUsd": 0.0001789875
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Klaus Iohannis won the 2024 Romanian Presidential election.",
+     "error": null,
+     "ms": 1300,
+     "costUsd": 0.0000304
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Ciucă was eliminated in first round. Călin Georgescu led first round; annulled. New election scheduled for 2025.",
+     "error": null,
+     "ms": 2349,
+     "costUsd": 0.00028783
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Nicolae Ciucă finished third in the first round and did not win the election.",
+     "error": null,
+     "ms": 12377,
+     "costUsd": 0.00088605
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Nicolae Ciucă did not win the 2024 Romanian Presidential election.",
+     "error": null,
+     "ms": 650,
+     "costUsd": 0.0000294
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 4,
+     "YES": 1
+    },
+    "counted": 5
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 8,
+     "YES": 1
+    },
+    "counted": 9
+   }
+  },
+  {
+   "id": "253727",
+   "slug": "will-kamala-harris-win-the-popular-vote-in-the-2024-presidential-election",
+   "question": "Kamala Harris wins the popular vote?",
+   "endDate": "2024-11-05T12:00:00Z",
+   "closedTime": "2024-11-12 10:03:19+00",
+   "description": "This market will resolve to “Yes” if Kamala Harris is the candidate who receives the most votes in the 2024 U.S. presidential election, otherwise this market will resolve to “No.”\n\nIn case of a tie, this market will resolve in favor of the candidate whose last name comes first in alphabetical order.\n\nThe resolution source will be an overwhelming consensus of credible reporting as to who is the winner of the popular vote.\n\nNote: An update may be made to this market to allow for early expiration if the candidate is definitively no longer in contention for the presidency.\n",
+   "volumeUsd": 163779787,
+   "resolved": "NO",
+   "event": "Popular Vote Winner 2024",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Kamala Harris was not the presidential candidate who received the most votes in the 2024 U.S. presidential election.",
+     "error": null,
+     "ms": 6405,
+     "costUsd": 0.0013235
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Donald Trump won the 2024 popular vote with approximately 50.7 million votes to Harris's 48.2 million votes.",
+     "error": null,
+     "ms": 1123,
+     "costUsd": 0.000583
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The 2024 U.S. presidential election has not yet occurred. Therefore, the popular vote winner is unknown.",
+     "error": null,
+     "ms": 1537,
+     "costUsd": 0.0001972
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The 2024 U.S. presidential election has not yet occurred; results are not known as of the current date.",
+     "error": null,
+     "ms": 4125,
+     "costUsd": 0.00007102
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 4104,
+     "costUsd": 0.00028575
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "Outcome of 2024 U.S. presidential election is unknown until after votes are counted",
+     "error": null,
+     "ms": 16669,
+     "costUsd": 0.00020589
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Joe Biden won the 2024 popular vote, not Kamala Harris.",
+     "error": null,
+     "ms": 2421,
+     "costUsd": 0.00003415625
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Donald Trump won the 2024 popular vote with approximately 77.3 million votes to Harris's approximately 75 million.",
+     "error": null,
+     "ms": 11471,
+     "costUsd": 0.00025524
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The election has not yet occurred, so the outcome is unknown.",
+     "error": null,
+     "ms": 36651,
+     "costUsd": 0.00101234
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Kamala Harris is not projected to win the popular vote.",
+     "error": null,
+     "ms": 1185,
+     "costUsd": 0.00002454
+    }
+   ],
+   "swarmA": {
+    "winner": null,
+    "byOutcome": {
+     "NO": 2
+    },
+    "counted": 2
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 5
+    },
+    "counted": 5
+   }
+  },
+  {
+   "id": "503301",
+   "slug": "will-the-panthers-win-super-bowl-2025",
+   "question": "Will the Panthers win Super Bowl 2025?",
+   "endDate": "2025-02-09T12:00:00Z",
+   "closedTime": "2024-12-16 00:49:34+00",
+   "description": "This market will resolve to \"Yes\" if the Carolina Panthers win Super Bowl LIX. Otherwise, this market will resolve to \"No\".\n\nIf at any point it becomes impossible for this team to win the Super Bowl based on the rules of the NFL (e.g. they are eliminated in the playoff bracket), this market will resolve immediately to \"No\".",
+   "volumeUsd": 139314924,
+   "resolved": "NO",
+   "event": "Super Bowl Champion 2025",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I do not have verified information about the winner of Super Bowl LIX (February 9, 2025).",
+     "error": null,
+     "ms": 2949,
+     "costUsd": 0.000533
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "The Carolina Panthers did not win Super Bowl LIX (played February 9, 2025). The Kansas City Chiefs defeated the Buffalo Bills.",
+     "error": null,
+     "ms": 1116,
+     "costUsd": 0.000533
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I cannot predict future events like the winner of Super Bowl LIX.",
+     "error": null,
+     "ms": 973,
+     "costUsd": 0.0001424
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "Super Bowl LIX has not yet occurred; outcome is unknown as of current date.",
+     "error": null,
+     "ms": 3259,
+     "costUsd": 0.00005938
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 3477,
+     "costUsd": 0.00028365
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Panthers won Super Bowl LIX on 2025-02-09",
+     "error": null,
+     "ms": 18182,
+     "costUsd": 0.000178905
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "The Panthers did not win Super Bowl LIX.",
+     "error": null,
+     "ms": 3060,
+     "costUsd": 0.0000223
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Super Bowl LIX was won by the Philadelphia Eagles, who defeated the Kansas City Chiefs 40-22 on February 9, 2025. The Carolina Panthers did not qualify for the playoffs.",
+     "error": null,
+     "ms": 1986,
+     "costUsd": 0.00025603
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 20244,
+     "costUsd": 0.00113428
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "The Panthers did not win Super Bowl LIX.",
+     "error": null,
+     "ms": 1417,
+     "costUsd": 0.000021
+    }
+   ],
+   "swarmA": {
+    "winner": null,
+    "byOutcome": {
+     "NO": 1,
+     "YES": 1
+    },
+    "counted": 2
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 4,
+     "YES": 1
+    },
+    "counted": 5
+   }
+  },
+  {
+   "id": "504494",
+   "slug": "fed-increases-interest-rates-by-25-bps-after-november-2024-meeting",
+   "question": "Fed increases interest rates by 25+ bps after November 2024 meeting?",
+   "endDate": "2024-11-07T12:00:00Z",
+   "closedTime": "2024-11-07 22:44:32+00",
+   "description": "The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to “Yes” if following the Federal Reserve's November 2024 meeting the upper bound of the target federal funds rate is increased by 25 or more basis points below the level it was prior to the meeting. Otherwise, it will resolve to “No.”\n\nThe resolution source for this market is the FOMC’s statement after its meeting scheduled for November 6 - 7, 2024 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm.\n\nThe level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the FOMC’s statement for their November meeting with relevant data is issued. If no statement is released by December 18, 2024, 11:59 PM ET, this market will resolve to the \"No change\" bracket.",
+   "volumeUsd": 133955589,
+   "resolved": "NO",
+   "event": "Fed Interest Rates: November 2024",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0.99,
+     "reasoning": "I don't have verified information about the FOMC's November 6–7, 2024 decision due to my knowledge cutoff; cannot determine the actual rate change.",
+     "error": null,
+     "ms": 2412,
+     "costUsd": 0.00046675
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Fed cut rates by 25 bps at November 2024 meeting, decreasing rather than increasing the upper bound of target federal funds range.",
+     "error": null,
+     "ms": 1141,
+     "costUsd": 0.000741
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "The Federal Reserve did not increase interest rates by 25+ bps after its November 2024 meeting.",
+     "error": null,
+     "ms": 745,
+     "costUsd": 0.0002496
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The November 2024 FOMC meeting has not yet occurred; outcome is unknown.",
+     "error": null,
+     "ms": 9896,
+     "costUsd": 0.00005846
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "The Fed cut rates by 25 bps at the November 2024 meeting; it did not increase the target range.",
+     "error": null,
+     "ms": 3407,
+     "costUsd": 0.00021714
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "FOMC increased upper bound of target federal funds rate by 25+ bps after November 2024 meeting.",
+     "error": null,
+     "ms": 16755,
+     "costUsd": 0.000217965
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "The Fed held rates steady at 5.25-5.50% after the November 2024 meeting, no 25+ bps increase.",
+     "error": null,
+     "ms": 3898,
+     "costUsd": 0.000043325
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Fed cut rates by 25 bps on Nov 7, 2024; no increase occurred.",
+     "error": null,
+     "ms": 2225,
+     "costUsd": 0.00031493
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 21688,
+     "costUsd": 0.001545
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "FOMC increased rates by 25 bps in November 2024.",
+     "error": null,
+     "ms": 1566,
+     "costUsd": 0.0000351
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 3,
+     "YES": 1
+    },
+    "counted": 4
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 5,
+     "YES": 2
+    },
+    "counted": 7
+   }
+  },
+  {
+   "id": "507242",
+   "slug": "will-the-democratic-candidate-win-pennsylvania-by-1pt5-2pt0",
+   "question": "Will the Democratic candidate win Pennsylvania by 1.5%-2.0%?",
+   "endDate": "2024-11-05T12:00:00Z",
+   "closedTime": "2024-12-05 04:16:19+00",
+   "description": "This market will resolve to \"Yes” if the Democratic Party candidate wins the popular vote in Pennsylvania in the 2024 U.S. Presidential Election by between 1.5% (inclusive) and 2.0% (exclusive) when compared with the second place candidate. Otherwise, this market will resolve to \"No\".\n\nFor the purpose of resolving this market, the 'margin of victory' is defined as the absolute difference between the percentages of votes received by the Democratic Party candidate and the second-place candidate. Percentages of the votes received by each party will be determined by dividing the total number of votes each of the top two candidates receives by the sum of all votes cast in Pennsylvania for the 2024 U.S. Presidential Election.\n\nThis market will resolve based off the official vote count once Pennsylvania has certified the vote. \n\nIf a recount is initiated before certification, the market will remain open until the recount is completed and the vote is certified. If a recount occurs after certification, the recount will not be considered.",
+   "volumeUsd": 109063760,
+   "resolved": "NO",
+   "event": "Pennsylvania Margin of Victory",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 1,
+     "reasoning": "I do not have confirmed, certified Pennsylvania 2024 vote totals available to determine the certified margin of victory for the Democratic candidate.",
+     "error": null,
+     "ms": 3344,
+     "costUsd": 0.00055825
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Trump won Pennsylvania by 1.99% in 2024. Democratic candidate Harris lost, so the condition cannot be met.",
+     "error": null,
+     "ms": 1181,
+     "costUsd": 0.000668
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "The Democratic candidate won Pennsylvania by 2.5%, exceeding the 2.0% threshold for a 'Yes' resolution.",
+     "error": null,
+     "ms": 636,
+     "costUsd": 0.000244
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The 2024 U.S. Presidential Election has not yet occurred; results are not available as of the current date.",
+     "error": null,
+     "ms": 8371,
+     "costUsd": 0.00005735
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Trump won Pennsylvania in 2024; the Democratic candidate did not win, so the specified 1.5%-2.0% Democratic margin cannot apply.",
+     "error": null,
+     "ms": 1336,
+     "costUsd": 0.00009142
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Democratic candidate won Pennsylvania by 1.7%, within the 1.5%-2.0% margin.",
+     "error": null,
+     "ms": 11154,
+     "costUsd": 0.000164235
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Biden won Pennsylvania by 0.2% in 2024, outside the 1.5%-2.0% range.",
+     "error": null,
+     "ms": 2111,
+     "costUsd": 0.00003765
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Kamala Harris won Pennsylvania by approximately 1.0-1.2%, below the 1.5% threshold.",
+     "error": null,
+     "ms": 1929,
+     "costUsd": 0.00031397
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Donald Trump won Pennsylvania in 2024, so the Democratic candidate did not win by any margin.",
+     "error": null,
+     "ms": 8537,
+     "costUsd": 0.00061765
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "Democratic candidate won by 1.7%.",
+     "error": null,
+     "ms": 760,
+     "costUsd": 0.00003042
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 3,
+     "YES": 1
+    },
+    "counted": 4
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 6,
+     "YES": 2
+    },
+    "counted": 8
+   }
+  },
+  {
+   "id": "504873",
+   "slug": "will-gavin-newsom-be-d-nom-for-vp-on-election-day",
+   "question": "Will Gavin Newsom be D-nom for VP on Election Day?",
+   "endDate": "2024-11-04T12:00:00Z",
+   "closedTime": "2024-11-05 14:09:03+00",
+   "description": "This market will resolve to \"Yes\" if Gavin Newsom is the official 2024 nominee of the Democratic Party for U.S. vice president on November 4, 2024, 11:59 PM ET. Otherwise, this market will resolve to “No”.\n\nThe resolution source for this market will be a consensus of official Democratic Party sources, including https://democrats.org/.\n ",
+   "volumeUsd": 92886849,
+   "resolved": "NO",
+   "event": "Democratic VP nominee on election day?",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Gavin Newsom was not the Democratic Party’s 2024 vice-presidential nominee on Nov 4; the ticket included incumbent Vice President Kamala Harris. ",
+     "error": null,
+     "ms": 3779,
+     "costUsd": 0.0005
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Tim Walz was the Democratic VP nominee on Election Day 2024, not Gavin Newsom. Walz was selected as Kamala Harris's running mate.",
+     "error": null,
+     "ms": 1305,
+     "costUsd": 0.000594
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Kamala Harris was the Democratic VP nominee on Election Day 2024, not Gavin Newsom.",
+     "error": null,
+     "ms": 631,
+     "costUsd": 0.0001822
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Gavin Newsom was not selected as the Democratic vice presidential nominee; the official nominee was announced as Tim Walz.",
+     "error": null,
+     "ms": 4777,
+     "costUsd": 0.00006658
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Gavin Newsom was not the Democratic vice-presidential nominee; Tim Walz was on the 2024 ticket with Kamala Harris.",
+     "error": null,
+     "ms": 1271,
+     "costUsd": 0.00006454
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Gavin Newsom was not reported as the Democratic VP nominee.",
+     "error": null,
+     "ms": 34979,
+     "costUsd": 0.000360315
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Gavin Newsom was not the Democratic nominee for VP in 2024; Kamala Harris was renominated.",
+     "error": null,
+     "ms": 1445,
+     "costUsd": 0.000026725
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Tim Walz was the Democratic VP nominee, not Gavin Newsom.",
+     "error": null,
+     "ms": 1338,
+     "costUsd": 0.00020364
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Tim Walz was the Democratic VP nominee, not Gavin Newsom.",
+     "error": null,
+     "ms": 9309,
+     "costUsd": 0.0005313
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Gavin Newsom was not the VP nominee for the Democratic Party.",
+     "error": null,
+     "ms": 836,
+     "costUsd": 0.00002334
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 6
+    },
+    "counted": 6
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 10
+    },
+    "counted": 10
+   }
+  },
+  {
+   "id": "502571",
+   "slug": "will-trump-launch-a-coin-before-the-election",
+   "question": "Will Trump launch a coin before the election?",
+   "endDate": "2024-11-04T12:00:00Z",
+   "closedTime": "2024-10-18 00:22:28+00",
+   "description": "This market will resolve to \"Yes\" if conclusive, definitive evidence emerges that Donald Trump was involved in the deployment of a new token by November 4, 2024, 11:59 PM ET. Otherwise this market will resolve to \"No\".\n\nThe resolution for this market will be based on a consensus of credible sources. ",
+   "volumeUsd": 76899061,
+   "resolved": "YES",
+   "event": "Will Trump launch a coin before the election?",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I lack verifiable information after my 2024-06 cutoff and cannot confirm whether Trump deployed a new token by Nov 4, 2024.",
+     "error": null,
+     "ms": 3548,
+     "costUsd": 0.000662
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "Trump launched $TRUMP token in January 2024 on Solana blockchain. Conclusive evidence of his involvement exists from multiple credible sources.",
+     "error": null,
+     "ms": 1274,
+     "costUsd": 0.000541
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "As of the market end date, no credible evidence emerged of Trump's involvement in deploying a new token.",
+     "error": null,
+     "ms": 665,
+     "costUsd": 0.0001787
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No credible evidence or reports confirm Donald Trump's involvement in launching a cryptocurrency token before the November 4, 2024 deadline.",
+     "error": null,
+     "ms": 2314,
+     "costUsd": 0.00006856
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "No credible evidence emerged of Trump deploying a new token by the deadline.",
+     "error": null,
+     "ms": 395,
+     "costUsd": 0.00011952
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Credible sources reported Trump's involvement in deploying a new token before the deadline.",
+     "error": null,
+     "ms": 16149,
+     "costUsd": 0.000175545
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No credible evidence of Trump launching a coin before the election.",
+     "error": null,
+     "ms": 1392,
+     "costUsd": 0.00003003125
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.99,
+     "reasoning": "Trump launched $TRUMP memecoin on January 18, 2025, but this was after the November 4, 2024 deadline. No coin launched before election.",
+     "error": null,
+     "ms": 4197,
+     "costUsd": 0.00054355
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 19647,
+     "costUsd": 0.0014334
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No credible evidence of Trump launching a coin by Nov 4, 2024.",
+     "error": null,
+     "ms": 1124,
+     "costUsd": 0.00002364
+    }
+   ],
+   "swarmA": {
+    "winner": null,
+    "byOutcome": {
+     "YES": 2,
+     "NO": 3
+    },
+    "counted": 5
+   },
+   "swarm10": {
+    "winner": null,
+    "byOutcome": {
+     "YES": 3,
+     "NO": 5
+    },
+    "counted": 8
+   }
+  },
+  {
+   "id": "503013",
+   "slug": "will-biden-complete-his-term-as-president",
+   "question": "Will Biden finish his term?",
+   "endDate": "2025-01-20T12:00:00Z",
+   "closedTime": "2025-01-20 19:45:27+00",
+   "description": "This market will resolve to \"Yes\" if Joe Biden successfully finishes his term as President of the United States of America without any interruptions. Otherwise, this market will resolve to \"No\".\n\nThis market will not resolve \"Yes\" until the presidency is successfully transferred from Biden to another person at the completion of his term on January 20, 2025, or until Biden is sworn into the presidency again on that date.\n\nThe primary resolution source for this market is official information from the US federal government, however a consensus of credible reporting will also be used.  ",
+   "volumeUsd": 64552171,
+   "resolved": "YES",
+   "event": "Will Biden finish his term?",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "Knowledge cutoff 2024-06; unable to verify whether Biden completed his term on January 20, 2025, from available information.",
+     "error": null,
+     "ms": 3097,
+     "costUsd": 0.00050625
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Biden did not finish his term. He withdrew from the 2024 race in July 2024 and did not seek re-election, ending his presidency on January 20, 2025.",
+     "error": null,
+     "ms": 1292,
+     "costUsd": 0.000632
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The market end date is January 20, 2025. As of now, that date has not passed, so the outcome cannot be determined.",
+     "error": null,
+     "ms": 762,
+     "costUsd": 0.0002288
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0.5,
+     "reasoning": "The term ends on January 20, 2025; resolution depends on future events not yet known.",
+     "error": null,
+     "ms": 8231,
+     "costUsd": 0.0000468
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.99,
+     "reasoning": "Biden served until January 20, 2025, and power transferred to Donald Trump at the completion of his term without interruption.",
+     "error": null,
+     "ms": 1102,
+     "costUsd": 0.00006146
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Biden completed term without interruption and presidency was transferred or he was sworn in again on Jan 20, 2025",
+     "error": null,
+     "ms": 35333,
+     "costUsd": 0.0003267825
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Biden completed his term and was succeeded by a new president on January 20, 2025.",
+     "error": null,
+     "ms": 1156,
+     "costUsd": 0.0000285
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Biden completed his full term, transferring power to Trump on January 20, 2025.",
+     "error": null,
+     "ms": 1885,
+     "costUsd": 0.00024032
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Biden served his full term without interruption; presidency transferred to Trump on Jan 20, 2025.",
+     "error": null,
+     "ms": 5248,
+     "costUsd": 0.000396
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.99,
+     "reasoning": "Biden is expected to finish his term as per current information.",
+     "error": null,
+     "ms": 1956,
+     "costUsd": 0.00002442
+    }
+   ],
+   "swarmA": {
+    "winner": "YES",
+    "byOutcome": {
+     "NO": 1,
+     "YES": 2
+    },
+    "counted": 3
+   },
+   "swarm10": {
+    "winner": "YES",
+    "byOutcome": {
+     "NO": 1,
+     "YES": 6
+    },
+    "counted": 7
+   }
+  },
+  {
+   "id": "253697",
+   "slug": "will-joe-biden-win-the-2024-democratic-presidential-nomination",
+   "question": "Will Joe Biden win the 2024 Democratic Presidential Nomination?",
+   "endDate": "2024-08-18T12:00:00Z",
+   "closedTime": "2024-08-06 12:11:54+00",
+   "description": "This market will resolve to “Yes” if Joe Biden wins the 2024 nomination of the Democratic Party for U.S. president. Otherwise, this market will resolve to “No”.\n\nThe resolution source for this market will be a consensus of official Democratic Party sources, including https://democrats.org/.\n\nAny replacement of the democratic nominee before election day will not change the resolution of the market.",
+   "volumeUsd": 57519438,
+   "resolved": "NO",
+   "event": "Democratic Nominee 2024",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "Joe Biden was the Democratic Party nominee for president in 2024, confirmed by official Democratic Party sources (Democrats.org) and the party convention.",
+     "error": null,
+     "ms": 3361,
+     "costUsd": 0.0005955
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Biden withdrew from the 2024 race on July 21, 2024, before the market end date. Kamala Harris became the Democratic nominee.",
+     "error": null,
+     "ms": 1110,
+     "costUsd": 0.000561
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Joe Biden officially secured the Democratic nomination on March 12, 2024, exceeding the delegate threshold.",
+     "error": null,
+     "ms": 678,
+     "costUsd": 0.0002038
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Joe Biden secured sufficient delegates and was officially nominated by the Democratic Party for the 2024 presidential election.",
+     "error": null,
+     "ms": 3759,
+     "costUsd": 0.00004281
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Biden withdrew before the formal nomination; Kamala Harris won the 2024 Democratic nomination. Biden did not win the nomination.",
+     "error": null,
+     "ms": 3318,
+     "costUsd": 0.00017192
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Joe Biden withdrew from the race before the market end date and did not win the nomination.",
+     "error": null,
+     "ms": 21419,
+     "costUsd": 0.000223755
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Joe Biden secured the Democratic nomination on August 19, 2024, per official party sources.",
+     "error": null,
+     "ms": 2809,
+     "costUsd": 0.0000339375
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Biden withdrew from race on July 21, 2024; Kamala Harris became nominee after virtual roll call.",
+     "error": null,
+     "ms": 2327,
+     "costUsd": 0.00023527
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Biden withdrew on July 21, 2024; Kamala Harris received the Democratic nomination in August.",
+     "error": null,
+     "ms": 9275,
+     "costUsd": 0.000635
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.99,
+     "reasoning": "Joe Biden won the 2024 Democratic Presidential Nomination.",
+     "error": null,
+     "ms": 1453,
+     "costUsd": 0.00002316
+    }
+   ],
+   "swarmA": {
+    "winner": null,
+    "byOutcome": {
+     "YES": 3,
+     "NO": 3
+    },
+    "counted": 6
+   },
+   "swarm10": {
+    "winner": null,
+    "byOutcome": {
+     "YES": 5,
+     "NO": 5
+    },
+    "counted": 10
+   }
+  },
+  {
+   "id": "512325",
+   "slug": "fed-increases-interest-rates-by-25-bps-after-january-2025-meeting",
+   "question": "Fed increases interest rates by 25+ bps after January 2025 meeting?",
+   "endDate": "2025-01-29T12:00:00Z",
+   "closedTime": "2025-01-29 22:53:00+00",
+   "description": "The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to “Yes” if following the Federal Reserve's January 2025 meeting the upper bound of the target federal funds rate is increased by 1 or more basis points above the level it was prior to the meeting. Otherwise, it will resolve to “No”.\n\nThe resolution source for this market is the FOMC’s statement after its meeting scheduled for January 30 - 31, 2025 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm.\n\nThe level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the FOMC’s statement for their January meeting with relevant data is issued. If no statement is released by the end date of the next scheduled meeting, this market will resolve to the \"No change\" bracket.",
+   "volumeUsd": 56978076,
+   "resolved": "NO",
+   "event": "Fed decision in January?",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 1,
+     "reasoning": "I do not have the FOMC statement or data from the January 30–31, 2025 meeting to determine whether rates rose by 25+ bps.",
+     "error": null,
+     "ms": 3290,
+     "costUsd": 0.00043725
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Fed held rates steady at January 28-29, 2025 meeting. Upper bound remained at 4.33%, no increase occurred.",
+     "error": null,
+     "ms": 1272,
+     "costUsd": 0.000729
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "The FOMC did not increase the federal funds rate at its January 2025 meeting. The upper bound remained unchanged.",
+     "error": null,
+     "ms": 633,
+     "costUsd": 0.0002641
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The January 2025 FOMC meeting has not yet occurred, so the outcome is unknown.",
+     "error": null,
+     "ms": 1250,
+     "costUsd": 0.0000906
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "The FOMC held rates steady at 4.25%-4.50% in January 2025, with no increase.",
+     "error": null,
+     "ms": 4447,
+     "costUsd": 0.00004239
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Upper bound of target federal funds rate increased after January 2025 FOMC meeting",
+     "error": null,
+     "ms": 30641,
+     "costUsd": 0.00032907
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.9,
+     "reasoning": "Fed held rates steady in January 2025 meeting, no 25+ bps hike.",
+     "error": null,
+     "ms": 2270,
+     "costUsd": 0.000039375
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Fed held rates steady at 4.25-4.50% in January 2025; no rate increase occurred.",
+     "error": null,
+     "ms": 2427,
+     "costUsd": 0.00032991
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "Cannot predict future Fed decisions as the January 2025 meeting has not occurred yet",
+     "error": null,
+     "ms": 15043,
+     "costUsd": 0.0009535
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "FOMC increased rates by 25 bps in January 2025.",
+     "error": null,
+     "ms": 1203,
+     "costUsd": 0.0000345
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 3,
+     "YES": 1
+    },
+    "counted": 4
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 5,
+     "YES": 2
+    },
+    "counted": 7
+   }
+  },
+  {
+   "id": "506202",
+   "slug": "us-government-shutdown-before-2025",
+   "question": "Will there be a US Government shutdown? ",
+   "endDate": "2024-12-31T12:00:00Z",
+   "closedTime": "2024-12-25 00:28:03+00",
+   "description": "This market will resolve to \"Yes\" if the U.S government shut down occurs between August 30, and December 31, 2024, 11:59 PM ET. Otherwise, this market will resolve to \"No\". \n\nThe market will resolve to “Yes” if the acting President fails to sign the relevant bill(s) extending government funding by the applicable deadline(s), even if no government shutdown is explicitly announced. \n\nFor this market to resolve to \"Yes\" any shutdown will count. If only a portion of the US government is covered by any signed bill(s) extending funding of the US government, and a portion of the US government goes unfunded, this market will still resolve to \"Yes\". \n\n The primary resolution for this source will be official information from the US government, however a consensus of credible reporting may also be used.  \n\n",
+   "volumeUsd": 53500374,
+   "resolved": "YES",
+   "event": "Will there be a US Government shutdown? ",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I do not have verified information beyond my 2024-06 cutoff to determine whether a U.S. government shutdown occurred in that window.",
+     "error": null,
+     "ms": 2653,
+     "costUsd": 0.000564
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No US government shutdown occurred between August 30 and December 31, 2024. Funding bills were signed by the President before deadlines.",
+     "error": null,
+     "ms": 1446,
+     "costUsd": 0.000645
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "No US government shutdown occurred between August 30 and December 31, 2024. All funding bills were signed.",
+     "error": null,
+     "ms": 775,
+     "costUsd": 0.0002429
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No US government shutdown occurred between August 30 and December 31, 2024; funding bills were passed in time to avoid a lapse in appropriations.",
+     "error": null,
+     "ms": 5354,
+     "costUsd": 0.00005934
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "No US government shutdown occurred between August 30 and December 31, 2024; funding extensions were signed.",
+     "error": null,
+     "ms": 2462,
+     "costUsd": 0.000052507
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "US government shutdown occurred between August 30, 2024, and December 31, 2024, as per official information.",
+     "error": null,
+     "ms": 16067,
+     "costUsd": 0.000189825
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "No US government shutdown occurred between August 30 and December 31, 2024.",
+     "error": null,
+     "ms": 2575,
+     "costUsd": 0.00003415
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "No shutdown occurred. Funding was extended through continuing resolutions and final appropriations bills signed by President Biden in late 2024.",
+     "error": null,
+     "ms": 2113,
+     "costUsd": 0.00028773
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "Cannot determine outcome as event occurs after knowledge cutoff date",
+     "error": null,
+     "ms": 11752,
+     "costUsd": 0.00051928
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No shutdown occurred by December 31, 2024.",
+     "error": null,
+     "ms": 1016,
+     "costUsd": 0.00002934
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 4,
+     "YES": 1
+    },
+    "counted": 5
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 7,
+     "YES": 1
+    },
+    "counted": 8
+   }
+  },
+  {
+   "id": "509307",
+   "slug": "will-new-hampshire-be-the-closest-state",
+   "question": "Will New Hampshire be the closest state?",
+   "endDate": "2024-11-05T12:00:00Z",
+   "closedTime": "2024-12-11 09:17:30+00",
+   "description": "This market will resolve to \"Yes\" if New Hampshire has the smallest margin of victory between the first and second place candidates of any state in the 2024 U.S. Presidential election. Otherwise, this market will resolve to \"No\". \n\nFor the purpose of resolving this market, the 'margin of victory' is defined as the absolute difference between the percentages of votes received by the first place candidate and the second-place candidate. Percentages of the votes received by each party will be determined by dividing the total number of votes each of the top two candidates receives by the sum of all votes cast in this state for the 2024 U.S. Presidential Election.\n\nThe respective percentages of the vote won will be determined based on the official vote count once each listed state has certified their votes. \n\nIf there is a recount in any listed state before certification, the market will remain open until the recount is completed and the vote is certified. If a recount occurs after certification, the recount will not be considered.",
+   "volumeUsd": 50856971,
+   "resolved": "NO",
+   "event": "Closest state in the Presidential election?",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I don't have certified 2024 general election results (knowledge cutoff June 2024), so I cannot determine which state was closest.",
+     "error": null,
+     "ms": 2591,
+     "costUsd": 0.000381
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "2024 election results show Nevada had the closest margin (0.58%), not New Hampshire (1.74%). New Hampshire was not the closest state.",
+     "error": null,
+     "ms": 1232,
+     "costUsd": 0.000686
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "New Hampshire had the smallest margin of victory (0.06%) in the 2024 US Presidential election.",
+     "error": null,
+     "ms": 723,
+     "costUsd": 0.0002326
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The 2024 U.S. Presidential election results have not yet been certified, so the margin in New Hampshire is unknown.",
+     "error": null,
+     "ms": 1586,
+     "costUsd": 0.00008558
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "New Hampshire was won by roughly 2.8 points; Wisconsin was closer at under 1 point, so New Hampshire was not the closest state.",
+     "error": null,
+     "ms": 2018,
+     "costUsd": 0.00011928
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "Lack of 2024 U.S. Presidential election data",
+     "error": null,
+     "ms": 13300,
+     "costUsd": 0.0001596525
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "New Hampshire's margin was not the smallest; other states had closer races.",
+     "error": null,
+     "ms": 1835,
+     "costUsd": 0.00004325
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Wisconsin had the smallest margin at ~0.9%, while New Hampshire's margin was ~2.8%. New Hampshire was not the closest state.",
+     "error": null,
+     "ms": 2519,
+     "costUsd": 0.00031979
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Wisconsin had the smallest margin of victory (~0.9%), while New Hampshire was won by ~3 points.",
+     "error": null,
+     "ms": 19556,
+     "costUsd": 0.0014428
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "New Hampshire was not the closest state in the 2024 election.",
+     "error": null,
+     "ms": 1312,
+     "costUsd": 0.00003108
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 2,
+     "YES": 1
+    },
+    "counted": 3
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 6,
+     "YES": 1
+    },
+    "counted": 7
+   }
+  },
+  {
+   "id": "509218",
+   "slug": "will-the-democratic-candidate-win-nevada-by-3pt0-4pt0",
+   "question": "Will the Democratic candidate win Nevada by 3.0%-4.0%? ",
+   "endDate": "2024-11-05T12:00:00Z",
+   "closedTime": "2024-11-27 08:27:48+00",
+   "description": "This market will resolve to \"Yes” if the Democratic Party candidate wins the popular vote in Nevada in the 2024 U.S. Presidential Election by between 3.0% (inclusive) and 4.0% (exclusive) when compared with the second place candidate. Otherwise, this market will resolve to \"No\".\n\nFor the purpose of resolving this market, the 'margin of victory' is defined as the absolute difference between the percentages of votes received by the Democratic Party candidate and the second-place candidate. Percentages of the votes received by each party will be determined by dividing the total number of votes each of the top two candidates receives by the sum of all votes cast in Nevada for the 2024 U.S. Presidential Election.\n\nThis market will resolve based off the official vote count once Nevada has certified the vote. \n\nIf a recount is initiated before certification, the market will remain open until the recount is completed and the vote is certified. If a recount occurs after certification, the recount will not be considered.",
+   "volumeUsd": 47843276,
+   "resolved": "NO",
+   "event": "Nevada Margin of Victory",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I don't have access to certified 2024 Nevada election results after my 2024-06 cutoff, so I cannot determine the final margin.",
+     "error": null,
+     "ms": 2586,
+     "costUsd": 0.0003085
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "Harris won Nevada by 3.64%, falling within the 3.0%-4.0% range specified. Official certification confirms this margin.",
+     "error": null,
+     "ms": 1209,
+     "costUsd": 0.000689
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The 2024 U.S. Presidential Election has not yet occurred, so the outcome for Nevada is unknown.",
+     "error": null,
+     "ms": 934,
+     "costUsd": 0.0002418
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The 2024 U.S. Presidential Election results for Nevada have not yet been certified, so the outcome is unknown.",
+     "error": null,
+     "ms": 1306,
+     "costUsd": 0.00008674
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Nevada was won by Republican Donald Trump, not the Democratic candidate, so the Democratic margin was not 3.0%-4.0%.",
+     "error": null,
+     "ms": 2109,
+     "costUsd": 0.0001036
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Democratic candidate won Nevada by 3.0%, within the specified range.",
+     "error": null,
+     "ms": 21283,
+     "costUsd": 0.00021513
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "The Democratic candidate won Nevada by 2.6%, outside the 3.0%-4.0% range.",
+     "error": null,
+     "ms": 1404,
+     "costUsd": 0.00004575
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Kamala Harris won Nevada by approximately 2.4%, below the 3.0% threshold.",
+     "error": null,
+     "ms": 2321,
+     "costUsd": 0.00030534
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "The Democratic candidate lost Nevada to Trump by approximately 1.8%, not winning by 3.0%-4.0%.",
+     "error": null,
+     "ms": 11654,
+     "costUsd": 0.0008946
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "Democratic candidate won by 3.5%.",
+     "error": null,
+     "ms": 816,
+     "costUsd": 0.00003048
+    }
+   ],
+   "swarmA": {
+    "winner": "YES",
+    "byOutcome": {
+     "YES": 2,
+     "NO": 1
+    },
+    "counted": 3
+   },
+   "swarm10": {
+    "winner": null,
+    "byOutcome": {
+     "YES": 3,
+     "NO": 4
+    },
+    "counted": 7
+   }
+  },
+  {
+   "id": "507792",
+   "slug": "israel-x-hezbollah-ceasefire-in-2024",
+   "question": "Israel x Hezbollah Ceasefire in 2024?",
+   "endDate": "2024-12-31T12:00:00Z",
+   "closedTime": "2024-12-05 00:31:32+00",
+   "description": "This market will resolve to \"Yes\" if the government of Israel and Hezbollah both officially announce an armistice, ceasefire and/or negotiated settlement between the two parties that will go into effect by December 31, 2024, 11:59 PM ET.\n\nTo count toward the resolution of this market, an armistice, ceasefire, and/or negotiated settlement must be indicative of at least a temporary pause in the Israel-Hezbollah military conflict, must pertain to all theaters of military conflict between the two countries, and be declared through official channels by both parties.\n\nA humanitarian pause will not count toward a \"Yes\" resolution.\n\nIf only one party (e.g. only Israel, or only Hezbollah) officially announces an armistice, ceasefire, and/or negotiated settlement, it will not be sufficient to resolve this market to \"Yes\".\n\nThe primary resolution source for this market will be official information from the government of Israel and Hezbollah, however a consensus of credible reporting will suffice.",
+   "volumeUsd": 40061278,
+   "resolved": "YES",
+   "event": "Israel x Hezbollah Ceasefire in 2024?",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.85,
+     "reasoning": "No official, mutual armistice/ceasefire/negotiated settlement announced by both the government of Israel and Hezbollah by Dec 31, 2024.",
+     "error": null,
+     "ms": 2782,
+     "costUsd": 0.0005595
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "Israel and Hezbollah agreed to a ceasefire on November 26, 2024, which went into effect November 27, 2024, before the December 31 deadline.",
+     "error": null,
+     "ms": 1014,
+     "costUsd": 0.000749
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "No official, mutual ceasefire between Israel and Hezbollah was announced or went into effect by December 31, 2024.",
+     "error": null,
+     "ms": 798,
+     "costUsd": 0.0002432
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "As of December 31, 2024, no mutual, official ceasefire between Israel and Hezbollah has been announced; conflict continues without a negotiated settlement.",
+     "error": null,
+     "ms": 2529,
+     "costUsd": 0.00006085
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "Israel and Hezbollah agreed to a ceasefire effective November 27, 2024, ending hostilities; credible reporting confirms both sides accepted it.",
+     "error": null,
+     "ms": 1691,
+     "costUsd": 0.00010514
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "No mutual official ceasefire or armistice announced by Israel and Hezbollah by December 31, 2024.",
+     "error": null,
+     "ms": 12073,
+     "costUsd": 0.0001739175
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No official ceasefire was announced by both Israel and Hezbollah by December 31, 2024.",
+     "error": null,
+     "ms": 1327,
+     "costUsd": 0.0000372
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "Israel and Lebanon announced a ceasefire on Nov 26, 2024, effective Nov 27, brokered by US and France.",
+     "error": null,
+     "ms": 2589,
+     "costUsd": 0.00031743
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "No definitive information available about Israel-Hezbollah ceasefire agreement by December 31, 2024",
+     "error": null,
+     "ms": 11885,
+     "costUsd": 0.000822
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No official ceasefire announced by both parties by Dec 31, 2024.",
+     "error": null,
+     "ms": 1103,
+     "costUsd": 0.00003162
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 4,
+     "YES": 2
+    },
+    "counted": 6
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 6,
+     "YES": 3
+    },
+    "counted": 9
+   }
+  },
+  {
+   "id": "506105",
+   "slug": "will-dak-prescott-win-nfl-mvp-for-the-2024-25-season",
+   "question": "Will Dak Prescott win NFL MVP for the 2024-25 season?",
+   "endDate": "2025-02-09T12:00:00Z",
+   "closedTime": "2025-01-24 03:10:06+00",
+   "description": "This market will resolve to “Yes” if Dak Prescott wins the MVP award for the 2024-2025 NFL season. Otherwise, this market will resolve to “No”.\n\nThe primary resolution source for this market is official information from the NFL.",
+   "volumeUsd": 37958530,
+   "resolved": "NO",
+   "event": "NFL MVP",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I lack information beyond June 2024 and cannot confirm the 2024-25 NFL MVP winner (no official NFL data available to me).",
+     "error": null,
+     "ms": 2774,
+     "costUsd": 0.000471
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Lamar Jackson won the 2024-25 NFL MVP award. Dak Prescott did not win MVP.",
+     "error": null,
+     "ms": 954,
+     "costUsd": 0.00051
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Patrick Mahomes won the NFL MVP award for the 2024-25 season, not Dak Prescott.",
+     "error": null,
+     "ms": 676,
+     "costUsd": 0.0001788
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The 2024-25 NFL season and MVP award have not yet occurred as of the current date.",
+     "error": null,
+     "ms": 3312,
+     "costUsd": 0.00004239
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Dak Prescott did not win NFL MVP for the 2024-25 season; the award went to Lamar Jackson.",
+     "error": null,
+     "ms": 272,
+     "costUsd": 0.00011462
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Dak Prescott won NFL MVP for 2024-25 season as per official NFL information.",
+     "error": null,
+     "ms": 12809,
+     "costUsd": 0.000141885
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Patrick Mahomes won the 2024-25 NFL MVP, not Dak Prescott.",
+     "error": null,
+     "ms": 2134,
+     "costUsd": 0.00003084375
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Josh Allen won the 2024-25 NFL MVP award on February 6, 2025.",
+     "error": null,
+     "ms": 2006,
+     "costUsd": 0.00021412
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I don't have information about who won the 2024-25 NFL MVP award as this is a future event relative to my knowledge cutoff.",
+     "error": null,
+     "ms": 16744,
+     "costUsd": 0.00073365
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Dak Prescott did not win the 2024-2025 NFL MVP award.",
+     "error": null,
+     "ms": 733,
+     "costUsd": 0.00002364
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 3,
+     "YES": 1
+    },
+    "counted": 4
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 6,
+     "YES": 1
+    },
+    "counted": 7
+   }
+  },
+  {
+   "id": "509188",
+   "slug": "will-the-democratic-candidate-win-wisconsin-by-3-4pt0",
+   "question": "Will the Democratic candidate win Wisconsin by 3%-4.0%? ",
+   "endDate": "2024-11-05T12:00:00Z",
+   "closedTime": "2024-11-30 00:17:43+00",
+   "description": "This market will resolve to \"Yes” if the Democratic Party candidate wins the popular vote in Wisconsin in the 2024 U.S. Presidential Election by between 3.0% (inclusive) and 4.0% (exclusive) when compared with the second place candidate. Otherwise, this market will resolve to \"No\".\n\nFor the purpose of resolving this market, the 'margin of victory' is defined as the absolute difference between the percentages of votes received by the Democratic Party candidate and the second-place candidate. Percentages of the votes received by each party will be determined by dividing the total number of votes each of the top two candidates receives by the sum of all votes cast in Wisconsin for the 2024 U.S. Presidential Election.\n\nThis market will resolve based off the official vote count once Wisconsin has certified the vote. \n\nIf a recount is initiated before certification, the market will remain open until the recount is completed and the vote is certified. If a recount occurs after certification, the recount will not be considered.",
+   "volumeUsd": 37386912,
+   "resolved": "NO",
+   "event": "Wisconsin Margin of Victory",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I don't have verified certified Wisconsin 2024 vote totals to determine the Democratic margin in that range.",
+     "error": null,
+     "ms": 4205,
+     "costUsd": 0.000572
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Wisconsin 2024: Harris won by approximately 0.6%, well below the 3.0%-4.0% range required for YES resolution.",
+     "error": null,
+     "ms": 2085,
+     "costUsd": 0.000697
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The 2024 U.S. Presidential Election has not yet occurred, so the outcome for Wisconsin is unknown.",
+     "error": null,
+     "ms": 606,
+     "costUsd": 0.0002412
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The 2024 U.S. Presidential Election results for Wisconsin have not yet been certified, so the outcome is unknown.",
+     "error": null,
+     "ms": 2215,
+     "costUsd": 0.0000876
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Trump won Wisconsin in 2024 by under 1 point over Harris, so the Democratic candidate did not win by 3–4%.",
+     "error": null,
+     "ms": 1218,
+     "costUsd": 0.00008344
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Democratic candidate won Wisconsin by 3.2%, within the specified margin.",
+     "error": null,
+     "ms": 16134,
+     "costUsd": 0.000193875
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Biden won Wisconsin by 5.1%, outside the 3-4% range.",
+     "error": null,
+     "ms": 1690,
+     "costUsd": 0.0000443125
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Kamala Harris won Wisconsin by approximately 0.9%, far below the 3.0% threshold required.",
+     "error": null,
+     "ms": 2198,
+     "costUsd": 0.0003088
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Democratic candidate won Wisconsin by approximately 0.7%, which is outside the specified 3.0%-4.0% range.",
+     "error": null,
+     "ms": 15501,
+     "costUsd": 0.000972
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "Democratic candidate won by 3.5%.",
+     "error": null,
+     "ms": 1371,
+     "costUsd": 0.00003036
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 2,
+     "YES": 1
+    },
+    "counted": 3
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 5,
+     "YES": 2
+    },
+    "counted": 7
+   }
+  },
+  {
+   "id": "255397",
+   "slug": "will-mike-tyson-win-his-boxing-match-against-jake-paul",
+   "question": "Will Mike Tyson win his boxing match against Jake Paul?",
+   "endDate": "2024-07-20T00:00:00Z",
+   "closedTime": "2024-11-16 09:03:46+00",
+   "description": "The boxing match between Jake Paul and Mike Tyson has been scheduled for Saturday, July 20, 2024 at the AT&T Stadium in Arlington, Texas.\n\nThis market will resolve to \"Yes\" if Mike Tyson is officially declared the winner of the boxing match against Jake Paul. Otherwise, this market will resolve to \"No\".\n\nIf this fight ends in a draw, is not officially designated as a win for either Jake Paul or Mike Tyson, is canceled permanently, or moved to a date after December 31, 2024, 11:59 PM ET, this market will resolve to \"No\".",
+   "volumeUsd": 32399877,
+   "resolved": "NO",
+   "event": "Jake Paul vs. Mike Tyson: Who will win?",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.9,
+     "reasoning": "Jake Paul defeated Mike Tyson in their July 20, 2024 bout (Tyson was not officially declared the winner).",
+     "error": null,
+     "ms": 2510,
+     "costUsd": 0.000516
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Jake Paul defeated Mike Tyson by unanimous decision on July 20, 2024. Tyson was not declared the winner.",
+     "error": null,
+     "ms": 1021,
+     "costUsd": 0.000585
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "The fight was postponed to November 15, 2024, due to Tyson's ulcer flare-up, thus resolving to 'No' based on the market rules.",
+     "error": null,
+     "ms": 774,
+     "costUsd": 0.0002476
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Mike Tyson did not win; Jake Paul won by unanimous decision on July 20, 2024.",
+     "error": null,
+     "ms": 3644,
+     "costUsd": 0.0000475
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "The fight was postponed and held November 15, 2024; Jake Paul defeated Mike Tyson by unanimous decision, so Tyson was not declared the winner.",
+     "error": null,
+     "ms": 1817,
+     "costUsd": 0.00008372
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Mike Tyson was officially declared the winner of the boxing match against Jake Paul.",
+     "error": null,
+     "ms": 11585,
+     "costUsd": 0.00014298
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Jake Paul won the match by split decision.",
+     "error": null,
+     "ms": 1054,
+     "costUsd": 0.0000338125
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Jake Paul won by unanimous decision. Tyson lost the fight on July 20, 2024.",
+     "error": null,
+     "ms": 1909,
+     "costUsd": 0.00025117
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 19506,
+     "costUsd": 0.0014676
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Jake Paul won the match on July 20, 2024.",
+     "error": null,
+     "ms": 1376,
+     "costUsd": 0.00002616
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 5,
+     "YES": 1
+    },
+    "counted": 6
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 8,
+     "YES": 1
+    },
+    "counted": 9
+   }
+  },
+  {
+   "id": "514670",
+   "slug": "yoon-out-as-president-of-south-korea-before-april",
+   "question": "Yoon out as president of South Korea before April?",
+   "endDate": "2025-03-31T12:00:00Z",
+   "closedTime": "2025-04-01 07:20:28+00",
+   "description": "This market will resolve to “Yes” if Yoon Suk Yeol ceases to be the President of South Korea for any period of time between December 3, 2024 and March 31, 2025, 11:59 PM ET. Otherwise, this market will resolve to “No”.\n\nIf Yoon Suk Yeol is impeached by the National Assembly, however the Constitutional Court does not uphold the impeachment by this market's end date, it will not count toward a \"Yes\" resolution.\n\nFor this market to resolve to \"Yes\" Yoon Suk Yeol must have actually ceased to be President of South Korea before this market's end date; an announcement that Yoon will resign at a later time will not count.\n\nThe resolution source for this market will be a consensus of credible reporting.",
+   "volumeUsd": 32369093,
+   "resolved": "NO",
+   "event": "Yoon out as president of South Korea before April?",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Yoon Suk Yeol did not cease being president between 3 Dec 2024 and 31 Mar 2025; no resignation or Constitutional Court‑upheld impeachment occurred in that period.",
+     "error": null,
+     "ms": 3145,
+     "costUsd": 0.00043825
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "Yoon Suk Yeol was impeached by the National Assembly on December 14, 2024, and ceased being president. Constitutional Court upheld impeachment on March 14, 2025.",
+     "error": null,
+     "ms": 1135,
+     "costUsd": 0.00072
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "As of March 31, 2025, Yoon Suk Yeol remains the President of South Korea. No credible reports indicate otherwise.",
+     "error": null,
+     "ms": 1156,
+     "costUsd": 0.0002434
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Yoon Suk Yeol remained President of South Korea throughout the specified period; no credible reports indicate he ceased to hold office before March 31, 2025.",
+     "error": null,
+     "ms": 3944,
+     "costUsd": 0.00005935
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.98,
+     "reasoning": "Constitutional Court upheld Yoon's impeachment on April 4, 2025, after the market end date, so the specified condition was not met.",
+     "error": null,
+     "ms": 4125,
+     "costUsd": 0.000105196
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 36523,
+     "costUsd": 0.000352845
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Yoon Suk Yeol remained president until his term ended in May 2027.",
+     "error": null,
+     "ms": 937,
+     "costUsd": 0.00003953125
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.99,
+     "reasoning": "Yoon Suk Yeol was impeached and removed from office on April 4, 2025, but was suspended from December 14, 2024. However, he did not fully cease to be president before March 31, 2025. Wait - re-reading: he was suspended Dec 14, 2024, which counts as ceasing to be president. Actually checking: suspension means duties suspended but still technically president. He was only fully removed April 4, 2025. So he did NOT cease to be president before March 31. Correcting: NO.",
+     "error": null,
+     "ms": 5306,
+     "costUsd": 0.00065748
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 19275,
+     "costUsd": 0.0014922
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Yoon Suk Yeol remained President until market end date.",
+     "error": null,
+     "ms": 1257,
+     "costUsd": 0.00002772
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 4,
+     "YES": 1
+    },
+    "counted": 5
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 6,
+     "YES": 2
+    },
+    "counted": 8
+   }
+  },
+  {
+   "id": "505971",
+   "slug": "will-another-team-win-the-2024-f1-constructors-cup",
+   "question": "Will another team win the 2024 F1 Constructors Championship?",
+   "endDate": "2024-12-08T12:00:00Z",
+   "closedTime": "2024-12-08 20:53:23+00",
+   "description": "This market will resolve to “Yes” if any team other than Red Bull Racing, McLaren, Mercedes, or Ferrari wins the Constructor’s Championship for the 2024 F1 season. Otherwise, this market will resolve to “No”.\n\nIn the case of a tie between two teams, this market will resolve in favor of the team who's listed name comes first alphabetically. \n\nThe resolution source for this market will be information from F1.",
+   "volumeUsd": 31284286,
+   "resolved": "NO",
+   "event": "F1 Constructors Champion",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Red Bull Racing won the 2024 Formula 1 Constructors Championship according to official F1 results, so no other team won.",
+     "error": null,
+     "ms": 3686,
+     "costUsd": 0.00049025
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "McLaren won the 2024 F1 Constructors Championship. The winner was one of the four specified teams, so the market resolves NO.",
+     "error": null,
+     "ms": 1106,
+     "costUsd": 0.000575
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Red Bull Racing won the 2024 F1 Constructors' Championship, which is one of the excluded teams.",
+     "error": null,
+     "ms": 737,
+     "costUsd": 0.0002071
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Red Bull, McLaren, Mercedes, or Ferrari won the 2024 F1 Constructors Championship, per official F1 results; no other team finished first.",
+     "error": null,
+     "ms": 2182,
+     "costUsd": 0.00007476
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "McLaren won the 2024 F1 Constructors Championship, and McLaren is among the four listed teams, so the market resolves No.",
+     "error": null,
+     "ms": 5349,
+     "costUsd": 0.000058058
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Another team won the 2024 F1 Constructors Championship according to F1's official results.",
+     "error": null,
+     "ms": 18461,
+     "costUsd": 0.000189555
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Red Bull Racing won the 2024 F1 Constructors Championship.",
+     "error": null,
+     "ms": 1180,
+     "costUsd": 0.0000318125
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "McLaren won the 2024 F1 Constructors Championship, which is one of the excluded teams.",
+     "error": null,
+     "ms": 1902,
+     "costUsd": 0.00023177
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 21693,
+     "costUsd": 0.0013085
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Red Bull Racing won the 2024 F1 Constructor’s Championship.",
+     "error": null,
+     "ms": 1225,
+     "costUsd": 0.0000249
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 5,
+     "YES": 1
+    },
+    "counted": 6
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 8,
+     "YES": 1
+    },
+    "counted": 9
+   }
+  },
+  {
+   "id": "512600",
+   "slug": "will-bitcoin-hit-100k-in-november",
+   "question": "Will Bitcoin hit $100k in November?",
+   "endDate": "2024-11-30T12:00:00Z",
+   "closedTime": "2024-12-01 07:15:21+00",
+   "description": "This market will immediately resolve to \"Yes\" if any Binance 1 minute candle for Bitcoin (BTCUSDT) between November 1, 2024, 00:00 and November 30, 2024, 23:59 in the ET timezone has a final \"High\" price of $100,000.00 or higher. Otherwise, this market will resolve to \"No.\"\n\nThe resolution source for this market is Binance, specifically the BTCUSDT \"High\" prices available at https://www.binance.com/en/trade/BTC_USDT, with the chart settings on \"1m\" for one-minute candles selected on the top bar.\n\nPlease note that the outcome of this market depends solely on the price data from the Binance BTCUSDT trading pair. Prices from other exchanges, different trading pairs, or spot markets will not be considered for the resolution of this market.",
+   "volumeUsd": 28587434,
+   "resolved": "NO",
+   "event": "Will Bitcoin hit $100k in November?",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I lack post‑cutoff market data and cannot access Binance 1-minute BTCUSDT historical candles for November 2024 to determine a $100,000 high.",
+     "error": null,
+     "ms": 3403,
+     "costUsd": 0.00048775
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "Bitcoin reached $100k in November 2024. BTC hit $99,798 on Nov 25 and crossed $100k on Nov 29, 2024.",
+     "error": null,
+     "ms": 1200,
+     "costUsd": 0.000705
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Bitcoin did not reach $100,000 on Binance in November 2024.",
+     "error": null,
+     "ms": 609,
+     "costUsd": 0.0002277
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Bitcoin did not reach $100,000 on Binance BTCUSDT 1-minute candles in November 2024.",
+     "error": null,
+     "ms": 1703,
+     "costUsd": 0.00008865
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Bitcoin first reached $100,000 in December 2024; Binance BTCUSDT did not print a $100,000+ 1-minute high during November 2024.",
+     "error": null,
+     "ms": 2023,
+     "costUsd": 0.00012096
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Binance BTCUSDT 1-minute candle high was >= $100,000 between Nov 1, 2024 00:00 ET and Nov 30, 2024 23:59 ET",
+     "error": null,
+     "ms": 37373,
+     "costUsd": 0.0003556575
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Bitcoin did not reach $100k on Binance in November 2024.",
+     "error": null,
+     "ms": 1602,
+     "costUsd": 0.000043125
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Bitcoin reached $100,000 on Binance on November 22, 2024, with BTCUSDT hitting $100,000.00+.",
+     "error": null,
+     "ms": 2025,
+     "costUsd": 0.00029803
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 13516,
+     "costUsd": 0.001353
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Bitcoin did not reach $100k in November 2024.",
+     "error": null,
+     "ms": 501,
+     "costUsd": 0.00003096
+    }
+   ],
+   "swarmA": {
+    "winner": null,
+    "byOutcome": {
+     "YES": 2,
+     "NO": 3
+    },
+    "counted": 5
+   },
+   "swarm10": {
+    "winner": null,
+    "byOutcome": {
+     "YES": 3,
+     "NO": 5
+    },
+    "counted": 8
+   }
+  },
+  {
+   "id": "514165",
+   "slug": "will-another-party-win-the-most-seats-in-the-next-german-election",
+   "question": "Will another party win the most seats in the next German election?",
+   "endDate": "2025-02-23T12:00:00Z",
+   "closedTime": "2025-02-24 12:45:52+00",
+   "description": "German Federal elections to elect the 21st Bundestag are expected to tale place February 23, 2025.\n\nThis market will resolve to \"Yes\" if any party other than SPD, CDU/CSU, AfD, Greens, FDP or BSW wins the most seats in the Bundestag (Germany's lower house) as a result of the next German parliamentary election.\n\nIf voting in the next German parliamentary election does not occur by June 30, 2025, this market will resolve to \"Yes\".\n\nIn the case of a tie between this party and any other for the most seats gained, this market will resolve in favor of the party whose listed abbreviation comes first in alphabetical order.\n\nThis market's resolution will be based solely on the number of seats won by an individual party, not any coalition of which it may be a part.\n\nThis market will resolve based on the final total number of seats won by each party, including any overhang mandates (Überhangmandate) and balancing mandates (Ausgleichsmandate), as reflected in the official results.\n\nThis market will resolve based on the result of the election as indicated by a consensus of credible reporting. If there is ambiguity, this market will resolve based solely on the official results as reported by the German government, specifically the Federal Returning Officer (Bundeswahlleiter) (https://www.bundeswahlleiterin.de/en/).",
+   "volumeUsd": 28301065,
+   "resolved": "NO",
+   "event": "Germany Parliamentary Election Winner",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I don't have post-2024 election results in my training data, so I cannot determine which party won the most seats in the 2025 German election.",
+     "error": null,
+     "ms": 3525,
+     "costUsd": 0.0006505
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "CDU/CSU won the most seats (258) in the February 23, 2025 German election. CDU/CSU is one of the six listed parties, so the answer is NO.",
+     "error": null,
+     "ms": 1491,
+     "costUsd": 0.000848
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "The next German election is expected to be dominated by established parties, making it highly improbable for another party to win the most seats.",
+     "error": null,
+     "ms": 714,
+     "costUsd": 0.0002671
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The election has not yet occurred; outcome is unknown as of current date.",
+     "error": null,
+     "ms": 1559,
+     "costUsd": 0.00005904
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "CDU/CSU won the most seats in the 2025 German federal election, and it is one of the listed parties, so no other party won the most seats.",
+     "error": null,
+     "ms": 2367,
+     "costUsd": 0.00016912
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "Lack of knowledge about the 2025 German federal election outcome",
+     "error": null,
+     "ms": 11939,
+     "costUsd": 0.00017568
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "SPD, CDU/CSU, AfD, Greens, FDP, and BSW were the top parties; none lost majority to an outsider.",
+     "error": null,
+     "ms": 1962,
+     "costUsd": 0.00005673
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "CDU/CSU won most seats with 208. No other party outside listed ones won plurality.",
+     "error": null,
+     "ms": 2348,
+     "costUsd": 0.00034807
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 16495,
+     "costUsd": 0.00122802
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Historically, SPD, CDU/CSU, AfD, Greens, FDP, or BSW have always won the most seats.",
+     "error": null,
+     "ms": 1410,
+     "costUsd": 0.00003852
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 3
+    },
+    "counted": 3
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 6
+    },
+    "counted": 6
+   }
+  },
+  {
+   "id": "509855",
+   "slug": "israel-military-action-against-iraq-before-november",
+   "question": "Israel military action against Iraq before November?",
+   "endDate": "2024-10-31T12:00:00Z",
+   "closedTime": "2024-10-30 00:25:09+00",
+   "description": "This market will resolve to \"Yes\" if Israel initiates a military action on Iraqi soil, airspace, or maritime territory between October 13, 2024, and October 31, 11:59 PM ET. Otherwise, this market will resolve to \"No\".\n\nFor the purposes of this market, a \"military action\" will be considered to be any use of force executed by Israel on Iraqi soil, airspace, or maritime territory (e.g. if a weapons depot on Iraqi soil is hit by an Israeli missile, this market will resolve to \"Yes\") that is officially acknowledged by the Israeli government or a consensus of credible reporting. This includes, but is not limited to, airstrikes, naval attacks, or ground invasions. Cyber attacks, sanctions, or diplomatic actions will not count towards the resolution of this market.\n\nIn the case that the \"Yes\" resolution criteria are met prior to this market's resolution date, this market will resolve immediately.\n",
+   "volumeUsd": 27780154,
+   "resolved": "YES",
+   "event": "Israel military action against Iraq before November?",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0.01,
+     "reasoning": "I lack information about events between Oct 13–31, 2024; cannot determine whether Israel conducted acknowledged military action against Iraq in that window.",
+     "error": null,
+     "ms": 3074,
+     "costUsd": 0.00035
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "Israel conducted airstrikes on Iraqi military targets on October 26, 2024, officially acknowledged by Israeli government. This meets resolution criteria.",
+     "error": null,
+     "ms": 1010,
+     "costUsd": 0.000654
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "No credible reports or official acknowledgments of Israeli military action in Iraq occurred by the deadline.",
+     "error": null,
+     "ms": 879,
+     "costUsd": 0.0002221
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No credible reports or official acknowledgments indicate Israeli military action in Iraq between October 13 and October 31, 2024.",
+     "error": null,
+     "ms": 1018,
+     "costUsd": 0.00008794
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 4652,
+     "costUsd": 0.00021602
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Israel conducted an airstrike on Iraqi soil on October 25, 2024, acknowledged by the Israeli government and credible reporting.",
+     "error": null,
+     "ms": 28755,
+     "costUsd": 0.0002811075
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "No Israeli military action against Iraq occurred in the specified period.",
+     "error": null,
+     "ms": 1203,
+     "costUsd": 0.0000406875
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No Israeli military action on Iraqi territory occurred between Oct 13-31, 2024. Israel focused operations on Gaza, Lebanon, and Iran during this period.",
+     "error": null,
+     "ms": 2663,
+     "costUsd": 0.00032038
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 20806,
+     "costUsd": 0.00118588
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No Israeli military action on Iraq was reported.",
+     "error": null,
+     "ms": 845,
+     "costUsd": 0.00002886
+    }
+   ],
+   "swarmA": {
+    "winner": null,
+    "byOutcome": {
+     "YES": 2,
+     "NO": 2
+    },
+    "counted": 4
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "YES": 2,
+     "NO": 5
+    },
+    "counted": 7
+   }
+  },
+  {
+   "id": "522080",
+   "slug": "will-kanye-launch-a-coin-in-february",
+   "question": "Will Kanye launch a coin in February?",
+   "endDate": "2025-02-28T12:00:00Z",
+   "closedTime": "2025-03-01 08:00:23+00",
+   "description": "Kanye is currently crashing out (https://x.com/kanyewest/status/1887837266703417817). \n\nThis market will resolve to \"Yes\" if Kanye West officially launches a token by February 28, 2025, 11:59 PM ET. Otherwise, this market will resolve to \"No\".\n\nOnly tokens which are confirmed to have been launched by Kanye West, either through posts from official social media channels, or otherwise confirmed by public statements will qualify.\n\nThe resolution source will be a consensus of credible reporting.",
+   "volumeUsd": 27507326,
+   "resolved": "NO",
+   "event": "Will Kanye launch a coin in February?",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "No verifiable information available through my 2024-06 cutoff; cannot confirm whether Kanye launched a token by Feb 28, 2025.",
+     "error": null,
+     "ms": 2359,
+     "costUsd": 0.000454
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No credible reports confirm Kanye West officially launched a token by February 28, 2025. No official announcements from verified channels documented.",
+     "error": null,
+     "ms": 1155,
+     "costUsd": 0.000587
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Kanye West did not launch any official token in February 2025. No credible reports confirm such an event.",
+     "error": null,
+     "ms": 688,
+     "costUsd": 0.0002189
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "As of February 28, 2025, no credible reports or official announcements confirm Kanye West launched a token.",
+     "error": null,
+     "ms": 1532,
+     "costUsd": 0.00004962
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Kanye West did not officially launch a token by Feb 28, 2025; he denied coin launch reports. Credible reporting confirms no official launch.",
+     "error": null,
+     "ms": 6382,
+     "costUsd": 0.000132587
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "No credible reporting of Kanye West launching a token by February 28, 2025.",
+     "error": null,
+     "ms": 17090,
+     "costUsd": 0.000162075
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No credible reports of Kanye launching a coin by February 28, 2025.",
+     "error": null,
+     "ms": 1531,
+     "costUsd": 0.000030025
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.99,
+     "reasoning": "Kanye West launched YZY token on February 23, 2025, confirmed via his X posts and multiple credible news sources.",
+     "error": null,
+     "ms": 2016,
+     "costUsd": 0.00025585
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 19463,
+     "costUsd": 0.00115191
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No credible reports of a coin launch by Kanye West by Feb 28, 2025.",
+     "error": null,
+     "ms": 719,
+     "costUsd": 0.00002772
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 5
+    },
+    "counted": 5
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 7,
+     "YES": 1
+    },
+    "counted": 8
+   }
+  },
+  {
+   "id": "254250",
+   "slug": "will-joker-2-gross-most-in-2024",
+   "question": "Will 'Joker 2' gross most in 2024?",
+   "endDate": "2024-12-29T00:00:00Z",
+   "closedTime": "2025-01-03 08:20:05+00",
+   "description": "This market will resolve to \"Yes\" if the \"Gross\" column on https://www.boxofficemojo.com/year/2024/?grossesOption=calendarGrosses shows 'Joker: Folie à Deux' (2024) as the film with the highest 2024 gross once data for December 31 is made available. Otherwise, this market will resolve to \"No\".\n\nNote: This market is about the movie's domestic calendar gross in 2024 - dates outside of 2024 will not count toward this movie's gross. \n\nIn the event of an exact tie the film that comes first alphabetically will be considered the winner.\n\nIf there is no final data available by January 7, 2025, 11:59 PM ET, another credible resolution source will be chosen.",
+   "volumeUsd": 27351094,
+   "resolved": "NO",
+   "event": "Highest grossing movie in 2024?",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I don't have authoritative Box Office Mojo 2024 calendar-gross final data available to determine the top domestic grosser.",
+     "error": null,
+     "ms": 3708,
+     "costUsd": 0.00061125
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Inside Out 2 grossed ~$652M domestically in 2024, significantly exceeding Joker 2's ~$202M domestic gross.",
+     "error": null,
+     "ms": 1076,
+     "costUsd": 0.000668
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "As of December 2024, 'Joker 2' has not been released and therefore cannot be the highest-grossing film of 2024.",
+     "error": null,
+     "ms": 823,
+     "costUsd": 0.0002447
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "As of early 2025, 'Joker: Folie à Deux' did not achieve the highest domestic gross in 2024; other films outperformed it.",
+     "error": null,
+     "ms": 2109,
+     "costUsd": 0.00009324
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Joker: Folie à Deux was a major box-office flop and did not have the highest 2024 domestic calendar gross; films like Inside Out 2 and Deadpool & Wolverine grossed far more.",
+     "error": null,
+     "ms": 1119,
+     "costUsd": 0.00008008
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Joker: Folie à Deux was not the highest grossing film in 2024 according to Box Office Mojo.",
+     "error": null,
+     "ms": 22268,
+     "costUsd": 0.0002031525
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "'Joker 2' did not gross highest in 2024; 'Dune: Part Two' led.",
+     "error": null,
+     "ms": 1469,
+     "costUsd": 0.00004334375
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Inside Out 2 grossed ~$652M domestically in 2024, far exceeding Joker 2's ~$58M. Box Office Mojo confirms Inside Out 2 as 2024's top grosser.",
+     "error": null,
+     "ms": 1997,
+     "costUsd": 0.00033833
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Joker 2 was a box office flop, grossing ~$59M, far below 2024 winners like Inside Out 2 or Deadpool & Wolverine.",
+     "error": null,
+     "ms": 6486,
+     "costUsd": 0.0005753
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Data shows 'Joker 2' did not gross most in 2024.",
+     "error": null,
+     "ms": 662,
+     "costUsd": 0.00003036
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 5
+    },
+    "counted": 5
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 9
+    },
+    "counted": 9
+   }
+  },
+  {
+   "id": "500640",
+   "slug": "2024-balance-of-power-other",
+   "question": "2024 Balance of Power: Other",
+   "endDate": "2024-11-05T12:00:00Z",
+   "closedTime": "2024-11-14 06:59:54+00",
+   "description": "This market will resolve to \"Yes\" if as a result of the 2024 United States general elections, any of either the Presidency, Senate, or House of Representatives are not controlled by either the Democratic or Republican party. Otherwise, this market will resolve to \"No\". \n\nA party will be considered to have 'control' of the House of Representatives, if they win a majority of voting seats.\n\nA party will be considered to have 'control' of the Senate if they have more than half of the voting Senate members, or half of the voting Senate members and the Vice President. \n\nA candidate's party is determined by their ballot-listed or otherwise identifiable affiliation with that party at the time the 2024 House, Senate and Presidency are conclusively called by this market's resolution sources. A candidate without a ballot-listed affiliation to either the Democrat or Republican Parties will be considered a member of one of these parties based on the party that they most recently expressed their intent to caucus with at the time the 2024 House, Senate and Presidency are conclusively called by this market's resolution sources.\n\nIf control of the House is ambiguous given the above rules, this market will resolve according to the party affiliation of the first Speaker of the US House who is selected following the 2024 US general election.\n\nIf control of the Senate is ambiguous given the above rules, this market will resolve according to the party affiliation of the first Majority Leader of the US Senate who is selected following the 2024 US general election.\n\nThe resolution source for this market is the Associated Press, Fox News, and NBC. This market will resolve once all three sources have conclusively called winners of the House, Senate, and Presidency in the 2024 US general election",
+   "volumeUsd": 24501103,
+   "resolved": "NO",
+   "event": "Balance of Power: 2024 Election",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.9,
+     "reasoning": "After the 2024 election, Presidency, House, and Senate were controlled by the two major parties (no chamber or presidency held by a non-Democrat/Republican).",
+     "error": null,
+     "ms": 3500,
+     "costUsd": 0.00066875
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "2024 election results: Republicans won Presidency, Senate, and House. All three branches controlled by Democratic or Republican parties.",
+     "error": null,
+     "ms": 1141,
+     "costUsd": 0.000817
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "All three branches (Presidency, Senate, House) are controlled by either the Democratic or Republican party after the 2024 elections.",
+     "error": null,
+     "ms": 787,
+     "costUsd": 0.0003006
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "All branches—Presidency, Senate, and House—were won by Democratic or Republican candidates per resolution sources, with no third-party control.",
+     "error": null,
+     "ms": 1710,
+     "costUsd": 0.00011235
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "After the 2024 elections, Republicans controlled the Presidency, Senate, and House; no other party controlled any chamber.",
+     "error": null,
+     "ms": 1126,
+     "costUsd": 0.00009842
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.8,
+     "reasoning": "Historically, Democratic and Republican parties dominate US elections",
+     "error": null,
+     "ms": 40764,
+     "costUsd": 0.000394815
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "All three branches (Presidency, Senate, House) were controlled by either Democrats or Republicans post-2024 election.",
+     "error": null,
+     "ms": 1756,
+     "costUsd": 0.000049325
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Republicans won Presidency (Trump), Senate majority (53 seats), and House majority (220 seats). No third party control of any branch.",
+     "error": null,
+     "ms": 4301,
+     "costUsd": 0.00039375
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Republicans won the Presidency, Senate, and House. All three branches remain controlled by either Democratic or Republican parties.",
+     "error": null,
+     "ms": 17612,
+     "costUsd": 0.00093443
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "All three major sources called control for both parties.",
+     "error": null,
+     "ms": 736,
+     "costUsd": 0.00003918
+    }
+   ],
+   "swarmA": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 6
+    },
+    "counted": 6
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 10
+    },
+    "counted": 10
+   }
+  },
+  {
+   "id": "504071",
+   "slug": "no-change-in-fed-interest-rates-after-2024-september-meeting",
+   "question": "No change in Fed interest rates after 2024 September meeting?",
+   "endDate": "2024-09-18T12:00:00Z",
+   "closedTime": "2024-09-18 21:14:22+00",
+   "description": "The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to “Yes” if following the Federal Reserve's September 2024 meeting the upper bound of the target federal funds rate is exactly the same as the level it was prior to the meeting (namely it increased 0 bps). Otherwise, it will resolve to “No.”\n\nThe resolution source for this market is the FOMC’s statement after its meeting scheduled for September 17 - 18, 2024 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm.\n\nThe level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the FOMC’s statement for their September meeting with relevant data is issued. If no statement is released by November 6, 2024, 11:59 PM ET, this market will resolve to the \"No change\" bracket.",
+   "volumeUsd": 23499211,
+   "resolved": "NO",
+   "event": "Fed Interest Rates: September 2024",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0.1,
+     "reasoning": "I lack verifiable data after my 2024-06 cutoff and cannot confirm the FOMC statement from Sept 17–18, 2024.",
+     "error": null,
+     "ms": 3409,
+     "costUsd": 0.00049075
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "The Federal Reserve cut rates by 25 basis points at the September 2024 FOMC meeting, lowering the upper bound from 5.50% to 5.25%.",
+     "error": null,
+     "ms": 1084,
+     "costUsd": 0.00079
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "The FOMC maintained the federal funds rate at 5.25%-5.50% after its September 2024 meeting, as per official statements.",
+     "error": null,
+     "ms": 823,
+     "costUsd": 0.0002865
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "The September 2024 FOMC meeting has not yet occurred; no outcome data is available as of the current date.",
+     "error": null,
+     "ms": 3023,
+     "costUsd": 0.00006222
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "The Fed cut the target range by 50 bps at the September 2024 meeting, lowering the upper bound from 5.25% to 5.00%.",
+     "error": null,
+     "ms": 1083,
+     "costUsd": 0.00009408
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "FOMC statement released after September meeting showed no change in the upper bound of the target federal funds rate.",
+     "error": null,
+     "ms": 17273,
+     "costUsd": 0.000201
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Fed kept rates unchanged at 5.25-5.50% after September 2024 meeting.",
+     "error": null,
+     "ms": 1694,
+     "costUsd": 0.0000500625
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Fed cut rates by 50 bps on Sept 18, 2024; upper bound changed from 5.50% to 5.00%.",
+     "error": null,
+     "ms": 2235,
+     "costUsd": 0.00034253
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "invalid",
+     "outcome": null,
+     "confidence": null,
+     "reasoning": null,
+     "error": null,
+     "ms": 31057,
+     "costUsd": 0.00121211
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "FOMC statement confirmed no change in interest rates.",
+     "error": null,
+     "ms": 1023,
+     "costUsd": 0.00003312
+    }
+   ],
+   "swarmA": {
+    "winner": null,
+    "byOutcome": {
+     "NO": 2,
+     "YES": 2
+    },
+    "counted": 4
+   },
+   "swarm10": {
+    "winner": null,
+    "byOutcome": {
+     "NO": 3,
+     "YES": 4
+    },
+    "counted": 7
+   }
+  },
+  {
+   "id": "255229",
+   "slug": "will-bitcoin-hit-100k-in-2024",
+   "question": "Will Bitcoin hit $100k in 2024?",
+   "endDate": "2024-12-30T12:00:00Z",
+   "closedTime": "2024-12-05 04:46:26+00",
+   "description": "This market will immediately resolve to “Yes” if any Coinbase 1 minute candle for bitcoin BTC-USD between 1 Jan '24 00:00 and 31 Dec '24 23:59 in the ET timezone has a final “High” price of 100,000.00 or higher. Otherwise, this market will resolve to \"No\".\n\nThe resolution source for this market is https://www.coinbase.com/, specifically the BTC-USD \"High\" prices currently available at https://www.coinbase.com/advanced-trade/BTC-USD with “1m” and “Candles” selected on the top bar.\n\nTo see the \"High\" prices, mouse over particular candles and look at the value \"H\" at the top of the chart.\n\nPlease note that this market is about the price according to Coinbase BTC-USD, not according to other sources or spot markets.\n\nNote: If it is clear there is a large data discrepancy issue with Coinbase (e.g. BTC only hit 75k on other exchanges but 100k on Coinbase), a consensus of other credible sources may be used.",
+   "volumeUsd": 22807236,
+   "resolved": "YES",
+   "event": "Will Bitcoin hit $100k in 2024?",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.9,
+     "reasoning": "Coinbase BTC-USD never recorded a 1-minute candle with a High of $100,000 or more during 2024.",
+     "error": null,
+     "ms": 2695,
+     "costUsd": 0.00047375
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "Bitcoin reached $100,089 on Coinbase on December 5, 2024, exceeding the $100,000 threshold during the 2024 calendar year.",
+     "error": null,
+     "ms": 1750,
+     "costUsd": 0.000759
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Bitcoin did not reach $100,000 on Coinbase in 2024. Its peak was below $74,000.",
+     "error": null,
+     "ms": 703,
+     "costUsd": 0.0002711
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.99,
+     "reasoning": "Bitcoin did not reach $100,000 on Coinbase BTC-USD 1-minute candles by 2024-12-30.",
+     "error": null,
+     "ms": 3336,
+     "costUsd": 0.00006482
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.99,
+     "reasoning": "Bitcoin's Coinbase BTC-USD price surpassed $100,000 in early December 2024, before the market end date.",
+     "error": null,
+     "ms": 2014,
+     "costUsd": 0.00011606
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Bitcoin hit $100k on Coinbase in 2024 according to resolution rules",
+     "error": null,
+     "ms": 38861,
+     "costUsd": 0.0003332475
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 1,
+     "reasoning": "Bitcoin did not reach $100k on Coinbase in 2024.",
+     "error": null,
+     "ms": 2198,
+     "costUsd": 0.000039225
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Bitcoin hit $100k on Coinbase on December 5, 2024, reaching new all-time highs.",
+     "error": null,
+     "ms": 1871,
+     "costUsd": 0.00030756
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.95,
+     "reasoning": "Bitcoin surpassed $100k on Coinbase in December 2024, reaching that milestone around Dec 5.",
+     "error": null,
+     "ms": 13883,
+     "costUsd": 0.0010736
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "Bitcoin did not reach $100k on Coinbase in 2024.",
+     "error": null,
+     "ms": 898,
+     "costUsd": 0.00003432
+    }
+   ],
+   "swarmA": {
+    "winner": null,
+    "byOutcome": {
+     "NO": 3,
+     "YES": 3
+    },
+    "counted": 6
+   },
+   "swarm10": {
+    "winner": null,
+    "byOutcome": {
+     "NO": 5,
+     "YES": 5
+    },
+    "counted": 10
+   }
+  },
+  {
+   "id": "519110",
+   "slug": "was-trump-hacked",
+   "question": "Was Trump hacked?",
+   "endDate": "2025-01-19T12:00:00Z",
+   "closedTime": "2025-01-20 07:02:08+00",
+   "description": "On January 17, Donald Trump posted the following: https://x.com/realDonaldTrump/status/1880446012168249386.\n\nThis market will resolve to \"Yes\" if definitive evidence is released that Donald Trumps's X account @realDonaldTrump, was hacked, meaning that the recent tweet about $TRUMP was posted without his consent or authorization. This market will resolve to \"No\" otherwise.\n\nIf no definitive evidence is released prior to Sunday, January 19, 2025, 11:59 PM ET, this market will resolve to \"No.\"\n\nThis market will resolve according to official statements from Donald Trump and a consensus of credible reporting. Note that actions such as the above posts being deleted will count as evidence toward Donald Trump being hacked, but will be considered in context of a consensus of credible reporting.\n",
+   "volumeUsd": 22213306,
+   "resolved": "NO",
+   "event": "Was Trump hacked?",
+   "answers": [
+    {
+     "operator": "op-gpt-5-mini",
+     "model": "openai/gpt-5-mini",
+     "family": "OpenAI",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I lack reliable information about events after my 2024-06 cutoff and cannot determine whether definitive evidence was released by the market deadline.",
+     "error": null,
+     "ms": 2499,
+     "costUsd": 0.00044775
+    },
+    {
+     "operator": "op-claude-haiku-4.5",
+     "model": "anthropic/claude-haiku-4.5",
+     "family": "Anthropic",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No definitive evidence of hacking was released by January 19, 2025. Trump did not claim his account was hacked, and credible reporting found no evidence supporting a hack.",
+     "error": null,
+     "ms": 1052,
+     "costUsd": 0.000688
+    },
+    {
+     "operator": "op-gemini-2.5-flash",
+     "model": "google/gemini-2.5-flash",
+     "family": "Google",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 1,
+     "reasoning": "Trump confirmed his account was hacked, and the tweet was deleted. Credible reporting supported this.",
+     "error": null,
+     "ms": 655,
+     "costUsd": 0.0002157
+    },
+    {
+     "operator": "op-qwen3-235b-a22b-2507",
+     "model": "qwen/qwen3-235b-a22b-2507",
+     "family": "Alibaba Qwen",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No definitive evidence or credible consensus emerged by the resolution date confirming Trump's X account was hacked; the tweet was not retracted or disavowed by Trump.",
+     "error": null,
+     "ms": 1814,
+     "costUsd": 0.0000866
+    },
+    {
+     "operator": "op-deepseek-v4-flash",
+     "model": "deepseek/deepseek-v4-flash",
+     "family": "DeepSeek",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No definitive evidence of hacking emerged; Trump's posts were not disavowed or deleted, and credible reporting indicated authorization.",
+     "error": null,
+     "ms": 8732,
+     "costUsd": 0.00009555
+    },
+    {
+     "operator": "op-llama-4-maverick",
+     "model": "meta-llama/llama-4-maverick",
+     "family": "Meta Llama",
+     "status": "counted",
+     "outcome": "YES",
+     "confidence": 0.9,
+     "reasoning": "Definitive evidence and credible reporting indicated Trump's X account was hacked before the deadline.",
+     "error": null,
+     "ms": 33322,
+     "costUsd": 0.000276225
+    },
+    {
+     "operator": "op-mistral-small-3.2-24b-instruct",
+     "model": "mistralai/mistral-small-3.2-24b-instruct",
+     "family": "Mistral",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No definitive evidence of a hack was released; Trump denied it, and no credible reporting supported a breach.",
+     "error": null,
+     "ms": 2230,
+     "costUsd": 0.000042875
+    },
+    {
+     "operator": "op-kimi-k2",
+     "model": "moonshotai/kimi-k2",
+     "family": "Moonshot",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No definitive evidence of hacking emerged. Trump promoted $TRUMP token himself; no credible reports confirmed unauthorized access by market close.",
+     "error": null,
+     "ms": 2344,
+     "costUsd": 0.0002734
+    },
+    {
+     "operator": "op-glm-4.6",
+     "model": "z-ai/glm-4.6",
+     "family": "Zhipu GLM",
+     "status": "na",
+     "outcome": null,
+     "confidence": 0,
+     "reasoning": "I don't have specific information about whether Trump's X account was definitively hacked in January 2025",
+     "error": null,
+     "ms": 14045,
+     "costUsd": 0.00078666
+    },
+    {
+     "operator": "op-nova-lite-v1",
+     "model": "amazon/nova-lite-v1",
+     "family": "Amazon",
+     "status": "counted",
+     "outcome": "NO",
+     "confidence": 0.95,
+     "reasoning": "No definitive evidence of hacking was released by the resolution date.",
+     "error": null,
+     "ms": 871,
+     "costUsd": 0.00002874
+    }
+   ],
+   "swarmA": {
+    "winner": null,
+    "byOutcome": {
+     "NO": 3,
+     "YES": 2
+    },
+    "counted": 5
+   },
+   "swarm10": {
+    "winner": "NO",
+    "byOutcome": {
+     "NO": 6,
+     "YES": 2
+    },
+    "counted": 8
+   }
+  }
+ ],
+ "caveats": [
+  "Reference is Polymarket's UMA resolution, a token-holder vote with bonds. Agreement with it is not the same as truth.",
+  "Models answered from memory, with no evidence fetched. This measures recall of well-known 2024-25 events, not evidence-based judgment, and every market likely predates most models' training cutoffs.",
+  "30 markets is a pilot. It cannot show a statistically meaningful difference between swarm and single models.",
+  "Selection was by trading volume, which favours famous events (elections, the Fed, the Super Bowl) and a NO-heavy base rate."
+ ]
+}

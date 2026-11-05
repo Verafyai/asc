@@ -1,0 +1,2 @@
+{ "name": "swarmchain-devnet", "private": true, "type": "module",
+  "dependencies": { "@iqlabs-official/solana-sdk": "0.3.7", "@solana/web3.js": "^1.99.0", "@noble/curves": "^2.0.1", "@noble/hashes": "^2.0.0", "tsx": "^4.19.0" } }

@@ -1,0 +1,76 @@
+{
+ "kind": "asc.certificate/1",
+ "repo": "demo-tv/firmware",
+ "commit": "9f3c2a1000000000000000000000000000000000",
+ "tree": "1a2b3c4000000000000000000000000000000000",
+ "codeChecksum": "4b1e07c2a9d30000000000000000000000000000000000000000000000000000",
+ "standard": {
+  "code": "EDO",
+  "version": "1.0",
+  "policyRef": "<sha256 of standards/EDO.md>"
+ },
+ "verdicts": [
+  {
+   "rule": "EDO-01",
+   "verdict": "pass",
+   "votes": "5/5",
+   "citations": [
+    {
+     "file": "app/voice/VoiceSearch.kt",
+     "lines": "40-44"
+    }
+   ]
+  },
+  {
+   "rule": "EDO-02",
+   "verdict": "pass",
+   "votes": "5/5",
+   "citations": [
+    {
+     "file": "app/acr/AcrSettings.kt",
+     "lines": "12"
+    }
+   ]
+  },
+  {
+   "rule": "EDO-03",
+   "verdict": "pass",
+   "votes": "4/5",
+   "citations": [
+    {
+     "file": "app/analytics/Boot.kt",
+     "lines": "80-95"
+    }
+   ]
+  },
+  {
+   "rule": "EDO-04",
+   "verdict": "pass",
+   "votes": "5/5",
+   "citations": [
+    {
+     "file": "app/setup/OfflineSetup.kt",
+     "lines": "1-60"
+    }
+   ]
+  },
+  {
+   "rule": "EDO-05",
+   "verdict": "pass",
+   "votes": "5/5",
+   "citations": [
+    {
+     "file": "app/config/RemoteFlags.kt",
+     "lines": "22-31"
+    }
+   ]
+  }
+ ],
+ "score": 100,
+ "result": "PASS",
+ "attestationSetHash": "<sha256 of the juror attestations>",
+ "reportHash": "<sha256 of the full report>",
+ "badge": "+------------------------------------------+\n|  .----------------------.   ASC  EDO     |\n|  |  [ ]  ETHICAL   [o]  |   v1.0         |\n|  |   DEVICE OPERATIONS  |                |\n|  '----------.-----------'   PASS  5/5    |\n|           _|_|_                          |\n|  demo-tv/firmware@9f3c2a1                |\n|  sha256:4b1e07c2a9d3   2026-11-04        |\n+------------------------------------------+\n",
+ "createdAt": "2026-11-04T23:00:00Z",
+ "_note": "EXAMPLE DATA for a demo repository, not a real review"
+}

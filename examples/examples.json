@@ -1,0 +1,145 @@
+{
+ "hot_wallet": {
+  "label": "illustrative policy; real inscription and transfers on a local validator; verdicts scripted",
+  "rules": [
+   "Never send more than $1,000,000 to a wallet not registered to the exchange.",
+   "Never send more than $50,000,000 in total per day.",
+   "Only pay out to wallets on the declared withdrawal list.",
+   "A newly registered address cannot receive funds until 24 hours after registration.",
+   "Never send more than 10% of the hot wallet balance in one withdrawal.",
+   "If any rule is broken, refuse the withdrawal and hold it for human review."
+  ],
+  "steps": [
+   {
+    "n": 1,
+    "op": "read_input",
+    "what": "withdrawal request: to, amountUsd, registered, sentTodayUsd, registeredHoursAgo"
+   },
+   {
+    "n": 2,
+    "op": "judge",
+    "rule": "unregistered_cap",
+    "test": "registered || amountUsd <= 1000000"
+   },
+   {
+    "n": 3,
+    "op": "judge",
+    "rule": "daily_cap",
+    "test": "sentTodayUsd + amountUsd <= 50000000"
+   },
+   {
+    "n": 4,
+    "op": "judge",
+    "rule": "declared_list",
+    "test": "to in declaredList"
+   },
+   {
+    "n": 5,
+    "op": "judge",
+    "rule": "new_address_delay",
+    "test": "registeredHoursAgo >= 24"
+   },
+   {
+    "n": 6,
+    "op": "judge",
+    "rule": "balance_share",
+    "test": "amountUsd <= 0.10 * hotWalletBalanceUsd"
+   },
+   {
+    "n": 7,
+    "op": "exit",
+    "requires": "quorum of allow attestations",
+    "else": "refuse + hold"
+   }
+  ],
+  "runs": [
+   {
+    "request": "$250,000 to a registered wallet",
+    "allow": 5,
+    "of": 5,
+    "quorum": 4,
+    "result": "paid"
+   },
+   {
+    "request": "$6,000,000,000 to an unknown wallet",
+    "allow": 0,
+    "of": 5,
+    "quorum": 4,
+    "result": "refused, held for review",
+    "rules_broken": [
+     "unregistered_cap",
+     "daily_cap",
+     "declared_list",
+     "new_address_delay",
+     "balance_share"
+    ]
+   }
+  ]
+ },
+ "recorded_runs": [
+  {
+   "scenario": "Flight insurance: delayed 3h17m",
+   "ruling": "Full payout, 6 of 6",
+   "paid": "500 to Ana Reyes",
+   "label": "real"
+  },
+  {
+   "scenario": "Forecast: real FOMC statement",
+   "ruling": "Ana wins, 6 of 6",
+   "paid": "300 to Ana",
+   "label": "real"
+  },
+  {
+   "scenario": "Governance: real SIMD-0296 text",
+   "ruling": "No quorum, escalated",
+   "paid": "Nothing",
+   "label": "real"
+  },
+  {
+   "scenario": "Treasury: SOL at 82%",
+   "ruling": "Rebalance, 6 of 6",
+   "paid": "100,000 to Stable Reserve",
+   "label": "real"
+  },
+  {
+   "scenario": "Vesting: audit with one High finding",
+   "ruling": "Partial release, 5 of 6",
+   "paid": "10,000 to Lumen Labs",
+   "label": "real"
+  },
+  {
+   "scenario": "Prompt injection, guarded",
+   "ruling": "No payout, 6 of 6 flagged it",
+   "paid": "500 back to the pool",
+   "label": "real"
+  },
+  {
+   "scenario": "Forged correction (poisoned evidence)",
+   "ruling": "Full payout, 6 of 6: fooled",
+   "paid": "500 to Ana Reyes",
+   "label": "real"
+  }
+ ],
+ "limits": [
+  "Poisoned evidence can fool every juror: a forged correction fooled all 10 models in our test.",
+  "Models can share blind spots.",
+  "A ruling takes 20 to 60 seconds and about a cent or less in model calls.",
+  "Play money only."
+ ],
+ "attestation": {
+  "kind": "jury.attestation/0",
+  "policyTx": "<IQ code-in tx signature (Solana) or tx hash (EVM) of the inscribed ASC>",
+  "policyRef": "<sha256 of the inscribed bytes, as returned by reader.readCodeIn>",
+  "actionHash": "<sha256 of the exact action>",
+  "inputHash": "<sha256 of evidence read>",
+  "modelId": "<model id>",
+  "ruling": "allow | deny | abstain",
+  "proof": "<planned: proof of which model answered; today: none>",
+  "wallet": "<juror pubkey listed in the rules>",
+  "sig": "<Ed25519 over all fields above>"
+ },
+ "code": {
+  "anchor": "// ILLUSTRATIVE (Anchor-style). Not a deployed program.\npub fn withdraw(ctx: Context<Withdraw>, amt: u64) -> Result<()> {\n    let action = Action { to: ctx.accounts.to.key(), amt };\n    // jurors' signatures ride in this transaction (Ed25519 precompile)\n    check_policy(&ctx.accounts.policy, &action, &ctx.accounts.ix_sysvar)?; // deny => tx fails\n    transfer(ctx, amt)\n}",
+  "solidity": "// ILLUSTRATIVE. Not a deployed interface. Two steps on EVM.\ncontract HotWallet {\n  IPolicy policy; bytes32 constant POLICY = 0x...;\n  function requestWithdraw(address to, uint256 amt) external {\n    policy.request(POLICY, abi.encode(to, amt, block.chainid)); // jury is asked\n  }\n  function release(uint256 id, bytes calldata attestations) external {\n    require(policy.allowed(id, attestations), \"policy: refused\");\n    _send(pending[id].to, pending[id].amt);\n  }\n}"
+ }
+}

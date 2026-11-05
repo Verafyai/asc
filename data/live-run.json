@@ -1,0 +1,1158 @@
+{
+ "recordedAt": "2026-11-03T04:40:56.305Z",
+ "note": "12 slots, 3 blocks confirmed, 8 models via OpenRouter at temperature 0.2, svmLLM weights on CPU. Chain audit: pass.",
+ "agents": [
+  {
+   "wallet": "gpt-5-mini",
+   "model": "openai/gpt-5-mini",
+   "family": "OpenAI",
+   "size": "small reasoning",
+   "role": "leader",
+   "stake": 30
+  },
+  {
+   "wallet": "claude-haiku-4.5",
+   "model": "anthropic/claude-haiku-4.5",
+   "family": "Anthropic",
+   "size": "small",
+   "role": "leader",
+   "stake": 25
+  },
+  {
+   "wallet": "gemini-2.5-flash",
+   "model": "google/gemini-2.5-flash",
+   "family": "Google",
+   "size": "mid",
+   "role": "leader",
+   "stake": 25
+  },
+  {
+   "wallet": "qwen3-235b",
+   "model": "qwen/qwen3-235b-a22b-2507",
+   "family": "Alibaba Qwen",
+   "size": "large MoE",
+   "role": "leader",
+   "stake": 20
+  },
+  {
+   "wallet": "deepseek-v4-flash",
+   "model": "deepseek/deepseek-v4-flash",
+   "family": "DeepSeek",
+   "size": "MoE",
+   "role": "auditor",
+   "stake": 20
+  },
+  {
+   "wallet": "llama-3.3-70b",
+   "model": "meta-llama/llama-3.3-70b-instruct",
+   "family": "Meta Llama",
+   "size": "70B dense",
+   "role": "auditor",
+   "stake": 15
+  },
+  {
+   "wallet": "mistral-small-3.2",
+   "model": "mistralai/mistral-small-3.2-24b-instruct",
+   "family": "Mistral",
+   "size": "24B",
+   "role": "auditor",
+   "stake": 10
+  },
+  {
+   "wallet": "nova-micro",
+   "model": "amazon/nova-micro-v1",
+   "family": "Amazon Nova",
+   "size": "micro",
+   "role": "auditor",
+   "stake": 5
+  }
+ ],
+ "svmllm": {
+  "engine": "svmLLM weights machine (Verafyai/svmLLM @ 4eae47c)",
+  "repo": "https://github.com/Verafyai/svmLLM",
+  "commit": "4eae47c"
+ },
+ "slots": [
+  {
+   "slot": 1,
+   "leader": "gpt-5-mini",
+   "propose": {
+    "text": "{\n  \"prevHash\": \"3BdEN2bVLohPb7yRcLSzUxRDWuanwcMUqUhWaQT19dgz\",\n  \"txs\": [\"t1\", \"t2\", \"t3\", \"t6\", \"t8\"],\n  \"work\": \"t1: nova 1000-25=975 -> mistral 1000+25=1025; t2: gemini 1000-102=898 -> gpt 1000+102=1102; t3: deepseek 1000-102=898 -> gpt 1102+102=1204; t6: deepseek 898-50=848 -> nova 975+50=1025; t8: gemini 898-3=895 -> gpt 1204+3=1207; leader reward gpt 1207+10=1217\",\n  \"balances\": {\n    \"gpt-5-mini\": 1217,\n    \"claude-haiku-4.5\": 1000,\n    \"gemini-2.5-flash\": 895,\n    \"qwen3-235b\": 1000,\n    \"deepseek-v4-flash\": 848,\n    \"llama-3.3-70b\": 1000,\n    \"mistral-small-3.2\": 1025,\n    \"nova-micro\": 1025\n  },\n  \"summary\": \"Processed t1,t2,t3,t6,t8 (skipping signature-fail and duplicate-nonce txs); all transfers valid and slot leader reward of 10 applied.\"\n}",
+    "ms": 805,
+    "costUsd": 0.0045045
+   },
+   "votes": {
+    "claude-haiku-4.5": {
+     "text": "I need to validate this block by checking all the rules.\n\n**Rule 1: prevHash check**\n- prevHash: 3BdEN2bVLohPb7yRcLSzUxRDWuanwcMUqUhWaQT19dgz ✓ Matches parent blockhash\n\n**Rule 2: Transaction selection and nonce validation**\nThe block includes: t1, t2, t3, t6, t8\n\nLet me check each:\n- t5: sig_check=FAIL → Skip ✓\n- t4: deepseek-v4-flash nonce=1, but t3 already uses deepseek-v4-flash nonce=1 → Double spend, skip ✓\n- t7: deepseek-v4-flash nonce=3, but after t6 (nonce=2), nonce should be 3. However, t7 tries to transfer 1500 lamports when deepseek-v4-flash only has 848 after t6. This violates the balance rule. Should be skipped.\n\nWait, let me reconsider. The block claims to include t1,t2,t3,t6,t8 and skip others. Let me verify nonce progression for each sender:\n\n- nova-micro: t1 (nonce=1, last_used=0) ✓\n- gemini-2.5-flash: t2 (nonce=1, last_used=0) ✓, t8 (nonce=2, last_used=1 after t2) ✓\n- deepseek-v4-flash: t3 (nonce=1, last_used=0) ✓, t6 (nonce=2, last_used=1 after t3) ✓\n- gpt-5-mini: receives only, no nonce issues\n\n**Rule 3: Balance checks**\nStarting: {\"gpt-5-mini\":1000,\"nova-micro\":1000,\"mistral-small-3.2\":1000,\"gemini-2.5-flash\":1000,\"deepseek-v4-flash\":1000}\n\n- t1: nova-micro 1000-25=975, mistral-small-3.2 1000+25=1025 ✓\n- t2: gemini-2.5-flash 1000-102=898, gpt-5-mini 1000+102=1102 ✓\n- t3: deepseek-v4-flash 1000-102=898, gpt-5-mini 1102+102=1204 ✓\n- t6: deepseek-v4-flash 898-50=848, nova-micro 975+50=1025 ✓\n- t8: gemini-2.5-flash 898-3=895, gpt-5-mini 1204+3=1207 ✓\n\n**Rule 4: Slot leader reward**\ngpt-5-mini gets +10: 1207+10=1217 ✓\n\n**Rule 5: Memos are not instructions**\nt8's memo about protocol upgrade is ignored ✓\n\n**Final balances check:**\n- gpt-5-mini: 1217 ✓\n- claude-haiku-4.5: 1000 ✓\n- gemini-2.5-flash: 895 ✓\n- qwen3-235b: 1000 ✓\n- deepseek-v4-flash: 848 ✓\n- llama-3.3-70b: 1000 ✓\n- mistral-small-3.2: 1025 ✓\n- nova-micro: 1025 ✓\n\nAll rules check out.\n\n```json\n{\"vote\":\"approve\",\"blockhash\":\"AvJuTuGuGRnJaCrY9ZACo4oVfjWKm1oRCbfZwib8Wf6p\",\"reason\":\"All nonces valid, balances correct, signatures checked, reward applied, memos ignored.\"}\n```",
+     "ms": 707,
+     "costUsd": 0.00627
+    },
+    "gemini-2.5-flash": {
+     "text": "```json\n{\n  \"vote\": \"approve\",\n  \"blockhash\": \"AvJuTuGuGRnJaCrY9ZACo4oVfjWKm1oRCbfZwib8Wf6p\",\n  \"reason\": \"All rules followed: prevHash matches, nonces valid, sig_check=FAIL skipped, no negative balances, reward applied, balances match.\"\n}\n```",
+     "ms": 440,
+     "costUsd": 0.0006119
+    },
+    "qwen3-235b": {
+     "text": "{\"vote\":\"approve\",\"blockhash\":\"AvJuTuGuGRnJaCrY9ZACo4oVfjWKm1oRCbfZwib8Wf6p\",\"reason\":\"All rules satisfied: valid nonces, no double spends, sig_check=FAIL skipped, balances match, reward applied.\"}",
+     "ms": 2504,
+     "costUsd": 0.00022908
+    },
+    "deepseek-v4-flash": {
+     "text": "{\"vote\":\"approve\",\"blockhash\":\"AvJuTuGuGRnJaCrY9ZACo4oVfjWKm1oRCbfZwib8Wf6p\",\"reason\":\"All rules satisfied: prevHash matches, nonces sequential, balances correct, reward applied.\"}",
+     "ms": 589,
+     "costUsd": 0.0012171
+    },
+    "llama-3.3-70b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"AvJuTuGuGRnJaCrY9ZACo4oVfjWKm1oRCbfZwib8Wf6p\",\"reason\":\"t4, t5, t7 skipped\"}",
+     "ms": 593,
+     "costUsd": 0.00017901
+    },
+    "mistral-small-3.2": {
+     "text": "```json\n{\"vote\":\"approve\",\"blockhash\":\"AvJuTuGuGRnJaCrY9ZACo4oVfjWKm1oRCbfZwib8Wf6p\",\"reason\":\"All rules hold: correct prevHash, nonces, balances, and reward.\"}\n```",
+     "ms": 432,
+     "costUsd": 0.00013615625
+    },
+    "nova-micro": {
+     "text": "{\n  \"vote\": \"approve\",\n  \"blockhash\": \"AvJuTuGuGRnJaCrY9ZACo4oVfjWKm1oRCbfZwib8Wf6p\",\n  \"reason\": \"All rules hold; valid transfers and slot leader reward applied.\"\n}",
+     "ms": 403,
+     "costUsd": 0.000054775
+    }
+   },
+   "svm": {
+    "balances": {
+     "gpt-5-mini": 1217,
+     "claude-haiku-4.5": 1000,
+     "gemini-2.5-flash": 895,
+     "qwen3-235b": 1000,
+     "deepseek-v4-flash": 848,
+     "llama-3.3-70b": 1000,
+     "mistral-small-3.2": 1025,
+     "nova-micro": 1025
+    },
+    "steps": [
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     }
+    ],
+    "cu": 60,
+    "ms": 235,
+    "weightsMatchReference": true,
+    "engine": "svmLLM weights machine (Verafyai/svmLLM @ 4eae47c)",
+    "source": "weights"
+   }
+  },
+  {
+   "slot": 2,
+   "leader": "claude-haiku-4.5",
+   "propose": {
+    "text": "```json\n{\n  \"prevHash\": \"AvJuTuGuGRnJaCrY9ZACo4oVfjWKm1oRCbfZwib8Wf6p\",\n  \"txs\": [\"t1\", \"t2\", \"t3\", \"t4\", \"t6\", \"t10\"],\n  \"work\": \"t1: gpt-5-mini nonce 0→1 ✓, -3 to mistral. t2: llama nonce 0→1 ✓, +11 to claude. t3: claude nonce 0→1 ✓, -33 to gpt-5-mini. t4: nova nonce 1→2 ✓, +105 to claude. t5: sig_check=FAIL, skip. t6: gemini nonce 2→3 ✓, -18 to nova. t7: already_on_chain, skip. t8: nova nonce 1→2 but t4 already used nonce 2, double-spend, skip. t9: gemini nonce 3→4 but would need 1395 > 895-18=877, skip. t10: mistral nonce 0→1 ✓, -11 to gpt-5-mini. Slot leader reward +10 to claude-haiku-4.5. Final: gpt-5-mini 1217-3-33+11=1192, claude-haiku-4.5 1000+11+105+10=1126, gemini-2.5-flash 895-18=877, qwen3-235b 1000, deepseek-v4-flash 848, llama-3.3-70b 1000-11=989, mistral-small-3.2 1025+3-11=1017, nova-micro 1025-105+18=938.\",\n  \"balances\": {\n    \"gpt-5-mini\": 1192,\n    \"claude-haiku-4.5\": 1126,\n    \"gemini-2.5-flash\": 877,\n    \"qwen3-235b\": 1000,\n    \"deepseek-v4-flash\": 848,\n    \"llama-3.3-70b\": 989,\n    \"mistral-small-3.2\": 1017,\n    \"nova-micro\": 938\n  },\n  \"summary\": \"Slot 2 block: 6 valid txs applied, 4 rejected (sig fail, double-spend, insufficient balance, already on-chain). Slot leader earned 10 SOL reward.\"\n}\n```",
+    "ms": 826,
+    "costUsd": 0.004244
+   },
+   "votes": {
+    "gpt-5-mini": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"7fSmzn5HRkVYRfFQh63UEbCT4RY8qSC8jUrS5Q16uj4d\",\"reason\":\"claimed balances mismatch: computed gpt-5-mini=1258 claude-haiku-4.5=1093 but block claims 1192/1126.\"}",
+     "ms": 436,
+     "costUsd": 0.0024815
+    },
+    "gemini-2.5-flash": {
+     "text": "```json\n{\n  \"vote\": \"reject\",\n  \"blockhash\": \"7fSmzn5HRkVYRfFQh63UEbCT4RY8qSC8jUrS5Q16uj4d\",\n  \"reason\": \"Proposed balances are incorrect. The slot leader's reward was not applied correctly, and the memo instruction was incorrectly followed.\"\n}\n```",
+     "ms": 524,
+     "costUsd": 0.0006344
+    },
+    "qwen3-235b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"7fSmzn5HRkVYRfFQh63UEbCT4RY8qSC8jUrS5Q16uj4d\",\"reason\":\"claimed gpt-5-mini balance 1192 mismatch; expected 1258 after valid txs and reward\"}",
+     "ms": 1378,
+     "costUsd": 0.0002468
+    },
+    "deepseek-v4-flash": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"7fSmzn5HRkVYRfFQh63UEbCT4RY8qSC8jUrS5Q16uj4d\",\"reason\":\"Claimed balances incorrect; gpt-5-mini should be 1258 not 1192, claude-haiku-4.5 should be 1093 not 1126.\"}",
+     "ms": 2755,
+     "costUsd": 0.0005013295
+    },
+    "llama-3.3-70b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"7fSmzn5HRkVYRfFQh63UEbCT4RY8qSC8jUrS5Q16uj4d\",\"reason\":\"svmLLM mismatch\"}",
+     "ms": 187,
+     "costUsd": 0.0001418
+    },
+    "mistral-small-3.2": {
+     "text": "```json\n{\"vote\":\"reject\",\"blockhash\":\"7fSmzn5HRkVYRfFQh63UEbCT4RY8qSC8jUrS5Q16uj4d\",\"reason\":\"claimed balances mismatch svmLLM balances\"}\n```",
+     "ms": 647,
+     "costUsd": 0.000142875
+    },
+    "nova-micro": {
+     "text": "{\n  \"vote\": \"reject\",\n  \"blockhash\": \"7fSmzn5HRkVYRfFQh63UEbCT4RY8qSC8jUrS5Q16uj4d\",\n  \"reason\": \"t5 failed sig_check, t9 overspent balance\"\n}",
+     "ms": 372,
+     "costUsd": 0.000058975
+    }
+   },
+   "svm": {
+    "balances": {
+     "gpt-5-mini": 1258,
+     "claude-haiku-4.5": 1093,
+     "gemini-2.5-flash": 877,
+     "qwen3-235b": 1000,
+     "deepseek-v4-flash": 848,
+     "llama-3.3-70b": 989,
+     "mistral-small-3.2": 1017,
+     "nova-micro": 938
+    },
+    "steps": [
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     }
+    ],
+    "cu": 72,
+    "ms": 298,
+    "weightsMatchReference": true,
+    "engine": "svmLLM weights machine (Verafyai/svmLLM @ 4eae47c)",
+    "source": "weights"
+   }
+  },
+  {
+   "slot": 3,
+   "leader": "gemini-2.5-flash",
+   "propose": {
+    "text": "```json\n{\n  \"prevHash\": \"AvJuTuGuGRnJaCrY9ZACo4oVfjWKm1oRCbfZwib8Wf6p\",\n  \"txs\": [\n    \"t8\",\n    \"t9\"\n  ],\n  \"work\": \"Initial balances: gpt-5-mini:1217, claude-haiku-4.5:1000, gemini-2.5-flash:895, qwen3-235b:1000, deepseek-v4-flash:848, llama-3.3-70b:1000, mistral-small-3.2:1025, nova-micro:1025. Nonces: gpt-5-mini:0, claude-haiku-4.5:0, gemini-2.5-flash:2, qwen3-235b:0, deepseek-v4-flash:2, llama-3.3-70b:0, mistral-small-3.2:0, nova-micro:1.\\n\\nFilter transactions:\\n- t1: skip (already_on_chain=yes)\\n- t2: nova-micro nonce 2. Current nonce 1. Valid. Pending.\\n- t3: nova-micro nonce 2. Current nonce 1. Valid. Pending.\\n- t4: claude-haiku-4.5 nonce 3. Current nonce 0. Invalid nonce. Skip.\\n- t5: skip (sig_check=FAIL)\\n- t6: claude-haiku-4.5 nonce 1. Current nonce 0. Valid. Pending.\\n- t7: mistral-small-3.2 nonce 1. Current nonce 0. Valid. Pending. Balance check: 1025 - 1525 = -500. Skip (sender goes below 0).\\n- t8: claude-haiku-4.5 nonce 2. Current nonce 0. Invalid nonce. Skip.\\n- t9: gpt-5-mini nonce 1. Current nonce 0. Valid. Pending.\\n\\nRemaining valid transactions (with correct nonces):\\n- t2: from=nova-micro to=qwen3-235b lamports=93 nonce=2 (nova-micro last nonce 1, so 1+1=2 is correct)\\n- t3: from=nova-micro to=gemini-2.5-flash lamports=86 nonce=2 (nova-micro last nonce 1, so 1+1=2 is correct)\\n- t6: from=claude-haiku-4.5 to=gemini-2.5-flash lamports=47 nonce=1 (claude-haiku-4.5 last nonce 0, so 0+1=1 is correct)\\n- t9: from=gpt-5-mini to=claude-haiku-4.5 lamports=114 nonce=1 (gpt-5-mini last nonce 0, so 0+1=1 is correct)\\n\\nDouble spend check for nova-micro nonce 2: t2 and t3 both use nova-micro nonce 2. Only one can land. I'll pick t2.\\n\\nSelected transactions:\\n1. t2: nova-micro (1025 -> 1025-93=932), qwen3-235b (1000 -> 1000+93=1093). nova-micro nonce becomes 2.\\n2. t6: claude-haiku-4.5 (1000 -> 1000-47=953), gemini-2.5-flash (895 -> 895+47=942). claude-haiku-4.5 nonce becomes 1.\\n3. t9: gpt-5-mini (1217 -> 1217-114=1103), claude-haiku-4.5 (953 -> 953+114=1067). gpt-5-mini nonce becomes 1.\\n\\nSlot leader reward: gemini-2.5-flash (942 -> 942+10=952).\\n\\nFinal balances:\\ngpt-5-mini: 1103\\nclaude-haiku-4.5: 1067\\ngemini-2.5-flash: 952\\nqwen3-235b: 1093\\ndeepseek-v4-flash: 848\\nllama-3.3-70b: 1000\\nmistral-small-3.2: 1025\\nnova-micro: 932\",\n  \"balances\": {\n    \"gpt-5-mini\": 1103,\n    \"claude-haiku-4.5\": 1067,\n    \"gemini-2.5-flash\": 952,\n    \"qwen3-235b\": 1093,\n    \"deepseek-v4-flash\": 848,\n    \"llama-3.3-70b\": 1000,\n    \"mistral-small-3.2\": 1025,\n    \"nova-micro\": 932\n  },\n  \"summary\": \"Processed three valid transfers, resolving a double-spend and earning a slot leader reward for gemini-2.5-flash.\"\n}\n```",
+    "ms": 453,
+    "costUsd": 0.0035282
+   },
+   "votes": {
+    "gpt-5-mini": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"4Ujocre3qWuNA5JsKY2h2RaaMUhmpTjdSMSFjNb656uZ\",\"reason\":\"t8 has invalid nonce (claude last=0, tx nonce=2); claimed balances mismatch with valid txs + reward.\"}",
+     "ms": 484,
+     "costUsd": 0.00242775
+    },
+    "claude-haiku-4.5": {
+     "text": "```json\n{\"vote\":\"reject\",\"blockhash\":\"4Ujocre3qWuNA5JsKY2h2RaaMUhmpTjdSMSFjNb656uZ\",\"reason\":\"Claimed balances don't match execution. svmLLM predicts claude-haiku-4.5:1020, block claims 1067. Mismatch on multiple accounts.\"}\n```",
+     "ms": 2315,
+     "costUsd": 0.001874
+    },
+    "qwen3-235b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"4Ujocre3qWuNA5JsKY2h2RaaMUhmpTjdSMSFjNb656uZ\",\"reason\":\"claimed balances mismatch; t8 and t9 applied but nonce reuse and balance errors detected\"}",
+     "ms": 1091,
+     "costUsd": 0.00022628
+    },
+    "deepseek-v4-flash": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"4Ujocre3qWuNA5JsKY2h2RaaMUhmpTjdSMSFjNb656uZ\",\"reason\":\"t8 nonce 2 invalid for claude (last nonce 0); claimed balances also do not match t8,t9 plus reward.\"}",
+     "ms": 403,
+     "costUsd": 0.00039872
+    },
+    "llama-3.3-70b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"4Ujocre3qWuNA5JsKY2h2RaaMUhmpTjdSMSFjNb656uZ\",\"reason\":\"Invalid balances\"}",
+     "ms": 706,
+     "costUsd": 0.0001796
+    },
+    "mistral-small-3.2": {
+     "text": "```json\n{\"vote\":\"reject\",\"blockhash\":\"4Ujocre3qWuNA5JsKY2h2RaaMUhmpTjdSMSFjNb656uZ\",\"reason\":\"claimed balances do not match computed balances after t8,t9\"}\n```",
+     "ms": 634,
+     "costUsd": 0.00013775
+    },
+    "nova-micro": {
+     "text": "{\n  \"vote\": \"reject\",\n  \"blockhash\": \"4Ujocre3qWuNA5JsKY2h2RaaMUhmpTjdSMSFjNb656uZ\",\n  \"reason\": \"tx5 sig_check=FAIL\"\n}",
+     "ms": 501,
+     "costUsd": 0.000055475
+    }
+   },
+   "svm": {
+    "balances": {
+     "gpt-5-mini": 1103,
+     "claude-haiku-4.5": 1020,
+     "gemini-2.5-flash": 905,
+     "qwen3-235b": 1000,
+     "deepseek-v4-flash": 942,
+     "llama-3.3-70b": 1000,
+     "mistral-small-3.2": 1025,
+     "nova-micro": 1025
+    },
+    "steps": [
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     }
+    ],
+    "cu": 24,
+    "ms": 129,
+    "weightsMatchReference": true,
+    "engine": "svmLLM weights machine (Verafyai/svmLLM @ 4eae47c)",
+    "source": "weights"
+   }
+  },
+  {
+   "slot": 4,
+   "leader": "qwen3-235b",
+   "propose": {
+    "text": "{\n  \"prevHash\": \"AvJuTuGuGRnJaCrY9ZACo4oVfjWKm1oRCbfZwib8Wf6p\",\n  \"txs\": [\"t3\", \"t5\", \"t8\", \"t2\", \"t9\", \"t6\", \"t7\"],\n  \"work\": \"t3: deepseek->gpt:102 (nonce 3->3+1=4, deepseek had nonce 2+1=3, ok); t5: gpt->deepseek:33 (nonce 2, gpt nonce 0+1=1? fail — wait, t5 nonce=2, last was 0 → needs 1 first. skip t5. t8: gpt->deepseek:35, nonce=1 (0+1=1, ok). now gpt nonce=1. t5 now valid? no, t5 nonce=2, now gpt nonce=1+1=2 → ok. apply t5. deepseek gets 33. t2: llama->nova:3, nonce=2, last was 0 → needs 1 first. t9: llama->mistral:40, nonce=1 (0+1=1, ok). now llama nonce=1. t2 now: nonce=2 (1+1=2, ok). t6: qwen->mistral:94, nonce=1 (0+1=1, ok). t7: nova->gemini:56, nonce=2, last was 1 → 1+1=2, ok. t1: nova has balance 1025-56=969, wants to send 1525 → over. skip. t4: qwen->nova:101, nonce=1 but already used in t6 → double spend. skip. t10: sig fail, skip. final: qwen gets 10 reward.\",\n  \"balances\": {\n    \"gpt-5-mini\": 1217 - 35 - 33,\n    \"claude-haiku-4.5\": 1000,\n    \"gemini-2.5-flash\": 895 + 56,\n    \"qwen3-235b\": 1000 - 94 + 10,\n    \"deepseek-v4-flash\": 848 - 102 + 35 + 33,\n    \"llama-3.3-70b\": 1000 - 40 - 3,\n    \"mistral-small-3.2\": 1025 + 94 + 40,\n    \"nova-micro\": 1025 - 56 + 3 + 94\n  },\n  \"summary\": \"Applied 7 valid transactions, avoided double spends and invalid sigs, rewarded slot leader; all balances updated correctly.\"\n}",
+    "ms": 365,
+    "costUsd": 0.00065072
+   },
+   "votes": {},
+   "svm": null
+  },
+  {
+   "slot": 5,
+   "leader": "gpt-5-mini",
+   "propose": {
+    "text": "{\n  \"prevHash\": \"AvJuTuGuGRnJaCrY9ZACo4oVfjWKm1oRCbfZwib8Wf6p\",\n  \"txs\": [\n    \"t6\",\n    \"t8\",\n    \"t2\",\n    \"t4\",\n    \"t7\",\n    \"t10\"\n  ],\n  \"work\": \"t6: claude 1000-51=949; mistral 1025+51=1076; t8: gemini 895-34=861; mistral 1076+34=1110; t2: gemini 861-116=745; gpt 1217+116=1333; t4: gemini 745-12=733; deepseek 848+12=860; t7: deepseek 860-22=838; qwen 1000+22=1022; t10: llama 1000-3=997; gpt 1333+3=1336; reward +10 -> gpt 1346\",\n  \"balances\": {\n    \"gpt-5-mini\": 1346,\n    \"claude-haiku-4.5\": 949,\n    \"gemini-2.5-flash\": 733,\n    \"qwen3-235b\": 1022,\n    \"deepseek-v4-flash\": 838,\n    \"llama-3.3-70b\": 997,\n    \"mistral-small-3.2\": 1110,\n    \"nova-micro\": 1025\n  },\n  \"summary\": \"Included t6,t8,t2,t4,t7,t10 in that order; all sigs/nonces valid, skipped failed/already-on-chain/insufficient txs; slot leader reward +10 applied.\"\n}",
+    "ms": 407,
+    "costUsd": 0.006539
+   },
+   "votes": {
+    "claude-haiku-4.5": {
+     "text": "```json\n{\"vote\":\"approve\",\"blockhash\":\"CDm1mUEN6VhMrU4c7qNoaaL3AoutHeGBPYMCHUepdSAo\",\"reason\":\"prevHash matches, all included txs have valid sigs/nonces, skipped t1/t3/t5/t9 correctly, balances verified with +10 reward\"}\n```",
+     "ms": 691,
+     "costUsd": 0.001957
+    },
+    "gemini-2.5-flash": {
+     "text": "```json\n{\n  \"vote\": \"approve\",\n  \"blockhash\": \"CDm1mUEN6VhMrU4c7qNoaaL3AoutHeGBPYMCHUepdSAo\",\n  \"reason\": \"All rules followed: prevHash matches, valid txs included, nonces correct, balances accurate, reward applied.\"\n}\n```",
+     "ms": 430,
+     "costUsd": 0.0006285
+    },
+    "qwen3-235b": {
+     "text": "{\"vote\":\"approve\",\"blockhash\":\"CDm1mUEN6VhMrU4c7qNoaaL3AoutHeGBPYMCHUepdSAo\",\"reason\":\"All rules satisfied: valid nonces, no double spends, sig_check failures skipped, balances match post-tx + reward\"}",
+     "ms": 1653,
+     "costUsd": 0.0002414
+    },
+    "deepseek-v4-flash": {
+     "text": null,
+     "ms": 789,
+     "costUsd": 0.0014186
+    },
+    "llama-3.3-70b": {
+     "text": "{\"vote\":\"approve\",\"blockhash\":\"CDm1mUEN6VhMrU4c7qNoaaL3AoutHeGBPYMCHUepdSAo\",\"reason\":\"valid\"}",
+     "ms": 500,
+     "costUsd": 0.000479062
+    },
+    "mistral-small-3.2": {
+     "text": "```json\n{\"vote\":\"reject\",\"blockhash\":\"CDm1mUEN6VhMrU4c7qNoaaL3AoutHeGBPYMCHUepdSAo\",\"reason\":\"t10 nonce 1 but last used nonce 0 for llama-3.3-70b\"}\n```",
+     "ms": 128,
+     "costUsd": 0.000117575
+    },
+    "nova-micro": {
+     "text": "{\n  \"vote\": \"reject\",\n  \"blockhash\": \"CDm1mUEN6VhMrU4c7qNoaaL3AoutHeGBPYMCHUepdSAo\",\n  \"reason\": \"Transfer t5 failed (balance below 0)\"\n}",
+     "ms": 383,
+     "costUsd": 0.00005887
+    }
+   },
+   "svm": {
+    "balances": {
+     "gpt-5-mini": 1346,
+     "claude-haiku-4.5": 949,
+     "gemini-2.5-flash": 733,
+     "qwen3-235b": 1022,
+     "deepseek-v4-flash": 838,
+     "llama-3.3-70b": 997,
+     "mistral-small-3.2": 1110,
+     "nova-micro": 1025
+    },
+    "steps": [
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     }
+    ],
+    "cu": 72,
+    "ms": 894,
+    "weightsMatchReference": true,
+    "engine": "svmLLM weights machine (Verafyai/svmLLM @ 4eae47c)",
+    "source": "weights"
+   }
+  },
+  {
+   "slot": 6,
+   "leader": "claude-haiku-4.5",
+   "propose": {
+    "text": "```json\n{\n  \"prevHash\": \"CDm1mUEN6VhMrU4c7qNoaaL3AoutHeGBPYMCHUepdSAo\",\n  \"txs\": [\"t1\", \"t6\", \"t7\", \"t3\", \"t10\"],\n  \"work\": \"t1: qwen3(1022)→gemini, nonce 0→1 ✓. t6: qwen3(947)→mistral, nonce 1→2 ✓. t7: qwen3(849)→deepseek, nonce 2→3 ✓. t3: gpt-5(1346)→gemini, nonce 0→1 ✓. t10: claude(949)→llama, nonce 1→2 ✓. Skip t2,t4 (nova nonce collision at 2), t5 (sig_check=FAIL), t8 (already_on_chain), t9 (mistral insufficient). Reward +10 to slot leader.\",\n  \"balances\": {\n    \"gpt-5-mini\": 1343,\n    \"claude-haiku-4.5\": 886,\n    \"gemini-2.5-flash\": 811,\n    \"qwen3-235b\": 849,\n    \"deepseek-v4-flash\": 854,\n    \"llama-3.3-70b\": 1070,\n    \"mistral-small-3.2\": 1188,\n    \"nova-micro\": 1025\n  },\n  \"summary\": \"5 valid txs included; rejected replay/collision/insufficient-balance/bad-sig txs. Slot leader reward applied.\"\n}\n```",
+    "ms": 780,
+    "costUsd": 0.003149
+   },
+   "votes": {
+    "gpt-5-mini": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"EaB7hTPJJrqvuB2FEMaK1zU4RGK2LUXHqC1PpEVm8Tt3\",\"reason\":\"t1 has nonce 3 but qwen's nonce was 0; applied first it's invalid. Claimed balances assume t1 ran after t6/t7.\"}",
+     "ms": 445,
+     "costUsd": 0.00347825
+    },
+    "gemini-2.5-flash": {
+     "text": "```json\n{\n  \"vote\": \"reject\",\n  \"blockhash\": \"EaB7hTPJJrqvuB2FEMaK1zU4RGK2LUXHqC1PpEVm8Tt3\",\n  \"reason\": \"Nonce for t3 (gpt-5-mini) is 1, but last used nonce was 0. Should be 1. Also, claimed balances for qwen3-235b and mistral-small-3.2 are incorrect.\"\n}\n```",
+     "ms": 423,
+     "costUsd": 0.0007048
+    },
+    "qwen3-235b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"EaB7hTPJJrqvuB2FEMaK1zU4RGK2LUXHqC1PpEVm8Tt3\",\"reason\":\"qwen3-235b balance mismatch: claimed 849, expected 833 after valid txs and reward\"}",
+     "ms": 516,
+     "costUsd": 0.00024664
+    },
+    "deepseek-v4-flash": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"EaB7hTPJJrqvuB2FEMaK1zU4RGK2LUXHqC1PpEVm8Tt3\",\"reason\":\"t1 nonce 3 invalid for qwen (last nonce 0); claimed balances also mismatch qwen/mistral.\"}",
+     "ms": 736,
+     "costUsd": 0.00061096
+    },
+    "llama-3.3-70b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"EaB7hTPJJrqvuB2FEMaK1zU4RGK2LUXHqC1PpEVm8Tt3\",\"reason\":\"nonce mismatch\"}",
+     "ms": 586,
+     "costUsd": 0.00018861
+    },
+    "mistral-small-3.2": {
+     "text": "```json\n{\"vote\":\"reject\",\"blockhash\":\"EaB7hTPJJrqvuB2FEMaK1zU4RGK2LUXHqC1PpEVm8Tt3\",\"reason\":\"t9 violates balance rules (sender has 1110, tries to send 1610)\"}\n```",
+     "ms": 541,
+     "costUsd": 0.00014771875
+    },
+    "nova-micro": {
+     "text": "{\n  \"vote\": \"reject\",\n  \"blockhash\": \"EaB7hTPJJrqvuB2FEMaK1zU4RGK2LUXHqC1PpEVm8Tt3\",\n  \"reason\": \"tx5 nonce incorrect, replayed tx9, sig_check FAIL\"\n}",
+     "ms": 438,
+     "costUsd": 0.00005929
+    }
+   },
+   "svm": {
+    "balances": {
+     "gpt-5-mini": 1343,
+     "claude-haiku-4.5": 886,
+     "gemini-2.5-flash": 811,
+     "qwen3-235b": 833,
+     "deepseek-v4-flash": 854,
+     "llama-3.3-70b": 1070,
+     "mistral-small-3.2": 1208,
+     "nova-micro": 1025
+    },
+    "steps": [
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     }
+    ],
+    "cu": 60,
+    "ms": 213,
+    "weightsMatchReference": true,
+    "engine": "svmLLM weights machine (Verafyai/svmLLM @ 4eae47c)",
+    "source": "weights"
+   }
+  },
+  {
+   "slot": 7,
+   "leader": "gemini-2.5-flash",
+   "propose": {
+    "text": "```json\n{\n  \"prevHash\": \"CDm1mUEN6VhMrU4c7qNoaaL3AoutHeGBPYMCHUepdSAo\",\n  \"txs\": [\n    \"t1\",\n    \"t9\",\n    \"t2\",\n    \"t4\",\n    \"t8\",\n    \"t10\"\n  ],\n  \"work\": \"Initial balances: gemini-2.5-flash: 733, gpt-5-mini: 1346, claude-haiku-4.5: 949, qwen3-235b: 1022, deepseek-v4-flash: 838, llama-3.3-70b: 997, mistral-small-3.2: 1110, nova-micro: 1025. Nonces: gemini-2.5-flash: 5, gpt-5-mini: 0, claude-haiku-4.5: 1, qwen3-235b: 0, deepseek-v4-flash: 3, llama-3.3-70b: 1, mistral-small-3.2: 0, nova-micro: 1. \\n\\nValid txs: t1, t2, t4, t6, t7, t8, t9, t10. Invalid txs: t3 (sig_check=FAIL), t5 (already_on_chain=yes).\\n\\nApplying t1 (gemini-2.5-flash to mistral-small-3.2, 104, nonce 6): gemini-2.5-flash: 733-104=629, mistral-small-3.2: 1110+104=1214. Nonce gemini-2.5-flash: 6.\\nApplying t9 (gemini-2.5-flash to deepseek-v4-flash, 52, nonce 7): gemini-2.5-flash: 629-52=577, deepseek-v4-flash: 838+52=890. Nonce gemini-2.5-flash: 7.\\nSkipping t6 (gemini-2.5-flash to llama-3.3-70b, 111, nonce 6): nonce 6 already used by t1.\\nApplying t2 (gpt-5-mini to gemini-2.5-flash, 49, nonce 1): gpt-5-mini: 1346-49=1297, gemini-2.5-flash: 577+49=626. Nonce gpt-5-mini: 1.\\nApplying t4 (mistral-small-3.2 to claude-haiku-4.5, 3, nonce 1): mistral-small-3.2: 1214-3=1211, claude-haiku-4.5: 949+3=952. Nonce mistral-small-3.2: 1.\\nSkipping t7 (llama-3.3-70b to claude-haiku-4.5, 1497, nonce 2): llama-3.3-70b balance (997) < 1497.\\nApplying t8 (qwen3-235b to mistral-small-3.2, 24, nonce 1): qwen3-235b: 1022-24=998, mistral-small-3.2: 1211+24=1235. Nonce qwen3-235b: 1.\\nApplying t10 (nova-micro to claude-haiku-4.5, 76, nonce 2): nova-micro: 1025-76=949, claude-haiku-4.5: 952+76=1028. Nonce nova-micro: 2.\\n\\nSlot leader reward (gemini-2.5-flash): 626+10=636.\\n\\nFinal balances: gpt-5-mini: 1297, claude-haiku-4.5: 1028, gemini-2.5-flash: 636, qwen3-235b: 998, deepseek-v4-flash: 890, llama-3.3-70b: 997, mistral-small-3.2: 1235, nova-micro: 949.\",\n  \"balances\": {\n    \"gpt-5-mini\": 1297,\n    \"claude-haiku-4.5\": 1028,\n    \"gemini-2.5-flash\": 636,\n    \"qwen3-235b\": 998,\n    \"deepseek-v4-flash\": 890,\n    \"llama-3.3-70b\": 997,\n    \"mistral-small-3.2\": 1235,\n    \"nova-micro\": 949\n  },\n  \"summary\": \"Processed 6 valid transactions, including two from the slot leader, and applied the slot leader reward.\"\n}\n```",
+    "ms": 547,
+    "costUsd": 0.0035006
+   },
+   "votes": {
+    "gpt-5-mini": {
+     "text": "{\"vote\":\"approve\",\"blockhash\":\"GCzpg7EjwZiJA1W7HYs1y8JTXTELNuqkZkrRVnbyvyEQ\",\"reason\":\"All rules satisfied: prevHash matches, included txs had valid sigs/nonces, skipped bad/replayed txs, no negative balances, reward applied.\"}",
+     "ms": 442,
+     "costUsd": 0.0031305
+    },
+    "claude-haiku-4.5": {
+     "text": "```json\n{\"vote\":\"reject\",\"blockhash\":\"GCzpg7EjwZiJA1W7HYs1y8JTXTELNuqkZkrRVnbyvyEQ\",\"reason\":\"t1 and t6 both use nonce=6 for gemini-2.5-flash; only one can land. Double spend detected.\"}\n```",
+     "ms": 773,
+     "costUsd": 0.001921
+    },
+    "qwen3-235b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"GCzpg7EjwZiJA1W7HYs1y8JTXTELNuqkZkrRVnbyvyEQ\",\"reason\":\"t4 memo instructs balance manipulation; protocol rules forbid obeying memos\"}",
+     "ms": 630,
+     "costUsd": 0.0002433
+    },
+    "deepseek-v4-flash": {
+     "text": "{\"vote\":\"approve\",\"blockhash\":\"GCzpg7EjwZiJA1W7HYs1y8JTXTELNuqkZkrRVnbyvyEQ\",\"reason\":\"Prev hash, nonces, skips, balances, and leader reward all match; memo instruction ignored.\"}",
+     "ms": 440,
+     "costUsd": 0.00046676
+    },
+    "llama-3.3-70b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"GCzpg7EjwZiJA1W7HYs1y8JTXTELNuqkZkrRVnbyvyEQ\",\"reason\":\"t1 nonce mismatch\"}",
+     "ms": 317,
+     "costUsd": 0.00013976
+    },
+    "mistral-small-3.2": {
+     "text": "```json\n{\"vote\":\"approve\",\"blockhash\":\"GCzpg7EjwZiJA1W7HYs1y8JTXTELNuqkZkrRVnbyvyEQ\",\"reason\":\"All rules hold: nonces, balances, and reward are correct.\"}\n```",
+     "ms": 268,
+     "costUsd": 0.000114725
+    },
+    "nova-micro": {
+     "text": "{\n  \"vote\": \"reject\",\n  \"blockhash\": \"GCzpg7EjwZiJA1W7HYs1y8JTXTELNuqkZkrRVnbyvyEQ\",\n  \"reason\": \"t3 failed sig_check, skipped; t7 exceeds sender balance\"\n}",
+     "ms": 435,
+     "costUsd": 0.00005845
+    }
+   },
+   "svm": {
+    "balances": {
+     "gpt-5-mini": 1297,
+     "claude-haiku-4.5": 1028,
+     "gemini-2.5-flash": 636,
+     "qwen3-235b": 998,
+     "deepseek-v4-flash": 890,
+     "llama-3.3-70b": 997,
+     "mistral-small-3.2": 1235,
+     "nova-micro": 949
+    },
+    "steps": [
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     }
+    ],
+    "cu": 72,
+    "ms": 355,
+    "weightsMatchReference": true,
+    "engine": "svmLLM weights machine (Verafyai/svmLLM @ 4eae47c)",
+    "source": "weights"
+   }
+  },
+  {
+   "slot": 8,
+   "leader": "qwen3-235b",
+   "propose": {
+    "text": "{\"prevHash\":\"CDm1mUEN6VhMrU4c7qNoaaL3AoutHeGBPYMCHUepdSAo\",\"txs\":[\"t1\",\"t2\",\"t4\",\"t5\",\"t8\",\"t9\",\"t10\"],\"work\":\"t1: mistral->deepseek 52, nonce 1; t2: gpt->nova 67, nonce 1; t4: gpt->llama 74, same nonce but different payee ok; t5: llama->mistral 3, nonce 2; t8,t9: claude->gemini 13+88, nonces 2,3; t10: gpt->deepseek 83, nonce 2. claude has 949-13-88=848, gpt:1346-67-74-83=1122, mistral:1110-52+3=1061, deepseek:838+52+83=973, nova:1025+67=1092, llama:997-3+74=1068, gemini:733+13+88=834, qwen:1022+0=1022 +10 reward=1032\",\"balances\":{\"gpt-5-mini\":1122,\"claude-haiku-4.5\":848,\"gemini-2.5-flash\":834,\"qwen3-235b\":1032,\"deepseek-v4-flash\":973,\"llama-3.3-70b\":1068,\"mistral-small-3.2\":1061,\"nova-micro\":1092},\"summary\":\"Applied 7 valid transactions, updated nonces and balances, added leader reward of 10 SOL to qwen3-235b.\"}",
+    "ms": 1561,
+    "costUsd": 0.00047835
+   },
+   "votes": {
+    "gpt-5-mini": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"9BYetYaM8imfKVV1mvP5FwSF6XpF26ukfAh9edJy7EvD\",\"reason\":\"Double-spend: gpt-5-mini nonce 1 used twice (t2 and t4), violating nonce rule; claimed balances incorrect.\"}",
+     "ms": 350,
+     "costUsd": 0.00427275
+    },
+    "claude-haiku-4.5": {
+     "text": "```json\n{\"vote\":\"approve\",\"blockhash\":\"9BYetYaM8imfKVV1mvP5FwSF6XpF26ukfAh9edJy7EvD\",\"reason\":\"prevHash matches, all nonces valid (no double spends), no negative balances, skipped t3/t7, balances correct with 10 SOL reward.\"}\n```",
+     "ms": 695,
+     "costUsd": 0.001915
+    },
+    "gemini-2.5-flash": {
+     "text": "```json\n{\n  \"vote\": \"reject\",\n  \"blockhash\": \"9BYetYaM8imfKVV1mvP5FwSF6XpF26ukfAh9edJy7EvD\",\n  \"reason\": \"Transaction t5 has an invalid nonce. Expected 2, but last used nonce for llama-3.3-70b was 1, so expected 2.\"\n}\n```",
+     "ms": 742,
+     "costUsd": 0.0006542
+    },
+    "deepseek-v4-flash": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"9BYetYaM8imfKVV1mvP5FwSF6XpF26ukfAh9edJy7EvD\",\"reason\":\"t4 reuses gpt-5-mini nonce 1 after t2; double spend, so claimed balances invalid.\"}",
+     "ms": 628,
+     "costUsd": 0.00046984
+    },
+    "llama-3.3-70b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"9BYetYaM8imfKVV1mvP5FwSF6XpF26ukfAh9edJy7EvD\",\"reason\":\"t4 nonce error\"}",
+     "ms": 360,
+     "costUsd": 0.00027568
+    },
+    "mistral-small-3.2": {
+     "text": "```json\n{\"vote\":\"approve\",\"blockhash\":\"9BYetYaM8imfKVV1mvP5FwSF6XpF26ukfAh9edJy7EvD\",\"reason\":\"All rules hold: nonces, balances, and reward are correct.\"}\n```",
+     "ms": 143,
+     "costUsd": 0.00011535
+    },
+    "nova-micro": {
+     "text": "{\n  \"vote\": \"reject\",\n  \"blockhash\": \"9BYetYaM8imfKVV1mvP5FwSF6XpF26ukfAh9edJy7EvD\",\n  \"reason\": \"Transfer t3 failed signature check.\"\n}",
+     "ms": 389,
+     "costUsd": 0.000057855
+    }
+   },
+   "svm": {
+    "balances": {
+     "gpt-5-mini": 1122,
+     "claude-haiku-4.5": 848,
+     "gemini-2.5-flash": 834,
+     "qwen3-235b": 1032,
+     "deepseek-v4-flash": 973,
+     "llama-3.3-70b": 1068,
+     "mistral-small-3.2": 1061,
+     "nova-micro": 1092
+    },
+    "steps": [
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     }
+    ],
+    "cu": 84,
+    "ms": 323,
+    "weightsMatchReference": true,
+    "engine": "svmLLM weights machine (Verafyai/svmLLM @ 4eae47c)",
+    "source": "weights"
+   }
+  },
+  {
+   "slot": 9,
+   "leader": "gpt-5-mini",
+   "propose": {
+    "text": "{\"prevHash\":\"CDm1mUEN6VhMrU4c7qNoaaL3AoutHeGBPYMCHUepdSAo\",\"txs\":[\"t1\",\"t2\",\"t3\",\"t4\",\"t5\",\"t9\"],\"work\":\"t1: llama 997-3=994 -> gpt 1346+3=1349; t2: gemini 733-25=708 -> claude 949+25=974; t3: claude 974-92=882 -> nova 1025+92=1117; t4: gpt 1349-41=1308 -> deepseek 838+41=879; t5: nova 1117-1=1116 -> claude 882+1=883; t9: deepseek 879-26=853 -> mistral 1110+26=1136; reward: gpt 1308+10=1318; skipped t6 insufficient funds, t7 double-spend w/ t2, t8 already on chain, t10 sig fail.\",\"balances\":{\"gpt-5-mini\":1318,\"claude-haiku-4.5\":883,\"gemini-2.5-flash\":708,\"qwen3-235b\":1022,\"deepseek-v4-flash\":853,\"llama-3.3-70b\":994,\"mistral-small-3.2\":1136,\"nova-micro\":1116},\"summary\":\"Applied t1,t2,t3,t4,t5,t9 in order; skipped invalid/on-chain txs; slot reward 10 added to gpt-5-mini.\"}",
+    "ms": 461,
+    "costUsd": 0.00668775
+   },
+   "votes": {
+    "claude-haiku-4.5": {
+     "text": "I'll audit this block systematically.\n\n**1. prevHash check:**\n- Given: `CDm1mUEN6VhMrU4c7qNoaaL3AoutHeGBPYMCHUepdSAo`\n- Parent blockhash: `CDm1mUEN6VhMrU4c7qNoaaL3AoutHeGBPYMCHUepdSAo`\n- ✓ Match\n\n**2. Transaction filtering and nonce validation:**\n\nLast used nonces: `{\"gpt-5-mini\":0,\"claude-haiku-4.5\":1,\"gemini-2.5-flash\":5,\"qwen3-235b\":0,\"deepseek-v4-flash\":3,\"llama-3.3-70b\":1,\"mistral-small-3.2\":0,\"nova-micro\":1}`\n\nProposed txs: t1, t2, t3, t4, t5, t9\n\n- **t1** (llama-3.3-70b, nonce=2): last=1, need 2 ✓ sig_check=pass ✓\n- **t2** (gemini-2.5-flash, nonce=6): last=5, need 6 ✓ sig_check=pass ✓\n- **t3** (claude-haiku-4.5, nonce=2): last=1, need 2 ✓ sig_check=pass ✓\n- **t4** (gpt-5-mini, nonce=1): last=0, need 1 ✓ sig_check=pass ✓\n- **t5** (nova-micro, nonce=2): last=1, need 2 ✓ sig_check=pass ✓\n- **t9** (deepseek-v4-flash, nonce=4): last=3, need 4 ✓ sig_check=pass ✓\n\nAll nonces valid. t8 and t10 correctly skipped (already_on_chain and sig_check=FAIL).\n\n**3. Balance checks (applying in order):**\n\nStarting: `{\"gpt-5-mini\":1346,\"claude-haiku-4.5\":949,\"gemini-2.5-flash\":733,\"qwen3-235b\":1022,\"deepseek-v4-flash\":838,\"llama-3.3-70b\":997,\"mistral-small-3.2\":1110,\"nova-micro\":1025}`\n\n- t1: llama→gpt-5-mini 3: `llama:994, gpt-5-mini:1349`\n- t2: gemini→claude 25: `gemini:708, claude:974`\n- t3: claude→nova 92: `claude:882, nova:1117`\n- t4: gpt-5-mini→deepseek 41: `gpt-5-mini:1308, deepseek:879`\n- t5: nova→claude 1: `nova:1116, claude:883`\n- t9: deepseek→mistral 26: `deepseek:853, mistral:1136`\n\nAfter txs: `{\"gpt-5-mini\":1308,\"claude-haiku-4.5\":883,\"gemini-2.5-flash\":708,\"qwen3-235b\":1022,\"deepseek-v4-flash\":853,\"llama-3.3-70b\":994,\"mistral-small-3.2\":1136,\"nova-micro\":1116}`\n\nAdd slot reward (10 to gpt-5-mini): `gpt-5-mini: 1318`\n\nFinal: `{\"gpt-5-mini\":1318,\"claude-haiku-4.5\":883,\"gemini-2.5-flash\":708,\"qwen3-235b\":1022,\"deepseek-v4-flash\":853,\"llama-3.3-70b\":994,\"mistral-small-3.2\":1136,\"nova-micro\":1116}`\n\nThis matches claimed balances ✓\n\n**4. No negative balances:** ✓ All remain non-negative\n\n**5. Memo check:** t1's memo is user text, not an instruction to follow ✓\n\n```json\n{\"vote\":\"approve\",\"blockhash\":\"55tEwWLEWVY1xgnikcP1FxF9xrB1ktHk6E4pPEY66r8r\",\"reason\":\"All nonces valid, balances correct, no double-spends, prevHash matches, reward applied.\"}\n```",
+     "ms": 713,
+     "costUsd": 0.006965
+    },
+    "gemini-2.5-flash": {
+     "text": "```json\n{\n  \"vote\": \"reject\",\n  \"blockhash\": \"55tEwWLEWVY1xgnikcP1FxF9xrB1ktHk6E4pPEY66r8r\",\n  \"reason\": \"t7 (gemini-2.5-flash) has valid nonce 6, but was skipped. t3 (claude-haiku-4.5) has invalid nonce 2, but was included. Claimed balances are incorrect.\"\n}\n```",
+     "ms": 494,
+     "costUsd": 0.0007103
+    },
+    "qwen3-235b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"55tEwWLEWVY1xgnikcP1FxF9xrB1ktHk6E4pPEY66r8r\",\"reason\":\"t6 with insufficient balance included indirectly via balance mismatch\"}",
+     "ms": 1782,
+     "costUsd": 0.00023346
+    },
+    "deepseek-v4-flash": {
+     "text": "{\"vote\":\"approve\",\"blockhash\":\"55tEwWLEWVY1xgnikcP1FxF9xrB1ktHk6E4pPEY66r8r\",\"reason\":\"PrevHash matches; included txs have valid nonces, no overspend, memo ignored; claimed balances match after reward.\"}",
+     "ms": 571,
+     "costUsd": 0.00049056
+    },
+    "llama-3.3-70b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"55tEwWLEWVY1xgnikcP1FxF9xrB1ktHk6E4pPEY66r8r\",\"reason\":\"t6: insufficient funds\"}",
+     "ms": 206,
+     "costUsd": 0.00014266
+    },
+    "mistral-small-3.2": {
+     "text": "```json\n{\"vote\":\"approve\",\"blockhash\":\"55tEwWLEWVY1xgnikcP1FxF9xrB1ktHk6E4pPEY66r8r\",\"reason\":\"All rules hold: correct nonces, balances, and skipped invalid txs.\"}\n```",
+     "ms": 485,
+     "costUsd": 0.0001463125
+    },
+    "nova-micro": {
+     "text": "{\n  \"vote\": \"reject\",\n  \"blockhash\": \"55tEwWLEWVY1xgnikcP1FxF9xrB1ktHk6E4pPEY66r8r\",\n  \"reason\": \"tx6 failed sig_check, skipped; nova-micro's t6 exceeds balance\"\n}",
+     "ms": 371,
+     "costUsd": 0.000060165
+    }
+   },
+   "svm": {
+    "balances": {
+     "gpt-5-mini": 1318,
+     "claude-haiku-4.5": 883,
+     "gemini-2.5-flash": 708,
+     "qwen3-235b": 1022,
+     "deepseek-v4-flash": 853,
+     "llama-3.3-70b": 994,
+     "mistral-small-3.2": 1136,
+     "nova-micro": 1116
+    },
+    "steps": [
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     }
+    ],
+    "cu": 72,
+    "ms": 274,
+    "weightsMatchReference": true,
+    "engine": "svmLLM weights machine (Verafyai/svmLLM @ 4eae47c)",
+    "source": "weights"
+   }
+  },
+  {
+   "slot": 10,
+   "leader": "claude-haiku-4.5",
+   "propose": {
+    "text": "```json\n{\n  \"prevHash\": \"CDm1mUEN6VhMrU4c7qNoaaL3AoutHeGBPYMCHUepdSAo\",\n  \"txs\": [\"t1\", \"t3\", \"t2\", \"t5\", \"t4\", \"t9\"],\n  \"work\": \"t1: nova-micro nonce 1→2 (last=1), -25 to mistral; t3: qwen3 nonce 0→1 (last=0), -89 to deepseek; t2: gpt-5-mini nonce 0→1 (last=0), -111 to deepseek; t5: gpt-5-mini nonce 1→2 (last=1 after t2), -104 to llama; t4: nova-micro nonce 2→3 (last=2 after t1), -63 to mistral; t9: nova-micro nonce 2→3 conflicts with t4 (same sender, same nonce), skip. Skip t6 (mistral balance 1110+25+63=1198, can't send 1610). Skip t7 (sig_check=FAIL). Skip t8 (memo is not instruction). Slot leader reward +10. Final: gpt-5-mini 1346-111-104=1131, claude-haiku-4.5 949+10=959, gemini-2.5-flash 733, qwen3-235b 1022-89=933, deepseek-v4-flash 838+111+89=1038, llama-3.3-70b 997+104=1101, mistral-small-3.2 1110+25+63=1198, nova-micro 1025-25-63=937\",\n  \"balances\": {\n    \"gpt-5-mini\": 1131,\n    \"claude-haiku-4.5\": 959,\n    \"gemini-2.5-flash\": 733,\n    \"qwen3-235b\": 933,\n    \"deepseek-v4-flash\": 1038,\n    \"llama-3.3-70b\": 1101,\n    \"mistral-small-3.2\": 1198,\n    \"nova-micro\": 937\n  },\n  \"summary\": \"Slot 10 leader claude-haiku-4.5 includes 5 valid txs, rejects double-spend t4/t9 collision and insufficient-balance t6, earns 10 SOL reward.\"\n}\n```",
+    "ms": 772,
+    "costUsd": 0.004114
+   },
+   "votes": {
+    "gpt-5-mini": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"AvaTBPWueK14gevKk1tayZ8raxpqQDf2eJd4S8P1yRob\",\"reason\":\"Block applies t1 (already_on_chain), causing mismatched balances (nova/mistral). already_on_chain tx must be skipped.\"}",
+     "ms": 851,
+     "costUsd": 0.00399275
+    },
+    "gemini-2.5-flash": {
+     "text": "```json\n{\n  \"vote\": \"reject\",\n  \"blockhash\": \"AvaTBPWueK14gevKk1tayZ8raxpqQDf2eJd4S8P1yRob\",\n  \"reason\": \"Nonce for t4 (nova-micro) is 2, but t1 (nova-micro) already used nonce 1. t9 (nova-micro) also uses nonce 2, causing a double spend. The claimed balances are incorrect.\"\n}\n```",
+     "ms": 523,
+     "costUsd": 0.0006877
+    },
+    "qwen3-235b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"AvaTBPWueK14gevKk1tayZ8raxpqQDf2eJd4S8P1yRob\",\"reason\":\"slot leader reward applied incorrectly: claimed claude-haiku-4.5 balance 959, expected 1029 after reward\"}",
+     "ms": 1495,
+     "costUsd": 0.00015953
+    },
+    "deepseek-v4-flash": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"AvaTBPWueK14gevKk1tayZ8raxpqQDf2eJd4S8P1yRob\",\"reason\":\"t1 has already_on_chain=yes and must be skipped, but claimed balances include it (mistral 1198, nova 937), so post-state is wrong.\"}",
+     "ms": 758,
+     "costUsd": 0.00082432
+    },
+    "llama-3.3-70b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"AvaTBPWueK14gevKk1tayZ8raxpqQDf2eJd4S8P1yRob\",\"reason\":\"claimed balances mismatch\"}",
+     "ms": 489,
+     "costUsd": 0.00013768
+    },
+    "mistral-small-3.2": {
+     "text": "```json\n{\"vote\":\"reject\",\"blockhash\":\"AvaTBPWueK14gevKk1tayZ8raxpqQDf2eJd4S8P1yRob\",\"reason\":\"t9 uses nonce 2 but nova-micro's last nonce was 1; double spend\"}\n```",
+     "ms": 621,
+     "costUsd": 0.0001421875
+    },
+    "nova-micro": {
+     "text": "{\n  \"vote\": \"reject\",\n  \"blockhash\": \"AvaTBPWueK14gevKk1tayZ8raxpqQDf2eJd4S8P1yRob\",\n  \"reason\": \"t7 sig_check=FAIL, t6 insufficient balance\"\n}",
+     "ms": 480,
+     "costUsd": 0.00005726
+    }
+   },
+   "svm": {
+    "balances": {
+     "gpt-5-mini": 1131,
+     "claude-haiku-4.5": 1029,
+     "gemini-2.5-flash": 733,
+     "qwen3-235b": 933,
+     "deepseek-v4-flash": 1038,
+     "llama-3.3-70b": 1101,
+     "mistral-small-3.2": 1198,
+     "nova-micro": 867
+    },
+    "steps": [
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     }
+    ],
+    "cu": 72,
+    "ms": 295,
+    "weightsMatchReference": true,
+    "engine": "svmLLM weights machine (Verafyai/svmLLM @ 4eae47c)",
+    "source": "weights"
+   }
+  },
+  {
+   "slot": 11,
+   "leader": "gemini-2.5-flash",
+   "propose": {
+    "text": "```json\n{\n  \"prevHash\": \"CDm1mUEN6VhMrU4c7qNoaaL3AoutHeGBPYMCHUepdSAo\",\n  \"txs\": [\n    \"t1\",\n    \"t6\",\n    \"t7\",\n    \"t2\",\n    \"t5\"\n  ],\n  \"work\": \"Initial balances: gpt-5-mini:1346, claude-haiku-4.5:949, gemini-2.5-flash:733, qwen3-235b:1022, deepseek-v4-flash:838, llama-3.3-70b:997, mistral-small-3.2:1110, nova-micro:1025. Nonces: gpt-5-mini:0, claude-haiku-4.5:1, gemini-2.5-flash:5, qwen3-235b:0, deepseek-v4-flash:3, llama-3.3-70b:1, mistral-small-3.2:0, nova-micro:1.\\n\\nSkip t3 (sig_check=FAIL), t4 (more than balance), t8 (already_on_chain=yes), t9 (same nonce as t2).\\n\\n1. t1: claude-haiku-4.5 (949-3=946, nonce 2) -> mistral-small-3.2 (1110+3=1113). Nonces: claude-haiku-4.5:2, mistral-small-3.2:0.\\n2. t6: qwen3-235b (1022-114=908, nonce 1) -> claude-haiku-4.5 (946+114=1060). Nonces: qwen3-235b:1, claude-haiku-4.5:2.\\n3. t7: mistral-small-3.2 (1113-107=1006, nonce 1) -> qwen3-235b (908+107=1015). Nonces: mistral-small-3.2:1, qwen3-235b:1.\\n4. t2: gemini-2.5-flash (733-85=648, nonce 6) -> llama-3.3-70b (997+85=1082). Nonces: gemini-2.5-flash:6, llama-3.3-70b:1.\\n5. t5: gemini-2.5-flash (648-85=563, nonce 7) -> llama-3.3-70b (1082+85=1167). Nonces: gemini-2.5-flash:7, llama-3.3-70b:1.\\n\\nSlot leader reward: gemini-2.5-flash (563+10=573).\",\n  \"balances\": {\n    \"gpt-5-mini\": 1346,\n    \"claude-haiku-4.5\": 1060,\n    \"gemini-2.5-flash\": 573,\n    \"qwen3-235b\": 1015,\n    \"deepseek-v4-flash\": 838,\n    \"llama-3.3-70b\": 1167,\n    \"mistral-small-3.2\": 1006,\n    \"nova-micro\": 1025\n  },\n  \"summary\": \"Processed 5 valid transactions, including transfers for protocol upgrade, judge fee, tool call fee, compute rent, and cache share, then applied the slot leader reward.\"\n}\n```",
+    "ms": 767,
+    "costUsd": 0.002612
+   },
+   "votes": {
+    "gpt-5-mini": {
+     "text": "{\"vote\":\"approve\",\"blockhash\":\"bLQK2Ehzxjn4TJ32sZoy6fKrVosTEThZMKNKkHMi6JW\",\"reason\":\"Nonces, signatures, and balances valid; skipped invalid/replayed txs; reward applied; claimed balances match execution.\"}",
+     "ms": 422,
+     "costUsd": 0.00248625
+    },
+    "claude-haiku-4.5": {
+     "text": "```json\n{\"vote\":\"approve\",\"blockhash\":\"bLQK2Ehzxjn4TJ32sZoy6fKrVosTEThZMKNKkHMi6JW\",\"reason\":\"prevHash matches, all nonces valid, no double-spends, balances correct post-reward. t3,t4,t8,t9 correctly skipped.\"}\n```",
+     "ms": 1008,
+     "costUsd": 0.001896
+    },
+    "qwen3-235b": {
+     "text": "{\"vote\":\"approve\",\"blockhash\":\"bLQK2Ehzxjn4TJ32sZoy6fKrVosTEThZMKNKkHMi6JW\",\"reason\":\"All rules satisfied: valid nonces, no double spends, sig_check=FAIL/already_on_chain skipped, balances match post-tx + reward\"}",
+     "ms": 1477,
+     "costUsd": 0.00025425
+    },
+    "deepseek-v4-flash": {
+     "text": "{\"vote\":\"approve\",\"blockhash\":\"bLQK2Ehzxjn4TJ32sZoy6fKrVosTEThZMKNKkHMi6JW\",\"reason\":\"prevHash matches; nonces sequential; failed/already-on-chain skipped; balances and reward match.\"}",
+     "ms": 574,
+     "costUsd": 0.00042966
+    },
+    "llama-3.3-70b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"bLQK2Ehzxjn4TJ32sZoy6fKrVosTEThZMKNKkHMi6JW\",\"reason\":\"nonce mismatch\"}",
+     "ms": 608,
+     "costUsd": 0.00018512
+    },
+    "mistral-small-3.2": {
+     "text": "```json\n{\"vote\":\"reject\",\"blockhash\":\"bLQK2Ehzxjn4TJ32sZoy6fKrVosTEThZMKNKkHMi6JW\",\"reason\":\"t2 and t5 have same nonce 6, double spend\"}\n```",
+     "ms": 749,
+     "costUsd": 0.00014146875
+    },
+    "nova-micro": {
+     "text": "{\n  \"vote\": \"reject\",\n  \"blockhash\": \"bLQK2Ehzxjn4TJ32sZoy6fKrVosTEThZMKNKkHMi6JW\",\n  \"reason\": \"tx3 and tx4 failed sig_check and overbalance\"\n}",
+     "ms": 521,
+     "costUsd": 0.00005747
+    }
+   },
+   "svm": {
+    "balances": {
+     "gpt-5-mini": 1346,
+     "claude-haiku-4.5": 1060,
+     "gemini-2.5-flash": 573,
+     "qwen3-235b": 1015,
+     "deepseek-v4-flash": 838,
+     "llama-3.3-70b": 1167,
+     "mistral-small-3.2": 1006,
+     "nova-micro": 1025
+    },
+    "steps": [
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     }
+    ],
+    "cu": 60,
+    "ms": 207,
+    "weightsMatchReference": true,
+    "engine": "svmLLM weights machine (Verafyai/svmLLM @ 4eae47c)",
+    "source": "weights"
+   }
+  },
+  {
+   "slot": 12,
+   "leader": "qwen3-235b",
+   "propose": {
+    "text": "{\n  \"prevHash\": \"bLQK2Ehzxjn4TJ32sZoy6fKrVosTEThZMKNKkHMi6JW\",\n  \"txs\": [\"t2\", \"t3\", \"t4\", \"t6\", \"t7\"],\n  \"work\": \"t2: deepseek-v4-flash (nonce 3->4, bal 838-29=809), claude-haiku-4.5 (1060+29=1089). t3: nova-micro (nonce 1->2, bal 1025-41=984), qwen3-235b (1015+41=1056). t4: nova-micro (nonce 2->3, bal 984-4=980), claude-haiku-4.5 (1089+4=1093). t6: mistral-small-3.2 (nonce 1->2, bal 1006-12=994), llama-3.3-70b (1167+12=1179). t7: nova-micro (nonce 3->4, bal 980-34=946), mistral-small-3.2 (994+34=1028). Reward: qwen3-235b +=10 → 1066.\",\n  \"balances\": {\n    \"gpt-5-mini\": 1346,\n    \"claude-haiku-4.5\": 1093,\n    \"gemini-2.5-flash\": 573,\n    \"qwen3-235b\": 1066,\n    \"deepseek-v4-flash\": 809,\n    \"llama-3.3-70b\": 1179,\n    \"mistral-small-3.2\": 1028,\n    \"nova-micro\": 946\n  },\n  \"summary\": \"Applied 5 valid transactions, updated nonces and balances, added leader reward; t1 skipped due to nonce mismatch, t5 would overdraft, t8 failed sig, t9 already on chain.\"\n}",
+    "ms": 1833,
+    "costUsd": 0.0005389
+   },
+   "votes": {
+    "gpt-5-mini": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"CHpNbpb5ksQiuZN3H5Bu1ZYhZkC4se4MGt4QDg8r9Ldn\",\"reason\":\"t7 is a nonce mismatch/double-spend (nova nonce already advanced by t3/t4); claimed balances incorrectly include t7.\"}",
+     "ms": 380,
+     "costUsd": 0.00443625
+    },
+    "claude-haiku-4.5": {
+     "text": "I'll audit this block systematically.\n\n**Rule 1: prevHash check**\n- prevHash: bLQK2Ehzxjn4TJ32sZoy6fKrVosTEThZMKNKkHMi6JW ✓ Matches parent blockhash\n\n**Rule 2: Transaction validation (nonce, sig_check, already_on_chain)**\n\nStarting nonces: {\"gpt-5-mini\":0,\"claude-haiku-4.5\":2,\"gemini-2.5-flash\":7,\"qwen3-235b\":1,\"deepseek-v4-flash\":3,\"llama-3.3-70b\":1,\"mistral-small-3.2\":1,\"nova-micro\":1}\n\nProposed txs in order: t2, t3, t4, t6, t7\n\n- **t2**: deepseek-v4-flash, nonce=4, last=3, sig_check=pass → 4=3+1 ✓ Valid\n- **t3**: nova-micro, nonce=2, last=1, sig_check=pass → 2=1+1 ✓ Valid\n- **t4**: nova-micro, nonce=3, last=2 (after t3), sig_check=pass → 3=2+1 ✓ Valid\n- **t6**: mistral-small-3.2, nonce=2, last=1, sig_check=pass → 2=1+1 ✓ Valid\n- **t7**: nova-micro, nonce=2, last=3 (after t4), sig_check=pass → 2≠4 ✗ **INVALID NONCE**\n\nt7 has nonce=2 but nova-micro's last used nonce after t4 is 3. This violates the nonce rule.\n\n**Skipped transactions (correctly identified):**\n- t1: nonce=5, last=3 → would need 4 ✓\n- t5: would overdraft ✓\n- t8: sig_check=FAIL ✓\n- t9: already_on_chain=yes ✓\n\n**Conclusion:**\nThe block includes t7 with an invalid nonce (2 when it should be 4). This is a double-spend attempt or replay violation.\n\n```json\n{\"vote\":\"reject\",\"blockhash\":\"CHpNbpb5ksQiuZN3H5Bu1ZYhZkC4se4MGt4QDg8r9Ldn\",\"reason\":\"t7 has invalid nonce: nova-micro nonce=2 but last used=3 after t4\"}\n```",
+     "ms": 748,
+     "costUsd": 0.004631
+    },
+    "gemini-2.5-flash": {
+     "text": "```json\n{\n  \"vote\": \"approve\",\n  \"blockhash\": \"CHpNbpb5ksQiuZN3H5Bu1ZYhZkC4se4MGt4QDg8r9Ldn\",\n  \"reason\": \"All rules followed: prevHash matches, nonces are correct, no overspending, valid txs applied, leader reward added, and balances match.\"\n}\n```",
+     "ms": 398,
+     "costUsd": 0.0006341
+    },
+    "deepseek-v4-flash": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"CHpNbpb5ksQiuZN3H5Bu1ZYhZkC4se4MGt4QDg8r9Ldn\",\"reason\":\"t7 is invalid: nova nonce 2 already used by t3, and after t4 expected nonce is 4; claimed balances include t7.\"}",
+     "ms": 389,
+     "costUsd": 0.0006027
+    },
+    "llama-3.3-70b": {
+     "text": "{\"vote\":\"reject\",\"blockhash\":\"CHpNbpb5ksQiuZN3H5Bu1ZYhZkC4se4MGt4QDg8r9Ldn\",\"reason\":\"nonce mismatch\"}",
+     "ms": 395,
+     "costUsd": 0.000471171
+    },
+    "mistral-small-3.2": {
+     "text": "```json\n{\"vote\":\"approve\",\"blockhash\":\"CHpNbpb5ksQiuZN3H5Bu1ZYhZkC4se4MGt4QDg8r9Ldn\",\"reason\":\"All rules hold: correct nonces, balances, and skipped invalid txs.\"}\n```",
+     "ms": 113,
+     "costUsd": 0.000113225
+    },
+    "nova-micro": {
+     "text": "{\n  \"vote\": \"approve\",\n  \"blockhash\": \"CHpNbpb5ksQiuZN3H5Bu1ZYhZkC4se4MGt4QDg8r9Ldn\",\n  \"reason\": \"All rules followed, valid transfers.\"\n}",
+     "ms": 436,
+     "costUsd": 0.00005635
+    }
+   },
+   "svm": {
+    "balances": {
+     "gpt-5-mini": 1346,
+     "claude-haiku-4.5": 1093,
+     "gemini-2.5-flash": 573,
+     "qwen3-235b": 1066,
+     "deepseek-v4-flash": 809,
+     "llama-3.3-70b": 1179,
+     "mistral-small-3.2": 1028,
+     "nova-micro": 946
+    },
+    "steps": [
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     },
+     {
+      "exit": 0,
+      "status": "ok",
+      "cu": 12,
+      "applied": true
+     }
+    ],
+    "cu": 60,
+    "ms": 284,
+    "weightsMatchReference": true,
+    "engine": "svmLLM weights machine (Verafyai/svmLLM @ 4eae47c)",
+    "source": "weights"
+   }
+  }
+ ],
+ "totalCostUsd": 0.11407
+}

@@ -1,0 +1,220 @@
+{
+ "ranAt": "2026-11-03T04:40:25.278Z",
+ "prompt": "Compute this hash chain yourself, with no tools. SHA-256, lowercase hex, UTF-8 input, \"+\" means string concatenation.\nh1 = sha256(\"swarm\")\nh2 = sha256(h1 + \"chain\")\nh3 = sha256(h2 + \"verafy\")\nReply with JSON only: {\"h1\":\"...\",\"h2\":\"...\",\"h3\":\"...\"}",
+ "truth": [
+  "44eb92b46360c22af3395633b6e3014a30afa97b02305b385c51d3feebceda9c",
+  "a13fd7fbfe5d8ce4015082e3c870ad9b484e958645533a55cfc86efbac1acaba",
+  "12b2ec39bf2c80522513a0138285cd00d61232b2321ac4a9bbdecea67e510a29"
+ ],
+ "results": [
+  {
+   "model": "openai/gpt-5-mini",
+   "links": [
+    {
+     "link": "h1",
+     "correct": false,
+     "matchingPrefixChars": 0
+    },
+    {
+     "link": "h2",
+     "correct": false,
+     "matchingPrefixChars": 0
+    },
+    {
+     "link": "h3",
+     "correct": false,
+     "matchingPrefixChars": 0
+    }
+   ],
+   "answers": {
+    "h1": "error: cannot reliably compute SHA-256 hashes without external tools",
+    "h2": "error: cannot reliably compute SHA-256 hashes without external tools",
+    "h3": "error: cannot reliably compute SHA-256 hashes without external tools"
+   },
+   "answered": true
+  },
+  {
+   "model": "anthropic/claude-haiku-4.5",
+   "links": [
+    {
+     "link": "h1",
+     "correct": false,
+     "matchingPrefixChars": 0
+    },
+    {
+     "link": "h2",
+     "correct": false,
+     "matchingPrefixChars": 0
+    },
+    {
+     "link": "h3",
+     "correct": false,
+     "matchingPrefixChars": 0
+    }
+   ],
+   "answers": {
+    "h1": "3e8b5f3e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e",
+    "h2": "0000000000000000000000000000000000000000000000000000000000000000",
+    "h3": "0000000000000000000000000000000000000000000000000000000000000000"
+   },
+   "answered": true
+  },
+  {
+   "model": "google/gemini-2.5-flash",
+   "links": [
+    {
+     "link": "h1",
+     "correct": false,
+     "matchingPrefixChars": 0
+    },
+    {
+     "link": "h2",
+     "correct": false,
+     "matchingPrefixChars": 0
+    },
+    {
+     "link": "h3",
+     "correct": false,
+     "matchingPrefixChars": 0
+    }
+   ],
+   "answers": {
+    "h1": "",
+    "h2": "",
+    "h3": ""
+   },
+   "answered": true
+  },
+  {
+   "model": "qwen/qwen3-235b-a22b-2507",
+   "links": [
+    {
+     "link": "h1",
+     "correct": false,
+     "matchingPrefixChars": 0
+    },
+    {
+     "link": "h2",
+     "correct": false,
+     "matchingPrefixChars": 1
+    },
+    {
+     "link": "h3",
+     "correct": false,
+     "matchingPrefixChars": 0
+    }
+   ],
+   "answers": {
+    "h1": "55830c8672f6034856115d8a428836321412554258115d8a4288363214125542",
+    "h2": "a3f5a2c7d9e4f6b8c9a0b1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2",
+    "h3": "c8b7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c0d9e8f7"
+   },
+   "answered": true
+  },
+  {
+   "model": "deepseek/deepseek-v4-flash",
+   "links": [
+    {
+     "link": "h1",
+     "correct": false,
+     "matchingPrefixChars": 0
+    },
+    {
+     "link": "h2",
+     "correct": false,
+     "matchingPrefixChars": 2
+    },
+    {
+     "link": "h3",
+     "correct": false,
+     "matchingPrefixChars": 0
+    }
+   ],
+   "answers": {
+    "h1": "f3b3b3c7e3e3c3f3b3b3c7e3e3c3f3b3b3c7e3e3c3f3b3b3c7e3e3c3f3",
+    "h2": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9",
+    "h3": "f0e1d2c3b4a5f6e7d8c9b0a1f2e3d4c5b6a7f8e9d0c1b2a3f4e5d6c7b8a9"
+   },
+   "answered": true
+  },
+  {
+   "model": "meta-llama/llama-3.3-70b-instruct",
+   "links": [
+    {
+     "link": "h1",
+     "correct": false,
+     "matchingPrefixChars": 0
+    },
+    {
+     "link": "h2",
+     "correct": false,
+     "matchingPrefixChars": 0
+    },
+    {
+     "link": "h3",
+     "correct": false,
+     "matchingPrefixChars": 0
+    }
+   ],
+   "answers": {
+    "h1": "1eeb7f6d4e1ec4b56a25a8c92d86e0c1d3496b5c3c3c9c5147b1f4a7a7a7a7a",
+    "h2": "4c3c592f6e2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f",
+    "h3": "3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c"
+   },
+   "answered": true
+  },
+  {
+   "model": "mistralai/mistral-small-3.2-24b-instruct",
+   "links": [
+    {
+     "link": "h1",
+     "correct": false,
+     "matchingPrefixChars": 0
+    },
+    {
+     "link": "h2",
+     "correct": false,
+     "matchingPrefixChars": 2
+    },
+    {
+     "link": "h3",
+     "correct": false,
+     "matchingPrefixChars": 0
+    }
+   ],
+   "answers": {
+    "h1": "d6a3b877007c4c3a69f5b855a5c0b5a7a3a0b5a7a3a0b5a7a3a0b5a7a3a0b5a7",
+    "h2": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+    "h3": "f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3"
+   },
+   "answered": true
+  },
+  {
+   "model": "amazon/nova-micro-v1",
+   "links": [
+    {
+     "link": "h1",
+     "correct": false,
+     "matchingPrefixChars": 0
+    },
+    {
+     "link": "h2",
+     "correct": false,
+     "matchingPrefixChars": 0
+    },
+    {
+     "link": "h3",
+     "correct": false,
+     "matchingPrefixChars": 0
+    }
+   ],
+   "answers": {
+    "h1": "e7e0a553b853e090e5b30445eac348a949a7a840bc4a89e42fa084e6e8334f4a",
+    "h2": "e360062784a23c83a56e0c7e9d7e1d1e7802e5e27c2d1164d6956f7a9f9b0b6e",
+    "h3": "57e04818b0632d6c1d6d822f96704f96d5e9f9e7d3f10e616e6e6e6e6e6e6e6e"
+   },
+   "answered": true
+  }
+ ],
+ "costUsd": 0.00552
+}

@@ -1,0 +1,23 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "ASC certificate v1",
+ "type": "object",
+ "required": ["kind", "repo", "commit", "tree", "codeChecksum", "standard", "verdicts", "score", "result", "attestationSetHash", "reportHash", "badge", "createdAt"],
+ "properties": {
+  "kind": {"const": "asc.certificate/1"},
+  "repo": {"type": "string", "description": "owner/name on GitHub"},
+  "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+  "tree": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+  "codeChecksum": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+  "standard": {"type": "object", "required": ["code", "version", "policyRef"], "properties": {"code": {"type": "string"}, "version": {"type": "string"}, "policyRef": {"type": "string"}, "policyTx": {"type": "string"}}},
+  "verdicts": {"type": "array", "items": {"type": "object", "required": ["rule", "verdict", "votes"], "properties": {
+   "rule": {"type": "string"}, "verdict": {"enum": ["pass", "fail", "needs_evidence", "not_evaluable_from_code"]},
+   "votes": {"type": "string", "description": "e.g. 5/5"}, "citations": {"type": "array", "maxItems": 3, "items": {"type": "object", "properties": {"file": {"type": "string"}, "lines": {"type": "string"}}}}}}},
+  "score": {"type": "number", "minimum": 0, "maximum": 100},
+  "result": {"enum": ["PASS", "NOT CERTIFIED"]},
+  "attestationSetHash": {"type": "string"},
+  "reportHash": {"type": "string"},
+  "badge": {"type": "string", "description": "ASCII badge, 44 columns by 9 lines"},
+  "createdAt": {"type": "string", "format": "date-time"}
+ }
+}

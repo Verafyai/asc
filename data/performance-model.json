@@ -1,0 +1,142 @@
+{
+ "kind": "asc.performance-model/1",
+ "asOf": "2026-11-04",
+ "note": "Every input is editable. Prices change; refresh model prices from the OpenRouter catalog and GPU prices before publishing.",
+ "inputs": {
+  "jurors": 5,
+  "ruling_tokens": {
+   "input": 1500,
+   "output": 300
+  },
+  "compile_tokens": {
+   "calls": 2,
+   "input": 3000,
+   "output": 1500,
+   "model": "anthropic/claude-opus-5.5"
+  },
+  "certify_tokens_per_rule": {
+   "input": 8000,
+   "output": 800
+  },
+  "certify_rules": 12,
+  "sol_usd": 85,
+  "lamports_per_signature": 5000,
+  "h100_usd_per_hour": {
+   "low": 1.99,
+   "typical": 6.16
+  },
+  "cpu24_usd_per_hour": 1.0,
+  "flashprove": {
+   "proving_tokens_per_sec_per_h100": 110,
+   "max_context_tokens": 1024,
+   "proof_mb": 18.78,
+   "verify_seconds_24_threads": 17,
+   "overhead_vs_vllm": {
+    "typical": 72,
+    "range": [
+     66,
+     77
+    ],
+    "heaviest": 94,
+    "stated": "about 70 to 95x the GPU time of running the model itself on vLLM"
+   },
+   "hardware": "one 80 GB GPU and about 290 GB host memory",
+   "models_supported": [
+    "meta-llama/llama-4-maverick"
+   ],
+   "status": "research prototype, intermediate progress, not deployed (Anthropic research post, Nov 2, 2026)",
+   "sources": {
+    "anthropic_research": "https://www.anthropic.com/research/provable-inference",
+    "technical_report": "https://www.anthropic.com/document/flashprove-technical-report",
+    "code": "https://github.com/anthropics/FlashProve",
+    "protocol_spec": "https://github.com/anthropics/FlashProve/blob/main/paper/paper.pdf",
+    "lean_proofs": "https://github.com/anthropics/FlashProve/tree/main/lean"
+   },
+   "verify_before_publishing": "Numbers confirmed against Anthropic's research post of Nov 2, 2026. Re-check if the technical report is updated.",
+   "batch_example": {
+    "requests": 24,
+    "seconds": 223
+   },
+   "offline_phase_minutes_once_per_model": 39,
+   "commitment_lifetime_requests": 16000000,
+   "client_download_mb": 6.5,
+   "verify_seconds_one_thread": 21,
+   "decoding": "integer model, greedy decoding",
+   "hides": "weights, intermediate values, which experts ran; not the architecture",
+   "out_of_scope": [
+    "side channels",
+    "whether the hardware is also doing other work",
+    "sampled (non-greedy) outputs"
+   ]
+  }
+ },
+ "model_prices_usd_per_token": {
+  "_source": "OpenRouter catalog snapshot, 2026-10-11",
+  "openai/gpt-5-mini": [
+   2.5e-07,
+   2e-06
+  ],
+  "anthropic/claude-haiku-4.5": [
+   1e-06,
+   5e-06
+  ],
+  "google/gemini-2.5-flash": [
+   3e-07,
+   2.5e-06
+  ],
+  "qwen/qwen3-235b-a22b-2507": [
+   9e-08,
+   5.5e-07
+  ],
+  "deepseek/deepseek-v4-flash": [
+   3e-08,
+   1.28e-06
+  ],
+  "anthropic/claude-opus-5.5": [
+   4e-06,
+   2e-05
+  ],
+  "x-ai/grok-4.7": [
+   2e-06,
+   6e-06
+  ],
+  "meta-llama/llama-4-maverick": [
+   1.875e-07,
+   6.525e-07
+  ]
+ },
+ "juries": {
+  "budget": [
+   "openai/gpt-5-mini",
+   "anthropic/claude-haiku-4.5",
+   "google/gemini-2.5-flash",
+   "qwen/qwen3-235b-a22b-2507",
+   "deepseek/deepseek-v4-flash"
+  ],
+  "proven_today": [
+   "meta-llama/llama-4-maverick",
+   "meta-llama/llama-4-maverick",
+   "meta-llama/llama-4-maverick",
+   "meta-llama/llama-4-maverick",
+   "meta-llama/llama-4-maverick"
+  ]
+ },
+ "measured": {
+  "ruling_seconds": [
+   20,
+   60
+  ],
+  "ruling_model_usd": [
+   0.002,
+   0.01
+  ],
+  "site_total_model_spend_usd": 0.286,
+  "hot_wallet_inscription_bytes": 1909,
+  "solana_tx_bytes_limit": 1232,
+  "juror_signatures_per_solana_tx": [
+   6,
+   7
+  ],
+  "source": "asc.verafy.ai recorded runs"
+ }
+}

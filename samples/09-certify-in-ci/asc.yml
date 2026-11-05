@@ -1,0 +1,9 @@
+# asc.yml: what this repo claims, and where the evidence is.
+claims:
+  - standard: EAO@1.0
+    scope: agent/            # the agent code the claim covers
+    notes: |
+      Spending limits live in agent/limits.ts.
+      Every purchase goes through the jury guard in agent/guard.ts.
+  - standard: ETC@1.0
+    scope: treasury/

@@ -1,0 +1,84 @@
+{
+ "capUsd": 2.8,
+ "totalUsd": 0.28626,
+ "entries": [
+  {
+   "at": "2026-11-03T15:05:58.172Z",
+   "script": "record-oracle:flight-delay",
+   "usd": 0.01223,
+   "calls": 12
+  },
+  {
+   "at": "2026-11-03T15:06:56.512Z",
+   "script": "record-oracle:flight-delay",
+   "usd": 0.0116,
+   "calls": 12
+  },
+  {
+   "at": "2026-11-03T15:07:36.398Z",
+   "script": "record-oracle:fed-forecast",
+   "usd": 0.01354,
+   "calls": 12
+  },
+  {
+   "at": "2026-11-03T15:08:29.100Z",
+   "script": "record-oracle:simd-review",
+   "usd": 0.01565,
+   "calls": 12
+  },
+  {
+   "at": "2026-11-03T15:09:48.829Z",
+   "script": "record-oracle:treasury-rebalance",
+   "usd": 0.01397,
+   "calls": 12
+  },
+  {
+   "at": "2026-11-03T15:11:06.635Z",
+   "script": "record-oracle:audit-vesting",
+   "usd": 0.01283,
+   "calls": 12
+  },
+  {
+   "at": "2026-11-03T15:12:24.429Z",
+   "script": "record-oracle:flight-delay",
+   "usd": 0.01162,
+   "calls": 12
+  },
+  {
+   "at": "2026-11-03T15:13:11.794Z",
+   "script": "record-oracle:fed-forecast",
+   "usd": 0.02058,
+   "calls": 14
+  },
+  {
+   "at": "2026-11-03T15:14:09.022Z",
+   "script": "record-oracle:simd-review",
+   "usd": 0.01553,
+   "calls": 12
+  },
+  {
+   "at": "2026-11-03T15:15:55.764Z",
+   "script": "record-oracle:treasury-rebalance",
+   "usd": 0.02577,
+   "calls": 14
+  },
+  {
+   "at": "2026-11-03T15:16:53.588Z",
+   "script": "record-oracle:audit-vesting",
+   "usd": 0.02061,
+   "calls": 14
+  },
+  {
+   "at": "2026-11-03T15:18:14.518Z",
+   "script": "record-oracle:prompt-injection",
+   "usd": 0.01563,
+   "calls": 30
+  },
+  {
+   "at": "2026-11-03T15:32:03.436Z",
+   "script": "pilot-run",
+   "usd": 0.0967,
+   "calls": 300
+  }
+ ]
+}

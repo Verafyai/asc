@@ -1,0 +1,15 @@
+# Re-check a repo against an inscribed standard on every release. ILLUSTRATIVE: the endpoint and token are planned.
+name: ASC certify
+on:
+  release:
+    types: [published]
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request an ASC review
+        run: |
+          curl -sS -X POST https://asc.verafy.ai/api/certify \
+            -H "Authorization: Bearer ${{ secrets.ASC_API_KEY }}" \
+            -H "content-type: application/json" \
+            -d '{"repo":"${{ github.repository }}","commit":"${{ github.sha }}","standard":"EMO@0.1","profile":"smart-tv","maxCredits":400}'

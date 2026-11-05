@@ -1,0 +1,37 @@
+{
+ "cluster": "localnet (solana-test-validator 4.4.0, IQ program cloned from devnet)",
+ "rpc": "http://127.0.0.1:8899",
+ "ranAt": "2026-11-03T15:33:59.053Z",
+ "recordHash": "2a01515d8f14400f94ef548152032185cd9615a9b2952625fccd9d9f8e218575",
+ "quorum": 6,
+ "steps": [
+  {
+   "name": "settle: Ed25519 precompile verifies all quorum signatures over the record hash, memo, transfer",
+   "ok": true,
+   "sig": "2Mpk2tBQ7yaSWjcmj6KiuYGZH9TTde8wNH2cDunCDB9d3ChedKr9A9LdrMDN1qzw2ZmkVGP2VKH3MzX4NTK5vnDn",
+   "bytes": 1142,
+   "payeeLamports": 5000000
+  },
+  {
+   "name": "tampered signature (one quorum sig altered): whole tx must fail, no transfer",
+   "ok": true,
+   "rejected": true,
+   "error": "Transaction 5sXoiUpRLGggvMsw74BjpDYbojKz8NssfYwxEwjJ6EBXNqrUDj4J8GqFwdSof1zJM5YX6SedyKTEhLeLQP5Bcz2s resulted in an error. \nStatus: ({\"err\":{\"InstructionError\":[0,{\"Custom\":2}]}}). \nCatch the `SendTransactionError` and call `getLogs()` on i",
+   "payeeLamportsAfter": 5000000
+  },
+  {
+   "name": "IQ Labs codeIn inscription of compact record",
+   "ok": true,
+   "sig": "2mNiVh8r2NojDqqHjdeXunRWxtSZ7eMhNzYEJwfUdqiE5LXUKGhdAtGXE9jBfdxGtXv3Uy3NVp1AmnJkFZoTbKuB",
+   "bytes": 1122
+  },
+  {
+   "name": "IQ readCodeIn round trip",
+   "ok": true,
+   "metadata": "{\"filetype\":\"application/octet-stream\",\"method\":0,\"filename\":\"judgment-flight-delay.json\",\"total_chunks\":1}"
+  }
+ ],
+ "payer": "FF1ThWNBn7EW9CwEbYmVS22EpcVnRMwJmq4UxQuPN4YG",
+ "escrow": "5XefsACkuTCtDb7qDc8EEhi9TrjkiAf1UYPigGbn7DJU",
+ "payee": "9uCNYU9Z4wSczH7chjVP8xbAKKfRKnpEEPQMqKCVvtf7"
+}

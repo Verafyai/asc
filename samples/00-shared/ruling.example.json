@@ -1,0 +1,23 @@
+{
+  "id": "rul_8fK2c9",
+  "asc": "asc_hotwallet_v1",
+  "status": "final",
+  "outcome": "hold",
+  "rulesBroken": [
+    { "rule": 5, "votes": 5, "note": "Email and 2FA changed 3 hours ago; withdrawal to an address never used by this account." }
+  ],
+  "jury": { "size": 5, "quorum": 4, "tier": "standard", "answered": 5 },
+  "votes": [
+    { "juror": "gpt",      "lab": "OpenAI",    "outcome": "hold", "wallet": "J1u...", "sig": "3fa9c1..." },
+    { "juror": "claude",   "lab": "Anthropic", "outcome": "hold", "wallet": "J2c...", "sig": "b07e42..." },
+    { "juror": "gemini",   "lab": "Google",    "outcome": "hold", "wallet": "J3g...", "sig": "9d21aa..." },
+    { "juror": "qwen",     "lab": "Alibaba",   "outcome": "hold", "wallet": "J4q...", "sig": "51c8e0..." },
+    { "juror": "deepseek", "lab": "DeepSeek",  "outcome": "hold", "wallet": "J5d...", "sig": "e6f30b..." }
+  ],
+  "evidence": { "sha256": "4b1e07c2a9d3...", "items": 4 },
+  "attestations": "<base64: the signed votes, ready to pass to verify_ruling / verifyRuling>",
+  "dispute": { "open_until": "2026-11-07T16:20:00Z" },
+  "cost": { "quoted": 25, "charged": 25, "unit": "credits" },
+  "record": "https://asc.verafy.ai/rulings/rul_8fK2c9",
+  "illustrative": true
+}
