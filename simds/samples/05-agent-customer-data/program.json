@@ -1,0 +1,43 @@
+{
+  "_comment": "Arguments to CreateInferenceProgram. Illustrative.",
+  "name": "Support agent, customer data rules",
+  "prompt": {
+    "storage": {
+      "inline": "program.asc.md"
+    },
+    "encoding": {
+      "compress": true
+    }
+  },
+  "context": [
+    {
+      "kind": "internal_policy",
+      "label": "Customer data rules",
+      "storage": {
+        "inline": "context/rules.md"
+      },
+      "encoding": {
+        "compress": true,
+        "encrypt": true
+      }
+    }
+  ],
+  "mutability": "mutable",
+  "contextBudget": 8000,
+  "externalContext": {
+    "mode": "required",
+    "kinds": [
+      "other"
+    ],
+    "budget": 4000
+  },
+  "minimums": {
+    "evaluators": 3,
+    "quorum": 2,
+    "assurance": "L1",
+    "distinctFamilies": true
+  },
+  "evaluatorSet": [
+    "<required because the context is encrypted>"
+  ]
+}

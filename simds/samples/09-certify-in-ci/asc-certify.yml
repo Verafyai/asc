@@ -1,0 +1,27 @@
+# Certify every push to main against the standards this repo claims to meet.
+# A certificate is a ruling: the standards are the program's internal context
+# (pinned from the asc-standards repo at a commit), this commit is external
+# context, and each rule's verdict cites a file and line range.
+# A certificate is a code review, not a legal or safety certification.
+# Planned action.
+name: ASC certify
+on:
+  push:
+    branches: [main]
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: verafy/asc-certify@v0       # planned
+        with:
+          standards: EAO@1.0, ETC@1.0     # internal context of the certify program
+          external-context: git           # this repository at ${{ github.sha }}
+          jury: 5 of 4, L1, distinct-families
+          budget: quote                   # QuoteRuling first; fail if over max-budget
+          max-budget-sol: 0.05
+          fail-on: fail                   # or: needs_evidence
+          wallet: ${{ secrets.ASC_PAYER_KEY }}
+      # Writes the ruling address, the per-rule report and the ASCII badge to
+      # the job summary. Anyone can later challenge a certificate with new
+      # evidence (SIMD 3); an overturned certificate shows as revoked.

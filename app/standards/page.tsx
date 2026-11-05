@@ -1,51 +1,101 @@
-import Chrome from "@/components/Chrome";
-import ComingSoon from "@/components/ComingSoon";
+import "@/styles/site.css";
+import type { Metadata } from "next";
 import { pageMeta } from "@/lib/page-meta";
-import { fillBadge, loadStandards } from "@/lib/standards";
 
-export const metadata = pageMeta("Standards", "/standards");
+export const metadata: Metadata = { ...pageMeta("Standards", "/standards"), description: "Plain-language standards that code can be certified against, held as internal context by inference programs and pinned from the asc-standards repository at a commit." };
+
+const CSS = `.badge{font-size:12px;line-height:1.35;padding:12px;color:var(--teal);background:var(--deep)}`;
 
 export default function Page() {
-  const standards = loadStandards();
-  const cards = standards.filter((s) => s.code !== "ASC-0");
-  const asc0 = standards.find((s) => s.code === "ASC-0");
   return (
-    <Chrome current="/standards">
-      <div className="d-wrap" style={{ paddingTop: 56, paddingBottom: 32 }}>
-        <div className="d-eb">Standards · inscribed rules for software <span className="d-tag ill" style={{ marginLeft: 6 }}>first versions, all drafts</span></div>
-        <h1 className="d-h1 d-md">ASC Standards</h1>
-        <p className="d-lede">Plain-language rules that code can be certified against. Each standard lists what a kind of software must never do, how the jury checks it, and the badge a passing repository earns.</p>
-      </div>
-      <div className="d-wrap" style={{ paddingBottom: 12, display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-        <span className="d-mut" style={{ fontSize: 15 }}>Source of truth: Markdown files in the <b style={{ color: "#e8edf2" }}>asc-standards</b> repository on GitHub. Final versions are inscribed on Solana. The GitHub repository is not published in this build; these pages render the Markdown in the repo.</span>
-        <span style={{ marginLeft: "auto" }}><ComingSoon /></span>
-      </div>
-      <div className="d-wrap d-std" style={{ paddingBottom: 40 }}>
-        {cards.map((s) => (
-          <div className="d-card" key={s.code}>
-            <pre className="d-pre" style={{ margin: 0, padding: 12, fontSize: 11.5, lineHeight: 1.35 }}>{fillBadge(s.badge)}</pre>
-            <div className="d-dim" style={{ fontSize: 12 }}>example badge</div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <b style={{ fontSize: 18 }}>{s.code} v{s.version}</b>
-              <span className="d-tag ill">{s.status}</span>
-              <span className="d-dim" style={{ marginLeft: "auto", fontSize: 13 }}>{s.rules.length} rules</span>
-            </div>
-            <div style={{ fontWeight: 600 }}>{s.title}</div>
-            <div className="d-mut" style={{ fontSize: 15 }}>{s.shallNever}</div>
-            <div style={{ display: "flex", gap: 8, marginTop: "auto" }}>
-              <a className="d-btn p sm" href={`/standards/${s.code.toLowerCase()}`}>Read {s.code}</a>
-              <a className="d-btn g sm" href={`/certify?standard=${s.code}`}>Certify a repo</a>
-            </div>
-          </div>
-        ))}
-        {asc0 && (
-          <div className="d-card" style={{ borderStyle: "dashed" }}>
-            <b>ASC-0 · Standards process</b>
-            <div className="d-mut" style={{ fontSize: 15, marginTop: 6 }}>How standards are named (E + subject + Operations, Conduct or Contracts), versioned (MAJOR.MINOR), reviewed and inscribed.</div>
-            <div style={{ marginTop: 12 }}><a className="d-btn g sm" href="/standards/asc-0">Propose a standard</a></div>
-          </div>
-        )}
-      </div>
-    </Chrome>
+    <>
+      <style dangerouslySetInnerHTML={{ __html: CSS }} />
+<main className="w">
+<section className="hero">
+<p className="eb">Standards · first versions, all drafts</p>
+<h1>Standards are context an inference program can hold</h1>
+<p className="lede">Each standard lists what a kind of software must never do. Under the SIMDs, a standard is a context entry of kind{" "}<code>standard</code>, pulled from the asc-standards repository pinned at a commit. Any inference program can hold one or several, and a certification is a ruling against them.</p>
+</section>
+<section className="sec">
+<div className="g3"><div className="card"><pre className="badge" aria-label="Example ASCII badge for Ethical Device Operations">{`+------------------------------------------+
+|  .----------------------.   ASC  EDO     |
+|  |  [ ]  ETHICAL   [o]  |   v1.0         |
+|  |   DEVICE OPERATIONS  |                |
+|  '----------.-----------'   PASS  5/5    |
+|           _|_|_                          |
+|  your-org/repo@a1b2c3d                   |
+|  sha256:4b1e07c2a9d3   2026-11-04        |
++------------------------------------------+`}</pre>
+<p className="row" style={{ "marginTop": "14px" }}><span className="n" style={{ "margin": "0" }}>EDO v1.0</span><span className="tag draft">draft</span><span className="dim" style={{ "fontSize": "14px" }}>5 rules</span></p>
+<h3>Ethical Device Operations</h3><p className="mut">A consumer device shall never do these 5 things.</p>
+<p className="kv">context entry: kind standard · label "EDO v1.0" · git asc-standards@&lt;commit&gt;</p>
+<p className="row" style={{ "marginTop": "8px" }}><a href="/certifications?std=EDO">Certify a repo against EDO</a></p></div><div className="card"><pre className="badge" aria-label="Example ASCII badge for Ethical Agent Operations">{`+------------------------------------------+
+|     .-----.         ASC  EAO   v1.0      |
+|    | o   o |        ETHICAL AGENT        |
+|    |  ---  |        OPERATIONS           |
+|     '--+--'                              |
+|      /|=|\\          PASS  10/10          |
+|  your-org/repo@a1b2c3d                   |
+|  sha256:4b1e07c2a9d3   2026-11-04        |
++------------------------------------------+`}</pre>
+<p className="row" style={{ "marginTop": "14px" }}><span className="n" style={{ "margin": "0" }}>EAO v1.0</span><span className="tag draft">draft</span><span className="dim" style={{ "fontSize": "14px" }}>10 rules</span></p>
+<h3>Ethical Agent Operations</h3><p className="mut">An AI agent shall never do these 10 things.</p>
+<p className="kv">context entry: kind standard · label "EAO v1.0" · git asc-standards@&lt;commit&gt;</p>
+<p className="row" style={{ "marginTop": "8px" }}><a href="/certifications?std=EAO">Certify a repo against EAO</a></p></div><div className="card"><pre className="badge" aria-label="Example ASCII badge for Ethical Treasury Conduct">{`+------------------------------------------+
+|   ___________       ASC  ETC   v1.0      |
+|  |  _______  |      ETHICAL TREASURY     |
+|  | | (@)   | |      CONDUCT              |
+|  | |_______| |                           |
+|  |___________|      PASS  12/12          |
+|  your-org/repo@a1b2c3d                   |
+|  sha256:4b1e07c2a9d3   2026-11-04        |
++------------------------------------------+`}</pre>
+<p className="row" style={{ "marginTop": "14px" }}><span className="n" style={{ "margin": "0" }}>ETC v1.0</span><span className="tag draft">draft</span><span className="dim" style={{ "fontSize": "14px" }}>12 rules</span></p>
+<h3>Ethical Treasury Conduct</h3><p className="mut">A treasury shall never do these 12 things.</p>
+<p className="kv">context entry: kind standard · label "ETC v1.0" · git asc-standards@&lt;commit&gt;</p>
+<p className="row" style={{ "marginTop": "8px" }}><a href="/certifications?std=ETC">Certify a repo against ETC</a></p></div><div className="card"><pre className="badge" aria-label="Example ASCII badge for Ethical Vesting Contracts">{`+------------------------------------------+
+|   [====|====|====|----]   ASC  EVC v1.0  |
+|   cliff  25%  50%   ...   ETHICAL        |
+|     \\__ on schedule __/   VESTING        |
+|                           CONTRACTS      |
+|                           PASS  8/8      |
+|  your-org/repo@a1b2c3d                   |
+|  sha256:4b1e07c2a9d3   2026-11-04        |
++------------------------------------------+`}</pre>
+<p className="row" style={{ "marginTop": "14px" }}><span className="n" style={{ "margin": "0" }}>EVC v1.0</span><span className="tag draft">draft</span><span className="dim" style={{ "fontSize": "14px" }}>8 rules</span></p>
+<h3>Ethical Vesting Contracts</h3><p className="mut">A vesting contract shall never do these 8 things.</p>
+<p className="kv">context entry: kind standard · label "EVC v1.0" · git asc-standards@&lt;commit&gt;</p>
+<p className="row" style={{ "marginTop": "8px" }}><a href="/certifications?std=EVC">Certify a repo against EVC</a></p></div><div className="card"><pre className="badge" aria-label="Example ASCII badge for Ethical Model Operations">{`+------------------------------------------+
+|    o---o---o        ASC  EMO   v1.0      |
+|     \\ / \\ /         ETHICAL MODEL        |
+|      o---o          OPERATIONS           |
+|     / \\ / \\                              |
+|    o---o---o        PASS  10/10          |
+|  your-org/repo@a1b2c3d                   |
+|  sha256:4b1e07c2a9d3   2026-11-04        |
++------------------------------------------+`}</pre>
+<p className="row" style={{ "marginTop": "14px" }}><span className="n" style={{ "margin": "0" }}>EMO v1.0</span><span className="tag draft">draft</span><span className="dim" style={{ "fontSize": "14px" }}>10 rules</span></p>
+<h3>Ethical Model Operations</h3><p className="mut">A model deployment shall never do these 10 things.</p>
+<p className="kv">context entry: kind standard · label "EMO v1.0" · git asc-standards@&lt;commit&gt;</p>
+<p className="row" style={{ "marginTop": "8px" }}><a href="/certifications?std=EMO">Certify a repo against EMO</a></p></div>
+<div className="card"><p className="n">ASC-0</p><h3>Standards process</h3><p className="mut">How standards are named (E + subject + Operations, Conduct or Contracts), versioned (MAJOR.MINOR), reviewed and pinned. A new version is a new commit; programs that hold the old one keep it until their creator updates the context, subject to its mutability mode.</p></div>
+</div>
+<p className="dim" style={{ "fontSize": "14px", "marginTop": "18px" }}>Source of truth: Markdown files in the asc-standards repository. It is not published yet; these pages render the drafts. Badges are examples.</p>
+</section>
+<section className="sec">
+<div className="g2">
+<div><h2>How a standard is used</h2>
+<ul className="b mut">
+<li><b>As internal context.</b>{" "}The certify program’s context set holds, for example, EAO v1.0 and ETC v1.0 as two entries, in order, each pinned by hash.</li>
+<li><b>Cited by rule.</b>{" "}A ruling’s sources must hash to a pinned entry, so each verdict cites the standard and the rule behind it.</li>
+<li><b>Versioned in public.</b>{" "}Moving to a newer commit changes the context hash, so every certificate names the exact version it applied.</li>
+</ul>
+<p className="spec dim" style={{ "fontSize": "14px" }}>See{" "}<a href="/simds#programs-contextset">SIMD 1, ContextSet</a>{" "}and{" "}<a href="/simds#programs-content">Content, git repositories</a>.</p>
+</div>
+<figure className="figure" style={{ "margin": "0" }}><img src="/slides/small.jpg" alt="Slide: five standards, about 3,400 words, compress to about 5 kilobytes." loading="lazy" /></figure>
+</div>
+</section>
+</main>
+    </>
   );
 }

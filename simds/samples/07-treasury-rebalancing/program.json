@@ -1,0 +1,58 @@
+{
+  "_comment": "Arguments to CreateInferenceProgram. Illustrative.",
+  "name": "Protocol treasury rebalancing",
+  "prompt": {
+    "storage": {
+      "inline": "program.asc.md"
+    },
+    "encoding": {
+      "compress": true
+    }
+  },
+  "context": [
+    {
+      "kind": "constitution",
+      "label": "DAO constitution, Art. 1",
+      "storage": {
+        "git": {
+          "repo": "github.com/example-dao/governance",
+          "commit": "<40-hex commit>",
+          "path": "constitution.md"
+        }
+      },
+      "encoding": {
+        "compress": true
+      }
+    },
+    {
+      "kind": "internal_policy",
+      "label": "Treasury policy v2",
+      "storage": {
+        "git": {
+          "repo": "github.com/example-dao/governance",
+          "commit": "<40-hex commit>",
+          "path": "treasury.md"
+        }
+      },
+      "encoding": {
+        "compress": true
+      }
+    }
+  ],
+  "mutability": "timelocked",
+  "updateTimelockSlots": 216000,
+  "contextBudget": 8000,
+  "externalContext": {
+    "mode": "required",
+    "kinds": [
+      "other"
+    ],
+    "budget": 3000
+  },
+  "minimums": {
+    "evaluators": 5,
+    "quorum": 4,
+    "assurance": "L1",
+    "distinctFamilies": true
+  }
+}

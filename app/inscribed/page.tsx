@@ -26,7 +26,7 @@ export default function Page() {
     attestations: Array<{ modelId: string; ruling: string; sig: string; voteTx: string }>;
   }>;
   return (
-    <Chrome current="/inscribed">
+    <Chrome>
       <div className="d-wrap" style={{ paddingTop: 56, paddingBottom: 40 }}>
         <div className="d-eb">
           {INSCRIBED.eyebrow} <span className="d-tag real" style={{ marginLeft: 6 }}>{INSCRIBED.tag}</span>

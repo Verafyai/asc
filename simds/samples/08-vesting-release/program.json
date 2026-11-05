@@ -1,0 +1,50 @@
+{
+  "_comment": "Arguments to CreateInferenceProgram. Illustrative.",
+  "name": "Contributor token vesting",
+  "prompt": {
+    "storage": {
+      "inline": "program.asc.md"
+    },
+    "encoding": {
+      "compress": true
+    }
+  },
+  "context": [
+    {
+      "kind": "contract_terms",
+      "label": "Contributor agreement",
+      "storage": {
+        "inline": "context/rules.md"
+      },
+      "encoding": {
+        "compress": true,
+        "encrypt": true
+      }
+    }
+  ],
+  "mutability": "frozen",
+  "contextBudget": 8000,
+  "externalContext": {
+    "mode": "optional",
+    "kinds": [
+      "other"
+    ],
+    "budget": 4000
+  },
+  "minimums": {
+    "evaluators": 5,
+    "quorum": 4,
+    "assurance": "L1",
+    "distinctFamilies": true
+  },
+  "evaluatorSet": [
+    "<required because the context is encrypted>"
+  ],
+  "reviewPolicy": {
+    "disputeParties": "named",
+    "challengeMode": "parties",
+    "challengeBondLamports": 500000000,
+    "challengeMinEvaluators": 7,
+    "_note": "SetReviewPolicy, from the Rulings SIMD"
+  }
+}

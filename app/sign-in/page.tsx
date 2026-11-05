@@ -10,7 +10,7 @@ export default function Page() {
         <div className="d-eb">Account</div>
         <h1 className="d-h1 d-md">Sign in</h1>
         <p className="d-lede">Sign-in is not connected in this build. There is no account, no API key, and no free credits.</p>
-        <p className="d-mut">Paid actions still show a quote and a Confirm button. Confirming does not charge a Verafy credits account, because that account is not available here. <a href="/docs/credits">Credits and pricing</a></p>
+        <p className="d-mut">Paid actions still show a quote and a Confirm button. Confirming does not charge a Verafy credits account, because that account is not available here. <a href="/performance">Performance and cost</a></p>
       </div>
     </Chrome>
   );

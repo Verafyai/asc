@@ -129,7 +129,7 @@ export default function RunView({ spec, run, evidence, svm, title }: { spec: Con
         <div className="seg" role="group" aria-label="Tamper with the record">{TAMPERS.map(([k, l]) => <button key={k} aria-pressed={t === k} onClick={() => setT(k)}>{l}</button>)}</div>
         <p style={{ margin: "var(--sp-3) 0" }}>{allOk ? <span className="pill ok">all {checks.length} checks pass</span> : <span className="pill bad">{checks.filter((c) => !c.ok).length} check(s) fail: tampering detected</span>}</p>
         <Checks items={checks} />
-        <p className="muted" style={{ marginTop: 8 }}>What this proves: the record, the votes and the reasoning texts were not changed after signing. What it does not prove: that the named model really produced the answer (see <a href="/docs/trust">Trust</a>), or that its reasoning text is why it answered.</p>
+        <p className="muted" style={{ marginTop: 8 }}>What this proves: the record, the votes and the reasoning texts were not changed after signing. What it does not prove: that the named model really produced the answer (see <a href="/security">Security</a>), or that its reasoning text is why it answered.</p>
       </div>
     </div>
   );
