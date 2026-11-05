@@ -1,9 +1,9 @@
 # The three draft SIMDs
 
 Three companion Solana Improvement Documents that bring inference programs to
-Solana. Each can be reviewed on its own. All three are drafts, for discussion in
-the [SIMD Ideas](https://github.com/solana-foundation/solana-improvement-documents/discussions/categories/ideas)
-forum, and are not yet submitted. Each is numbered `SIMD-XXXX` until it has a
+Solana. Each can be reviewed on its own. All three are drafts, open for discussion in
+[SIMD discussion #724](https://github.com/solana-foundation/solana-improvement-documents/discussions/724),
+and are not yet submitted as pull requests. Each is numbered `SIMD-XXXX` until it has a
 pull-request number; "SIMD 1, 2, 3" below only orders the three.
 
 | | File | Title | What it defines |

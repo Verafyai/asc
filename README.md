@@ -12,9 +12,9 @@ policy check or a prediction.
 
 This repository holds the site and three draft Solana Improvement Documents
 (SIMDs) that would make inference programs a shared standard, so every program,
-wallet and explorer can use them the same way. The drafts are for discussion in
-the [SIMD Ideas](https://github.com/solana-foundation/solana-improvement-documents/discussions/categories/ideas)
-forum and are not yet submitted.
+wallet and explorer can use them the same way. The drafts are open for discussion in
+[SIMD discussion #724](https://github.com/solana-foundation/solana-improvement-documents/discussions/724)
+and are not yet submitted as pull requests.
 
 It settles on Solana. No coin, no token, play money only.
 

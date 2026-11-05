@@ -67,7 +67,7 @@ export default function Page() {
 </div>
 <div className="links">
 <a href="https://blog.verafy.ai/articles/20261105-simd-verifiable-inference">Read the full post on the Verafy blog</a>
-<a href="https://github.com/solana-foundation/solana-improvement-documents/discussions/categories/ideas">Discuss in SIMD Ideas</a>
+<a href="https://github.com/solana-foundation/solana-improvement-documents/discussions/724">Join the discussion on GitHub (#724)</a>
 <a href="/sandbox">Try the sandbox</a>
 </div>
 </section>

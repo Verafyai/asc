@@ -1,7 +1,7 @@
 import "@/styles/site.css";
 import type { Metadata } from "next";
 import { pageMeta } from "@/lib/page-meta";
-import { BLOG_POST_URL, SIMD_IDEAS_URL } from "@/lib/brand";
+import { BLOG_POST_URL, SIMD_DISCUSSION_URL } from "@/lib/brand";
 import { loadSimds } from "@/lib/simds";
 import SimdsScript from "@/components/scripts/SimdsScript";
 
@@ -55,7 +55,7 @@ export default function Page() {
           ))}
         </aside>
         <main>
-          <p className="note">These SIMDs are part of a broader proposal to bring Inference Programs to Solana natively: <a href={BLOG_POST_URL}>Bringing Inference Programs To Solana</a>. All three are drafts, for discussion in the <a href={SIMD_IDEAS_URL}>SIMD Ideas</a> forum, and are not yet submitted.</p>
+          <p className="note">These SIMDs are part of a broader proposal to bring Inference Programs to Solana natively: <a href={BLOG_POST_URL}>Bringing Inference Programs To Solana</a>. All three are drafts, open for discussion in <a href={SIMD_DISCUSSION_URL}>SIMD discussion #724</a>, and are not yet submitted as pull requests.</p>
           {simds.map((s) => (
             <article key={s.key} className={s.key === "programs" ? "simd on" : "simd"} id={s.key} data-doc={s.key}>
               <p className="row"><span className="eb">SIMD {s.n}</span><span className="tag draft">draft</span><a className="kv" href={`/simds/${s.file}`} download>Download Markdown</a></p>
