@@ -12,6 +12,8 @@ import { loadStandards } from "@/lib/standards";
 import { PRODUCT_NAME, SITE_URL } from "@/lib/brand";
 import { redirectLegacyHost } from "../middleware";
 import { NAV, isCurrent } from "@/lib/nav";
+import { TEMPLATES as ASC_TEMPLATES, PROMPTS } from "@/lib/templates";
+import { TEMPLATE_LINKS } from "@/lib/template-links";
 import { loadSimds } from "@/lib/simds";
 
 function walk(dir: string, out: string[] = [], pattern = /\.(tsx|ts|md|css)$/): string[] {
@@ -173,10 +175,19 @@ describe("redirects", () => {
 
 describe("v2 nav and SIMDs", () => {
   it("has the one nav, in the spec order", () => {
-    expect(NAV.map((n) => n.label)).toEqual(["Home", "How it works", "Sandbox", "Read the SIMDs", "Standards", "Certifications", "Performance", "Security"]);
+    expect(NAV.map((n) => n.label)).toEqual(["Home", "How it works", "Sandbox", "Templates", "Read the SIMDs", "Standards", "Certifications", "Performance", "Security"]);
     expect(isCurrent("/", "/")).toBe(true);
     expect(isCurrent("/", "/simds")).toBe(false);
     expect(isCurrent("/standards", "/standards/edo")).toBe(true);
+  });
+
+  it("lists every template in the menu, each with a page, a shipped VIP and a prompt", () => {
+    expect(TEMPLATE_LINKS.map((t) => t.slug)).toEqual(ASC_TEMPLATES.map((t) => t.slug));
+    for (const t of ASC_TEMPLATES) {
+      expect(t.vip.status).toMatch(/^Shipped/);
+      expect(PROMPTS[t.slug]).toContain(`policyFromTemplate('${t.templateId}'`);
+      expect(PROMPTS[t.slug]).toContain("Never ask for or handle private keys");
+    }
   });
 
   it("renders the three SIMDs with every anchor the site links to", () => {
