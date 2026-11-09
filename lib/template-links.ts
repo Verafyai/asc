@@ -6,4 +6,5 @@ export const TEMPLATE_LINKS = [
   { slug: "hackathon", name: "Hackathon Grant" },
   { slug: "treasury", name: "Treasury" },
   { slug: "dao-constitution", name: "DAO Constitution" },
+  { slug: "verafy-certification", name: "Verafy Certification" },
 ] as const;

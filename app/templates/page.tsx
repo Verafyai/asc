@@ -6,7 +6,7 @@ import { TEMPLATES, MORE_TEMPLATES, HARNESS_REPO, HARNESS_RELEASE, vipUrl } from
 
 export const metadata: Metadata = { ...pageMeta("Templates", "/templates"), description: "ASC templates: ready-made inference programs for agent-to-agent contracts, agent bonds, super grants, hackathon grants, treasuries and DAO constitutions, each shipped in Verafy Harness with a VIP, tests, a demo and a tailoring prompt." };
 
-const GROUPS = ["Agreements", "Funding", "Treasury and governance"] as const;
+const GROUPS = ["Agreements", "Funding", "Treasury and governance", "Trust"] as const;
 
 export default function Page() {
   return (
