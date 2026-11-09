@@ -17,7 +17,7 @@ export type Row = string[];
 export type Template = {
   slug: string;
   name: string;
-  group: "Agreements" | "Funding" | "Treasury and governance";
+  group: "Agreements" | "Funding" | "Treasury and governance" | "Trust";
   card: string;
   headline: string;
   lede: string;
@@ -465,12 +465,48 @@ export const TEMPLATES: Template[] = [
     measured: ["2 of 2 tests pass: the constitution hash, one question per article, both caps, and the articles reaching the case"],
     open: ["Amending the constitution means a new policy and a signer swap; there's no amendment flow inside the template", "The signer program isn't on devnet yet"],
   },
+  {
+    slug: "verafy-certification",
+    name: "Verafy Certification",
+    group: "Trust",
+    card: "An on-chain report card for one exact build of a Solana program. A jury of registered harnesses rules on a Fuzzy report; agents read one account before they trust the program.",
+    headline: "Verafy Certification: a program's report card on Solana, written only by a jury",
+    lede: "Agents now call programs they have never seen. This template turns a Fuzzy report into a level a jury rules on, and a small Solana program writes that level for the exact bytecode, only from a sealed ruling. An agent checks a program with one read.",
+    vip: { n: "0034", title: "Verafy Certification: a program's report card on Solana, written only from a jury ruling", file: "VIP-0034-verafy-certification.md", status: "Shipped (v0.0.6-alpha): on devnet" },
+    related: [{ n: "0035", title: "Charter amendments: rules that change only when a Verafy jury approves", file: "VIP-0035-charter-amendments.md", status: "Shipped (v0.0.6-alpha): core" }, { n: "0012", title: "Harness registry: harnesses register on chain to be found and paid", file: "VIP-0012-harness-registry.md", status: "Shipped (v0.0.4-alpha)" }],
+    requirement: "VIP-0034",
+    templateId: "verafy-certification",
+    why: [
+      "An agent deciding whether to call a program has nothing it can check: a website can say anything, and an audit PDF describes some build, maybe not the deployed one.",
+      "A certification is tied to the bytecode hash, so an upgrade voids it automatically, and only a sealed ruling by registered harnesses from two or more model families can write it. Nobody certifies their own program by signing.",
+    ],
+    forWho: [["Agents and agent wallets", "One read before trusting a program: certified, at what level, by which ruling."], ["Program teams", "A public, machine-checkable record that a build survived Fuzzy's attacks."], ["Marketplaces and routers", "A filter: only route to programs certified at a level you choose."]],
+    flow: [
+      { t: "Fuzz", d: "Fuzzy attacks the program in a local copy of Solana and keeps only findings proven by a transaction. The report is hashed." },
+      { t: "Rule", d: "A jury of registered harnesses reads the report against the level rules and answers NOT_CERTIFIED, SNIFFED, FUZZED or HARDENED. Unsure between two levels means the lower." },
+      { t: "Seal", d: "The ruling is sealed on Solana by verafy_ruling. Its contract hash binds the program, the bytecode hash, the report hash and the score." },
+      { t: "Certify", d: "verafy_certification writes the level at [\"cert\", program, bytecode_hash], and refuses unless the ruling is sealed, about this build and report, and every seat is an active registered harness, at least three seats from two families." },
+      { t: "Check", d: "An agent hashes the program's current bytecode and reads one account, or calls the verafy_certification MCP tool or fuzzy.verafy.ai/api/certification." },
+    ],
+    format: [["program", "The program address"], ["bytecodeHash", "sha256 of the ELF the loader runs, without padding"], ["reportHash", "sha256 of the Fuzzy report as canonical JSON"], ["score", "The Fuzzy Score, 0 to 100"], ["level", "The jury's answer: 0 Not certified, 1 Sniffed, 2 Fuzzed, 3 Hardened"]],
+    code: ["The ruling must be owned by verafy_ruling and sealed", "Its contract hash must be sha256(domain, program, bytecode hash, report hash, score)", "Every seat an active verafy_registry harness: three or more seats, two or more model families", "A replacement only from a ruling releasable later"],
+    jury: ["Which Verafy Certification level has this build earned? HARDENED: Kitchen Sink, no proven findings, score 90 or more. FUZZED: Deep Fuzz or deeper on cloned mainnet state, no proven findings. SNIFFED: Sniff or deeper, no proven findings. Otherwise NOT_CERTIFIED."],
+    threats: [["Certifying your own program", "Only a sealed ruling by registered harnesses can write it", "Tested in LiteSVM"], ["A certification reused after an upgrade", "Bound to the bytecode hash; a new build has no account", "Tested on devnet"], ["A ruling about a different report", "The contract hash binds program, build, report and score", "Tested in LiteSVM"], ["One model family as the whole jury", "Two or more families required on chain", "Tested in LiteSVM"], ["Instructions planted in a report", "Report text is evidence, never instructions", "Built"]],
+    example: { title: "Check a program", code: `import { rpc, lookupCertification } from '@verafyharness/solana'
+
+const result = await lookupCertification(rpc('https://api.devnet.solana.com'), '9LdWL4mYLEyM8YnZejQYp5UzEynN75pxqUosZuXcB5ve')
+// { certified: true, reason: 'certified Sniffed', level: 1, score: 55, seats: 4, families: 4, ruling: 'AbgeVBT8...', ... }` },
+    run: { call: "programCertificationContract({ report, program, bytecodeHash, reportHash })", demo: "node scripts/certify-devnet.mjs (Verafyai/fuzzy)", files: [["packages/solana/certification/src/lib.rs", "The on-chain program"], ["packages/solana/src/certification.js", "Lookup for agents"], ["packages/core/src/program-certification.js", "The jury contract and level rules"], ["packages/mcp/src/tools.js", "MCP tool verafy_certification"]] },
+    measured: ["7 of 7 LiteSVM tests of the program pass (Verafyai/fuzzy test/certification.test.js)", "3 of 3 core tests pass", "On devnet: the fixed benchmark vault certified Sniffed by four registered harnesses from four families (votes scripted for this run)"],
+    open: ["Jurors in the devnet run voted by script; real model jurors are next", "Levels 2 and 3 need Fuzzy tiers that are not built yet", "The registry proves jurors are registered, not which model they ran"],
+  },
 ];
 
 /** Shipped in the harness too, with their own VIPs, without a landing page yet. */
 export const MORE_TEMPLATES = [
   { name: "Covenant Launch", card: "A token creator's supply, released only on a published schedule to published addresses.", vip: POLICIES },
   { name: "Commission covenant", card: "A validator's bonded promise to stakers on fees and notice.", vip: { n: "0016", title: "Commission covenant: a validator bonds its promise on fees", file: "VIP-0016-commission-covenant.md", status: "Shipped (v0.0.4-alpha)" } },
+  { name: "Charter amendments", card: "A versioned rulebook with protected articles. Anyone proposes an amendment; a jury adopts it only if every protected article still holds. Fuzzy's rules are the first charter.", vip: { n: "0035", title: "Charter amendments: rules that change only when a Verafy jury approves", file: "VIP-0035-charter-amendments.md", status: "Shipped (v0.0.6-alpha): core" } },
   { name: "Upgrade authority", card: "A program's upgrade key: moves no funds; upgrades checked against the change log, with a 7-day time lock.", vip: POLICIES },
 ];
 
@@ -490,6 +526,23 @@ const PROMPT_RULES = `Rules for you, the AI:
 - When you're done, output: (1) the JSON, (2) a plain-English summary of who gets what in each outcome, (3) the risks you see in my terms, and (4) the harness call that checks it.`;
 
 export const PROMPTS: Record<string, string> = {
+  "verafy-certification": `You are helping me get my Solana program a Verafy Certification (VIP-0034), or check one before my agent trusts a program.
+
+Rules for you, the AI:
+- Never ask for or handle private keys.
+- A certification covers one exact build. If the program is upgradeable, say so and remind me an upgrade voids the certification.
+- Never call a program safe or audited. A certification says the build survived Fuzzy's attacks.
+
+If I want to certify my program:
+1. Ask for the program address, the network, and whether I have its Anchor IDL.
+2. Tell me to run Fuzzy at fuzzy.verafy.ai (or the CLI: npm run fuzzy -- run <address>) and send you the report JSON.
+3. Read the report: list the proven findings first. If there are any, the level is NOT_CERTIFIED; help me fix them and run again.
+4. If there are none, say which level the report supports by the rules (SNIFFED, FUZZED, HARDENED) and build the jury contract with programCertificationContract({ report, program, bytecodeHash, reportHash }).
+
+If I want to check a program before my agent uses it:
+1. Call GET https://fuzzy.verafy.ai/api/certification?program=<address>, or the verafy_certification MCP tool.
+2. Report certified, the level, the score, the jury (seats and families) and the ruling.
+3. Treat not certified as not vouched for, not as malicious, and suggest a limit for my agent: for example, only programs certified SNIFFED or higher, and small amounts until FUZZED.`,
   "agentic-contract": `You are helping me write a Verafy Agentic Contract (verafy.agentic-contract/1, VIP-0029): an agreement between two AI agents, held in a two-of-three Squads escrow on Solana, with a Verafy jury as the neutral third party if the agents disagree. The jury can only pick one of the remedies we write now, and the escrow can only pay that remedy's exact payouts.
 
 ${PROMPT_RULES}
